@@ -4,7 +4,7 @@ import './App.css'
 import { CategoriesProvider } from './ecommerce/context/categories/CategoriesProvider'
 
 import Navbar from './ecommerce/components/Navbar'
-import Products from './ecommerce/pages/Products'
+import ProductsWrapper from './ecommerce/pages/Products'
 import Product from './ecommerce/pages/Product'
 import Categories from './ecommerce/pages/Categories'
 import CartDetail from './ecommerce/pages/CartDetail'
@@ -18,22 +18,23 @@ import Home from './ecommerce/pages/Home'
 function App() {
 
   return (
-    <CategoriesProvider>
-      <div className='App'>
-        <Navbar/>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='products/' element={<Products />} />
-          <Route path='products/:productId' element={<Product />} />
-          <Route path='categories/' element={<Categories />} />
-          <Route path='cart-detail/' element={<CartDetail />} />
-          <Route path='login/' element={<Login />} />
-          <Route path='register/' element={<Register />} />
-          <Route path='products/create/' element={<CreateProduct />} />
-          <Route path='products/edit/:productId' element={<EditProduct />} />
-        </Routes>
-      </div>
-    </CategoriesProvider>
+      <CategoriesProvider>
+        <div className='App'>
+          <Navbar />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='products/' element={<ProductsWrapper />} />
+            <Route path='products/?title=:category' element={<ProductsWrapper />} />
+            <Route path='products/:productId' element={<Product />} />
+            <Route path='categories/' element={<Categories />} />
+            <Route path='cart-detail/' element={<CartDetail />} />
+            <Route path='login/' element={<Login />} />
+            <Route path='register/' element={<Register />} />
+            <Route path='products/create/' element={<CreateProduct />} />
+            <Route path='products/edit/:productId' element={<EditProduct />} />
+          </Routes>
+        </div>
+      </CategoriesProvider>
   )
 }
 
