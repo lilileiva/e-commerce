@@ -6,28 +6,27 @@ import { baseUrl } from "../../constants"
 
 interface props {
     children: ReactNode;
-    category: string;
+    categoryId: number;
 }
 
-export const ProductsProvider = ({ children, category }: props) => {
+export const ProductsProvider = ({ children, categoryId }: props) => {
 
     const [data, setData] = useState<Array<Product>>(null);
 
     const fetchData = async () => {
         try {
             let response: Response;
-            console.log(category)
-            if (category) {
-                response = await fetch(`${baseUrl}/products/?title=${category}`)
+            if (categoryId) {                
+                response = await fetch(`${baseUrl}/products/?categoryId=${categoryId.toString()}`)                
             } else {
                 response = await fetch(`${baseUrl}/products`)
-            }
-            if (!response.ok) {
-                throw new Error("Error HTTP: " + response.status);
             }
             const products = await response.json();
             setData(products)
             console.log('data', products)
+            if (!response.ok) {
+                throw new Error("Error HTTP: " + response.status);
+            }        
         } catch (error) {
             console.error('Error fetching API data:', error);
         }

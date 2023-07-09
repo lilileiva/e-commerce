@@ -7,7 +7,7 @@ import { ProductsProvider } from "../context/products/ProductsProvider";
 function Products() {
     const products = useContext(ProductsContext);
     const productsData = products?.data
-
+    console.log(products?.data)
     return (
         <div>
             <p>Productos</p>
@@ -29,17 +29,11 @@ function Products() {
 
 function ProductsWrapper() {
 
-    const [param, setParam] = useState(null)
     const [searchParam] = useSearchParams();
-
-    const value = searchParam.get('title');
-    
-    useEffect(() => {
-        if (value) setParam(value)
-    }, [value])
+    const categoryId = searchParam.get('categoryId');
 
     return (
-        <ProductsProvider category={param}>
+        <ProductsProvider categoryId={categoryId}>
             <Products />
         </ProductsProvider>
     );
