@@ -19,7 +19,7 @@ export const CategoriesProvider = ({ children }: props) => {
                 throw new Error("Error HTTP: " + response.status);
             }
             const categories = await response.json();
-            setData(categories)    
+            setData(categories)            
         } catch (error) {            
             console.error('Error fetching API data:', error);
         }

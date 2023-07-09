@@ -23,7 +23,7 @@ export const ProductsProvider = ({ children, categoryId }: props) => {
             }
             const products = await response.json();
             setData(products)
-            console.log('data', products)
+
             if (!response.ok) {
                 throw new Error("Error HTTP: " + response.status);
             }        

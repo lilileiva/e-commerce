@@ -2,23 +2,25 @@ import { useState, useEffect, useContext } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ProductsContext } from "../context/products/ProductsContext";
 import { ProductsProvider } from "../context/products/ProductsProvider";
+import { useNavigate } from "react-router-dom";
 
 
 function Products() {
     const products = useContext(ProductsContext);
     const productsData = products?.data
-    console.log(products?.data)
+    const navigate = useNavigate()
+
     return (
-        <div>
-            <p>Productos</p>
-            <ul>
+        <div className="p-10 flex flex-col justify-center align-center">
+            <p className="text-lg w-fit">Productos</p>
+            <ul className="w-fit flex flex-wrap justify-center gap-10">
                 {
                     productsData && productsData.map((product) => (
-                        <li>
-                            <p>{product.title}</p>
-                            <p>{product.price}</p>
-                            <p>{product.description}</p>
-                            <img src={product.images[0]} alt={product.title} />
+                        <li className="flex flex-col justify-center align-center w-fit"
+                            onClick={() => navigate(`/products/${product.id}`)}>
+                            <p className="w-fit">{product.title}</p>
+                            <p className="w-fit">{product.price}</p>
+                            <img className="w-60" src={product.images[0]} alt={product.title} />
                         </li>
                     ))
                 }

@@ -6,9 +6,9 @@ function Navbar() {
 
 
     return (
-        <div>
+        <div className='inline-flex text-lg justify-between px-5 py-5 bg-slate-50'>
             <Link to="/">
-                <a className='text-indigo-600'>Ecommerce</a>
+                <a className='font-medium'>Ecommerce</a>
             </Link>
             <Link to="/products">
                 <a>Productos</a>

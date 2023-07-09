@@ -10,14 +10,15 @@ function Categories() {
     const navigate = useNavigate()
 
     return (
-        <div>
-            <p>Categories</p>
-            <ul>
+        <div className="p-10 flex flex-col justify-center align-center">
+            <p className="text-lg w-fit">Categories</p>
+            <ul className="w-fit flex flex-wrap justify-center gap-10">
                 {
                     categoriesData && categoriesData.map((category) => (
-                        <li onClick={() => navigate(`/products/?categoryId=${category.id}`)}>
-                            <p>{category.name}</p>
-                            <img src={category.image} alt={category.name} />
+                        <li className="flex flex-col justify-center align-center w-fit"
+                            onClick={() => navigate(`/products/?categoryId=${category.id}`)}>
+                            <p className="w-fit">{category.name}</p>
+                            <img className="w-60" src={category.image} alt={category.name} />
                         </li>
                     ))
                 }
