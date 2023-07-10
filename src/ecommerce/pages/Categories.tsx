@@ -7,8 +7,7 @@ function Categories() {
 
     const categories = useContext(CategoriesContext);
     const categoriesData = categories?.data
-    const navigate = useNavigate()
-    //
+    const navigate = useNavigate()    
 
     return (
         <div className="py-5 flex flex-col justify-center content-center">
