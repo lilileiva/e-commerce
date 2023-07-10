@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import './App.css'
+import './index.css'
 
 import { CategoriesProvider } from './ecommerce/context/categories/CategoriesProvider'
 
@@ -19,7 +19,7 @@ function App() {
 
   return (
       <CategoriesProvider>
-        <div className='App'>
+        <div className='px-20 grid grid-row-3 grid-cols-1 justify-center content-top w-full h-full'>
           <Navbar />
           <Routes>
             <Route path='/' element={<Home />} />
