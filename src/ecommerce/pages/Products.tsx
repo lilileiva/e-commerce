@@ -1,17 +1,27 @@
-import { useContext } from "react";
-import { useSearchParams } from "react-router-dom";
-import { ProductsContext } from "../context/products/ProductsContext";
-import { ProductsProvider } from "../context/products/ProductsProvider";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useQuery } from 'react-query';
+import { GET_ALL_PRODUCTS } from "../constants";
+import { fetchProducts } from "../actions/productsActions";
+
+import Loader from "../components/Loader";
+
 
 
 function Products() {
-    const products = useContext(ProductsContext);
-    const productsData = products?.data
+
+    const location = useLocation()
+    const searchParams = new URLSearchParams(location.search)
+    let params: string = ""
+    searchParams.forEach((value, key) => {
+        return params += `&${key}=${value}`
+      });
+
+    const { data, status } = useQuery(GET_ALL_PRODUCTS, () => fetchProducts({params}))
+
     const navigate = useNavigate()
 
-    return (        
-        <div className="py-5 flex flex-col justify-center content-center">
+    return (
+        <div className="flex flex-col justify-top content-center w-full min-h-screen">
             <p className="inline-flex text-xl w-fit text-gray-500 font-medium border-b-2 border-skyblue rounded-b-sm py-1 h-fit">
                 Todos los
                 <p className="text-transparent">-</p>
@@ -19,32 +29,21 @@ function Products() {
             </p>
             <ul className="flex flex-wrap justify-center gap-10 mt-10 h-full">
                 {
-                    productsData ? productsData.map((product) => (
+                    data && data.map((product) => (
                         <li className="flex flex-col justify-center align-center w-fit rounded-xl border-white overflow-hidden shadow cursor-pointer"
-                            onClick={() => navigate(`/products/${product.id}`)}>                            
-                            <div className="w-52 h-52">                                
+                            onClick={() => navigate(`/products/${product.id}`)}>
+                            <div className="w-52 h-52">
                                 <img className="w-52" src={product.images[0]} alt={product.title} />
                             </div>
-                            <p className="w-full z-10 bg-white pl-2 text-gray-800 capitalize">{product.title}</p>                            
+                            <p className="w-full z-10 bg-white pl-2 text-gray-800 capitalize">{product.title}</p>
                             <p className="w-full z-10 bg-white pl-2 font-semibold text-gray-600">${product.price}</p>
                         </li>
-                    )) : <p className="">Cargando...</p>
-                }                
+                    ))
+                }
+                {status === 'loading' && <Loader />}
             </ul>
         </div>
     );
 }
 
-function ProductsWrapper() {
-
-    const [searchParam] = useSearchParams();
-    const categoryId = searchParam.get('categoryId');
-
-    return (
-        <ProductsProvider categoryId={categoryId}>
-            <Products />
-        </ProductsProvider>
-    );
-}
-
-export default ProductsWrapper;
+export default Products;
