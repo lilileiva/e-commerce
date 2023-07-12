@@ -24,7 +24,7 @@ function Categories() {
                         <li className="flex flex-col justify-center align-center w-fit rounded-xl border-white overflow-hidden shadow cursor-pointer"
                             onClick={() => navigate(`/products/?categoryId=${category.id}`)}>
                             <div className="w-52 h-52">
-                                <img className="w-52" src={category.image} alt={category.name} />
+                                <img className="object-cover w-52 h-52" src={category.image} alt={category.name} />
                             </div>
                             <p className="w-full z-10 bg-white pl-2 capitalize">{category.name}</p>
                         </li>
@@ -32,7 +32,8 @@ function Categories() {
                 }
                 {data && data.length == 0 && <p>No se encontraron categorías</p>}
                 {status === 'loading' && <Loader />}                
-                {status === 'error' && <p>Error al cargar las categorías</p>}  
+                {status === 'error' && <p>Error al cargar las categorías</p>}
+                {!data && status === 'success' && <p>Error al cargar las categorías</p>}
             </ul>
         </div>
     );
