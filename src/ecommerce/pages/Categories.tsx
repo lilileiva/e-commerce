@@ -20,7 +20,7 @@ function Categories() {
             </p>
             <ul className="flex flex-wrap justify-center gap-10 mt-10">
                 {
-                    data && data.map((category) => (
+                    data && data.length > 0 && data.map((category) => (
                         <li className="flex flex-col justify-center align-center w-fit rounded-xl border-white overflow-hidden shadow cursor-pointer"
                             onClick={() => navigate(`/products/?categoryId=${category.id}`)}>
                             <div className="w-52 h-52">
@@ -30,7 +30,9 @@ function Categories() {
                         </li>
                     ))
                 }
-                {status === 'loading' && <Loader />}
+                {data && data.length == 0 && <p>No se encontraron categorías</p>}
+                {status === 'loading' && <Loader />}                
+                {status === 'error' && <p>Error al cargar las categorías</p>}  
             </ul>
         </div>
     );

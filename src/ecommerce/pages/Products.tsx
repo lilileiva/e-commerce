@@ -29,9 +29,9 @@ function Products() {
             </p>
             <ul className="flex flex-wrap justify-center gap-10 mt-10 h-full">
                 {
-                    data && data.map((product) => (
+                    data && data.length > 0 && status === 'success' && data.map((product) => (
                         <li className="flex flex-col justify-center align-center w-fit rounded-xl border-white overflow-hidden shadow cursor-pointer"
-                            onClick={() => navigate(`/products/${product.id}`)}>
+                        onClick={() => navigate(`/products/${product.id}`)}>
                             <div className="w-52 h-52">
                                 <img className="w-52" src={product.images[0]} alt={product.title} />
                             </div>
@@ -40,7 +40,9 @@ function Products() {
                         </li>
                     ))
                 }
+                {data && data.length == 0 && <p>No se encontraron productos</p>}
                 {status === 'loading' && <Loader />}
+                {status === 'error' && <p>Error al cargar los productos</p>}                
             </ul>
         </div>
     );
