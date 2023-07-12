@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundColor: {
+        'skyblue': '#1ABCFE'
+      },
       textColor: {
         'skyblue': '#1ABCFE'
       },

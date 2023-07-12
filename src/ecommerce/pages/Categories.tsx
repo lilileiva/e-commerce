@@ -30,10 +30,9 @@ function Categories() {
                         </li>
                     ))
                 }
-                {data && data.length == 0 && <p>No se encontraron categorías</p>}
+                {(data && data.length == 0 || !data) && status === 'success' && <p>No se encontraron categorías</p>}
                 {status === 'loading' && <Loader />}                
-                {status === 'error' && <p>Error al cargar las categorías</p>}
-                {!data && status === 'success' && <p>Error al cargar las categorías</p>}
+                {status === 'error' && <p>Error al cargar las categorías</p>}                
             </ul>
         </div>
     );
