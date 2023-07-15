@@ -1,0 +1,42 @@
+import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+
+function Searchbar() {
+
+    const location = useLocation()
+    const navigate = useNavigate()
+    const [inputText, setInputText] = useState("");
+
+    const handleInputChange = (e) => {
+        setInputText(e.target.value);
+    }
+
+    const handleInputSubmit = (e) => {
+        e.preventDefault();
+        if (location.search) {
+            let found = false
+            const url = location.search
+            let splited = url.split('&')
+            splited.map((item, index) => {
+                if (item.split('=')[0] === 'title') {
+                    splited[index] = `title=${inputText}`
+                    found = true
+                }
+            })
+            console.log(found)
+            if (!found) splited.push(`title=${inputText}`)
+            navigate(`products/${splited.join('&')}`)
+        } else {
+            navigate(`products/?&title=${inputText}`);
+        }
+    }
+
+    return (
+        <form className="bg-skyblue px-4 py-2 rounded-xl flex gap-4" onSubmit={(e) => handleInputSubmit(e)}>
+            <input type="submit" />
+            <input className="bg-skyblue focus:outline-none text-gray-500" type="text" placeholder="Buscar algún producto..." onChange={(e) => handleInputChange(e)} />
+        </form>
+    );
+}
+
+export default Searchbar;
