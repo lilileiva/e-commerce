@@ -1,7 +1,8 @@
 import '../../index.css'
 import { Link } from 'react-router-dom';
 import Searchbar from './Searchbar';
-
+import CartIcon from '../icons/CartIcon'
+import UserIcon from '../icons/UserIcon'
 
 function Navbar() {
 
@@ -13,10 +14,12 @@ function Navbar() {
                 </Link>
                 <div className='inline-flex justify-center align-center gap-10'>
                     <Searchbar />
-                    <Link to="/login" className='text-gray-500 self-center font-medium'>
+                    <Link to="/login" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium'>
+                    <UserIcon size='27' />
                         Iniciar sesión / Registrarse
                     </Link>
-                    <Link to="/cart-detail" className='text-gray-500 self-center font-medium'>
+                    <Link to="/cart-detail" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium'>
+                        <CartIcon size='27' />
                         Carrito
                     </Link>
                 </div>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import SearchIcon from '../icons/SearchIcon'
 
 function Searchbar() {
 
@@ -33,7 +34,9 @@ function Searchbar() {
 
     return (
         <form className="bg-skyblue px-4 py-2 rounded-xl flex gap-4" onSubmit={(e) => handleInputSubmit(e)}>
-            <input type="submit" />
+            <button type="submit">
+                <SearchIcon size='27' />
+            </button>
             <input className="bg-skyblue focus:outline-none text-gray-500" type="text" placeholder="Buscar algún producto..." onChange={(e) => handleInputChange(e)} />
         </form>
     );
