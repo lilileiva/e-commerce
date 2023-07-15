@@ -1,10 +1,18 @@
 import '../../index.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Searchbar from './Searchbar';
 import CartIcon from '../icons/CartIcon'
 import UserIcon from '../icons/UserIcon'
 
 function Navbar() {
+
+    const navigate = useNavigate()
+    const token = window.localStorage.getItem("token");
+
+    const closeSession = () => {
+        window.localStorage.removeItem("token");
+        navigate("/");
+    }
 
     return (
         <div className='flex flex-col justify-between py-5 w-full h-fit'>
@@ -14,14 +22,28 @@ function Navbar() {
                 </Link>
                 <div className='inline-flex justify-center align-center gap-10'>
                     <Searchbar />
-                    <Link to="/login" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium'>
-                    <UserIcon size='27' />
-                        Iniciar sesión / Registrarse
-                    </Link>
-                    <Link to="/cart-detail" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium'>
-                        <CartIcon size='27' />
-                        Carrito
-                    </Link>
+                    {
+                        token ? <>
+                            <Link to="/" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium'>
+                                <UserIcon size='27' />
+                                Mi perfil
+                            </Link>
+                            <button
+                                onClick={() => closeSession()}
+                                className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium'>
+                                Cerrar sesión
+                            </button>
+                        </> : <>
+                            <Link to="/register" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium'>
+                                <UserIcon size='27' />
+                                Iniciar sesión / Registrarse
+                            </Link>
+                            <Link to="/cart-detail" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium'>
+                                <CartIcon size='27' />
+                                Carrito
+                            </Link>
+                        </>
+                    }
                 </div>
             </div>
             <hr className='border-gray-200 my-5' />

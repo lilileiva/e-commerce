@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient } from 'react-query';
 import { PRODUCTS_QUERY_KEY } from "../constants";
-import { fetchProducts } from "../actions/productsActions";
+import { fetchProducts } from "../services/products";
 
 import FilterBar from "../components/FilterBar";
 import Loader from "../components/Loader";
@@ -16,7 +16,6 @@ function Products() {
     const { data, status, refetch } = useQuery(PRODUCTS_QUERY_KEY, () => fetchProducts({ params: location.search }))
 
     useEffect(() => {
-        console.log('ols')
         refetch()
         queryClient.resetQueries(PRODUCTS_QUERY_KEY);
     }, [location]);

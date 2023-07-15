@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useQuery } from 'react-query';
 import { CATEGORIES_QUERY_KEY } from "../constants"
-import { fetchCategories } from "../actions/categoriesActions";
+import { fetchCategories } from "../services/categories";
 import { useNavigate } from "react-router-dom";
 
 

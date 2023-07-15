@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { CATEGORIES_QUERY_KEY } from "../constants"
 import { useQuery } from 'react-query';
-import { fetchCategories } from "../actions/categoriesActions";
+import { fetchCategories } from "../services/categories";
 
 import Loader from "../components/Loader";
 
