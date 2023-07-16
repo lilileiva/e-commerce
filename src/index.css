@@ -2,9 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #bbbb;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #cececebb;
+  border-radius: 14px;  
+}
+
 #root {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-content: top;
@@ -13,7 +34,7 @@
 html, body {
   font-family: Arial, Helvetica, sans-serif;  
   min-width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   list-style: none;
   text-decoration: none;
   background: white;

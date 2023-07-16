@@ -1,21 +1,33 @@
 import { useEffect, useState } from "react";
-import { useQuery } from 'react-query';
-import { CATEGORIES_QUERY_KEY } from "../constants"
+import { useQuery, useQueryClient } from 'react-query';
+import { CATEGORIES_QUERY_KEY, PRODUCTS_QUERY_KEY } from "../constants"
 import { fetchCategories } from "../services/categories";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 function FilterBar() {
     
+    const location = useLocation()
     const navigate = useNavigate()
-    const [params, setParams] = useState("")
+    const [filter, setFilter] = useState("")
     const [category, setCategory] = useState("")
     const [minPrice, setMinPrice] = useState("")
     const [maxPrice, setMaxPrice] = useState("")
+    const [title, setTitle] = useState("")
     
+    const queryClient = useQueryClient();
     const { data, status } = useQuery(CATEGORIES_QUERY_KEY, fetchCategories)
 
     const handleInputChange = (e) => {
+        if (location.search) {
+            const search = location.search
+            let splited = search.split('&')
+            splited.map((item, index) => {
+                if (item.split('=')[0] === 'title') {  
+                    setTitle(`&${item}`)                              
+                }
+            })
+        }
         if (e.target.name == "categories") {
             setCategory(`&categoryId=${e.target.value}`)
         }
@@ -30,17 +42,19 @@ function FilterBar() {
     }
 
     useEffect(() => {
-        setParams(category + minPrice + maxPrice)
-    }, [category, minPrice, maxPrice])
+        setFilter(title + category + minPrice + maxPrice)
+    }, [title, category, minPrice, maxPrice])
+
 
     const handleInputSubmit = (e) => {
         e.preventDefault()
-        setParams(category + minPrice + maxPrice)
-        navigate(`/products/?${params}`)
+        setFilter(category + minPrice + maxPrice)
+        queryClient.resetQueries([PRODUCTS_QUERY_KEY]);
+        navigate(`/products/?${filter}`)
     }
 
     return (
-        <div className="h-80 flex flex-col justify-top align-left shadow p-4">
+        <div className="h-80 flex flex-col justify-top align-left shadow shadow-slate-300 rounded-md p-4">
             <h3 className="font-semibold text-gray-400">Filtros</h3>
             <div className="h-full flex flex-col justify-around align-left">
                 <div className="flex flex-col">
@@ -66,14 +80,14 @@ function FilterBar() {
                             type="text"
                             placeholder="Min"
                             onChange={(e) => handleInputChange(e)}
-                            className="w-5/12 border-[1px] border-gray-100 rounded-sm pl-2 focus:border-2 focus:border-strong-skyblue focus:outline-none"
+                            className="w-5/12 border-[1px] border-gray-100 rounded-sm pl-2 focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
                         />
                         <input
                             name="price_max"
                             type="text"
                             placeholder="Max"
                             onChange={(e) => handleInputChange(e)}
-                            className="w-5/12 border-[1px] border-gray-100 rounded-sm pl-2 focus:border-2 focus:border-strong-skyblue focus:outline-none"
+                            className="w-5/12 border-[1px] border-gray-100 rounded-sm pl-2 focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
                         />
                     </div>
                 </div>

@@ -16,8 +16,8 @@ function Searchbar() {
         e.preventDefault();
         if (location.search) {
             let found = false
-            const url = location.search
-            let splited = url.split('&')
+            const search = location.search
+            let splited = search.split('&')
             splited.map((item, index) => {
                 if (item.split('=')[0] === 'title') {
                     splited[index] = `title=${inputText}`

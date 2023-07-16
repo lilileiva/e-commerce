@@ -16,7 +16,7 @@ import Home from './ecommerce/pages/Home'
 function App() {
 
   return (
-    <div className='px-20 grid grid-rows-[200px_auto] grid-cols-1 justify-center content-top w-full'>
+    <div className='px-20 grid grid-rows-[200px_auto] grid-cols-1 justify-center content-top w-full h-full'>
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />        

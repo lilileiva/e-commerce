@@ -30,7 +30,7 @@ function Navbar() {
                             </Link>
                             <button
                                 onClick={() => closeSession()}
-                                className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium'>
+                                className='inline-flex justify-center items-center gap-1 text-gray-400 self-center'>
                                 Cerrar sesión
                             </button>
                         </> : <>

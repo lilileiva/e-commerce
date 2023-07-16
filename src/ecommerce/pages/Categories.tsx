@@ -1,7 +1,10 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { CATEGORIES_QUERY_KEY } from "../constants"
-import { useQuery } from 'react-query';
+import { CATEGORIES_QUERY_KEY, PRODUCTS_QUERY_KEY } from "../constants"
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { fetchCategories } from "../services/categories";
+import { fetchProducts } from "../services/products";
+import camera from "../../assets/camera-img.png";
 
 import Loader from "../components/Loader";
 
@@ -10,24 +13,49 @@ function Categories() {
 
     const navigate = useNavigate()
 
-    const { data, status }: any = useQuery(CATEGORIES_QUERY_KEY, fetchCategories)
+    const queryClient = useQueryClient();
+    const { data, status } = useQuery(CATEGORIES_QUERY_KEY, fetchCategories)
+    const [filter, setFilter] = useState(null)
+
+    const getProductsByCategory = (categoryId) => {
+        setFilter(`&categoryId=${categoryId}`)
+    }
+
+    const mutate = useMutation([PRODUCTS_QUERY_KEY, { params: filter }], () => fetchProducts({ params: filter }), {
+        onSuccess: () => {
+            queryClient.resetQueries([PRODUCTS_QUERY_KEY]);
+            navigate(`/products/?${filter}`)
+        }
+    })
+
+    useEffect(() => {
+        if (filter != null) {            
+            mutate.mutate(filter)
+        }
+    }, [filter])
 
     return (
-        <div className="flex flex-col justify-top content-center min-h-screen">
+        <div className="flex flex-col justify-top content-center h-[calc(100vh-200px)]">
             <p className="inline-flex text-xl w-fit text-gray-500 font-medium border-b-2 border-turquoise rounded-b-sm py-1">
                 Todas las
                 <p className="text-transparent">-</p>
                 <p className="text-turquoise">categorías</p>
             </p>
-            <ul className="flex flex-wrap justify-center gap-10 mt-10">
+            <ul className="flex flex-wrap justify-center gap-10 mt-10 overflow-y-scroll">
                 {
                     data && data.length > 0 && data.map((category) => (
-                        <li className="flex flex-col justify-center align-center w-fit rounded-xl border-white overflow-hidden shadow cursor-pointer"                        
-                            onClick={() => navigate(`/products/?categoryId=${category.id}`)}>
+                        <li className="flex flex-col justify-center align-center w-52 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer"
+                            key={category.name}
+                            onClick={() => getProductsByCategory(category.id)}>
                             <div className="w-52 h-52">
-                                <img className="object-cover w-52 h-52" src={category.image} alt={category.name} />
+                                <img
+                                    className="object-cover w-52 h-52"
+                                    src={category.image}
+                                    alt={category.name}
+                                    onError={(e) => { e.target.src = camera }}
+                                />
                             </div>
-                            <p className="w-full z-10 bg-white pl-2 text-gray-700 capitalize">{category.name}</p>
+                            <p className="w-full z-10 bg-white pl-2 text-gray-700 capitalize truncate">{category.name}</p>
                         </li>
                     ))
                 }

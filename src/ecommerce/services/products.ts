@@ -1,16 +1,16 @@
 import { baseUrl } from "../constants"
 
 interface Props {
-    params: string;
+    filter: string;
 }
 
-export const fetchProducts = async ({params}: Props) => {
+export const fetchProducts = async ({filter}: Props) => {
     try {        
-        const response = await fetch(`${baseUrl}/products/?${params.toString()}`)
+        const response = await fetch(`${baseUrl}/products/?${filter}`)
         if (!response.ok) {
             throw new Error("Error HTTP: " + response.status);
         }
-        const products = await response.json();         
+        const products = await response.json();        
         return products;
     } catch (error) {
         console.error('Error fetching API data:', error);
