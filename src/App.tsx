@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import './index.css'
 
@@ -15,12 +16,14 @@ import Home from './ecommerce/pages/Home'
 
 function App() {
 
+  const [order, setOrder] = useState("")
+
   return (
     <div className='px-20 grid grid-rows-[200px_auto] grid-cols-1 justify-center content-top w-full h-full'>
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />        
-        <Route path='products/?' element={<Products />} />
+        <Route path='products/?' element={<Products order={order} setOrder={setOrder} />} />
         <Route path='products/:productId' element={<Product />} />
         <Route path='categories/' element={<Categories />} />
         <Route path='cart-detail/' element={<CartDetail />} />

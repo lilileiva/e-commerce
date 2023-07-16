@@ -66,7 +66,7 @@ function Login() {
                                 <label htmlFor="email" className="text-gray-500 font-light text-md text-left">Email</label>
                                 <input
                                     required
-                                    className="border-[1px] border-gray-200 rounded-sm focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
+                                    className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
                                     name="email"
                                     type="text"
                                     onChange={(e) => handleInputChange(e)}
@@ -76,7 +76,7 @@ function Login() {
                                 <label htmlFor="password" className="text-gray-500 font-light text-md text-left">Password</label>
                                 <input
                                     required
-                                    className="border-[1px] border-gray-200 rounded-sm focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
+                                    className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
                                     name="password"
                                     type="password"
                                     onChange={(e) => handleInputChange(e)}
@@ -91,7 +91,7 @@ function Login() {
                         </form>
                         <button
                             onClick={() => navigate("/register")}
-                            className="text-white p-2 w-72 mt-2 rounded-md bg-turquoise cursor-pointer hover:bg-white hover:border-[1px] hover:border-turquoise hover:text-turquoise transition duration-150 ease-out hover:ease-in">
+                            className="text-white p-2 w-72 mt-2 rounded-md bg-turquoise cursor-pointer border-[1px] hover:bg-white hover:border-turquoise hover:text-turquoise transition duration-150 ease-out hover:ease-in">
                             Registrarse
                         </button>
                         {error && <p className="mt-4 text-gray-500 text-center w-72">{error}</p>}

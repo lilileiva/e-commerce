@@ -21,7 +21,7 @@ function Categories() {
         setFilter(`&categoryId=${categoryId}`)
     }
 
-    const mutate = useMutation([PRODUCTS_QUERY_KEY, { params: filter }], () => fetchProducts({ params: filter }), {
+    const mutation = useMutation([PRODUCTS_QUERY_KEY, { filter }], () => fetchProducts({ filter }), {
         onSuccess: () => {
             queryClient.invalidateQueries([PRODUCTS_QUERY_KEY]);
             navigate(`/products/?${filter}`)
@@ -30,7 +30,7 @@ function Categories() {
 
     useEffect(() => {
         if (filter != null) {            
-            mutate.mutate(filter)
+            mutation.mutate(filter)
         }
     }, [filter])
 

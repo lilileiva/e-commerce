@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery, useQueryClient, useMutation } from 'react-query';
 import { CATEGORIES_QUERY_KEY, PRODUCTS_QUERY_KEY } from "../constants"
 import { fetchCategories } from "../services/categories";
+import { fetchProducts } from "../services/products";
 import { useLocation, useNavigate } from "react-router-dom";
 
 
-function FilterBar() {
+function FilterBar({setOrder}) {
 
     const location = useLocation()
     const navigate = useNavigate()
-    const [filter, setFilter] = useState("")
+    const [filter, setFilter] = useState("")    
+    const [orderValue, setOrderValue] = useState("")
     const [category, setCategory] = useState("")
     const [minPrice, setMinPrice] = useState("")
     const [maxPrice, setMaxPrice] = useState("")
@@ -22,16 +24,16 @@ function FilterBar() {
         if (location.search) {
             const search = location.search
             let splited = search.split('&')
-            splited.map((item, index) => {
+            splited.map((item) => {
                 if (item.split('=')[0] === 'title') {
                     setTitle(`&${item}`)
                 }
             })
         }
-        if (e.target.name == "categories") {
+        if (e.target.name === "categories") {
             setCategory(`&categoryId=${e.target.value}`)
         }
-        if (e.target.name == "price_min") {
+        if (e.target.name === "price_min") {
             if (e.target.value != "") {
                 setMinPrice(`&price_min=${e.target.value}`)
             } else {
@@ -41,7 +43,7 @@ function FilterBar() {
                 setMaxPrice("&price_max=1000000")
             }
         }
-        if (e.target.name == "price_max") {
+        if (e.target.name === "price_max") {
             if (e.target.value != "") {
                 setMaxPrice(`&price_max=${e.target.value}`)
             } else {
@@ -51,29 +53,53 @@ function FilterBar() {
                 setMinPrice("&price_min=1")
             }
         }
+        if (e.target.name === "order") {
+            setOrderValue(e.target.value)
+        }
     }
-
+    
     useEffect(() => {
         setFilter(title + category + minPrice + maxPrice)
     }, [title, category, minPrice, maxPrice])
-
-
+    
+    
     const handleInputSubmit = (e) => {
         e.preventDefault()
         setFilter(category + minPrice + maxPrice)
+        setOrder(orderValue)
         queryClient.invalidateQueries([PRODUCTS_QUERY_KEY]);
-        navigate(`/products/?${filter}`)
+        navigate(`/products/?${filter}`)        
     }
 
     return (
-        <div className="h-80 flex flex-col justify-top align-left shadow shadow-slate-300 rounded-md p-4">
+        <div className="h-80 flex flex-col justify-top align-left shadow shadow-slate-300 rounded-md p-4 h-fit">
             <h3 className="font-semibold text-gray-400">Filtros</h3>
             <div className="h-full flex flex-col justify-around align-left">
-                <div className="flex flex-col">
+                <div className="flex flex-col mb-6">
+                    <label htmlFor="order" className="font-semibold text-lg text-gray-500">
+                        Ordenar
+                    </label>
+                    <select name="order" className="w-full cursor-pointer border-[1px] border-gray-200 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none" onChange={(e) => handleInputChange(e)}>
+                        <option value="">-----</option>
+                        <option value="title_asc">
+                            Alfabéticamente: A a Z
+                        </option>
+                        <option value="title_desc">
+                            Alfabéticamente: Z a A
+                        </option>
+                        <option value="price_desc">
+                            Precio: Mayor a menor
+                        </option>
+                        <option value="price_asc">
+                            Precio: Menor a mayor
+                        </option>
+                    </select>
+                </div>
+                <div className="flex flex-col mb-6">
                     <label htmlFor="categories" className="font-semibold text-lg text-gray-500">
                         Categorías
                     </label>
-                    <select name="categories" className="w-11/12 cursor-pointer focus:border-strong-skyblue focus:outline-none" onChange={(e) => handleInputChange(e)}>
+                    <select name="categories" className="w-full cursor-pointer border-[1px] border-gray-200 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none" onChange={(e) => handleInputChange(e)}>
                         <option value="">Todas las categorías</option>
                         {
                             data && status == "success" && data.map((category) => (
@@ -84,22 +110,22 @@ function FilterBar() {
                         }
                     </select>
                 </div>
-                <div>
+                <div className="flex flex-col mb-6">
                     <h2 className="font-semibold text-lg text-gray-500">Rango de precios</h2>
-                    <div className="inline-flex justify-left gap-2">
+                    <div className="inline-flex justify-left gap-2 w-full">
                         <input
                             name="price_min"
                             type="text"
                             placeholder="Min"
                             onChange={(e) => handleInputChange(e)}
-                            className="w-5/12 border-[1px] border-gray-100 rounded-sm pl-2 focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
+                            className="w-full border-[1px] border-gray-200 rounded-sm pl-2 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"
                         />
                         <input
                             name="price_max"
                             type="text"
                             placeholder="Max"
                             onChange={(e) => handleInputChange(e)}
-                            className="w-5/12 border-[1px] border-gray-100 rounded-sm pl-2 focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
+                            className="w-full border-[1px] border-gray-200 rounded-sm pl-2 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"
                         />
                     </div>
                 </div>

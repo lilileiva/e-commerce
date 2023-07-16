@@ -100,7 +100,7 @@ function Register() {
                                 <label htmlFor="name" className="text-gray-500 font-light text-md text-left">Name</label>
                                 <input
                                     required
-                                    className="border-[1px] border-gray-200 rounded-sm focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
+                                    className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"
                                     name="name"
                                     type="text"
                                     onChange={(e) => handleInputChange(e)}
@@ -111,7 +111,7 @@ function Register() {
                                 <label htmlFor="email" className="text-gray-500 font-light text-md text-left">Email</label>
                                 <input
                                     required
-                                    className="border-[1px] border-gray-200 rounded-sm focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
+                                    className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"
                                     name="email"
                                     type="text"
                                     onChange={(e) => handleInputChange(e)}
@@ -122,7 +122,7 @@ function Register() {
                                 <label htmlFor="password" className="text-gray-500 font-light text-md text-left">Password</label>
                                 <input
                                     required
-                                    className="border-[1px] border-gray-200 rounded-sm focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
+                                    className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"
                                     name="password"
                                     type="password"
                                     onChange={(e) => handleInputChange(e)}
@@ -131,7 +131,7 @@ function Register() {
                             </div>
                             <button
                                 type="submit"
-                                className="text-white p-2 mt-4 rounded-md bg-turquoise cursor-pointer hover:bg-white hover:border-[1px] hover:border-turquoise hover:text-turquoise transition duration-150 ease-out hover:ease-in"
+                                className="text-white p-2 mt-4 rounded-md bg-turquoise cursor-pointer border-[1px] hover:bg-white hover:border-turquoise hover:text-turquoise transition duration-150 ease-out hover:ease-in"
                             >
                                 {isRegistered ? <Loader /> : "Registrarse"}
                             </button>
