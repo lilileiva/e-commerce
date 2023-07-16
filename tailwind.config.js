@@ -10,7 +10,7 @@ export default {
         'skyblue': '#E3F7FF',
         'turquoise': '#1ABCFE'
       },
-      textColor: {
+      textColor: {        
         'turquoise': '#1ABCFE'
       },
       borderColor: {

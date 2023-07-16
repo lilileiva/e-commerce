@@ -26,15 +26,17 @@ function Login() {
             let response = await loginUser({ email, password })
             if (response != undefined && response.status === 201) {
                 response = await response.json()
-                const token = await response["access_token"];                
+                const token = await response["access_token"];
                 window.localStorage.setItem("token", token);
                 navigate("/");
             } else {
-                setIsLogged(false)                
+                setIsLogged(false)
                 setError("No se pudo iniciar sesión. Verifique que los datos ingresados sean correctos.")
             }
         } catch (error) {
             console.log(error)
+            setIsLogged(false)
+            setError(error);
         }
     }
 
@@ -46,7 +48,7 @@ function Login() {
 
     return (
         <div className="mt-4 flex flex-col justify-top items-center h-full">
-            <div className="flex flex-col justify-center items-center w-72 h-fit py-6 shadow shadow-slate-300 rounded-md">
+            <div className="flex flex-col justify-center items-center w-80 h-fit py-6 shadow shadow-slate-300 rounded-md">
                 {
                     token ? <>
                         <p>Ya has iniciado sesión</p>
@@ -59,34 +61,40 @@ function Login() {
                         <h2 className="mb-6 text-gray-500 font-semibold text-lg text-left">
                             Iniciá sesión
                         </h2>
-                        <form onSubmit={(e) => handleInputSubmit(e)} className="flex flex-col justify-center align-center w-56 h-fit">
-                            <div className="flex flex-col mb-4">
-                                <label htmlFor="email">Email</label>
+                        <form onSubmit={(e) => handleInputSubmit(e)} className="flex flex-col justify-center align-center w-72 h-fit">
+                            <div className="flex flex-col mb-8">
+                                <label htmlFor="email" className="text-gray-500 font-light text-md text-left">Email</label>
                                 <input
-                                    className="border-[1px] border-gray-200 focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
-                                    required name="email" type="text" onChange={(e) => handleInputChange(e)}
+                                    required
+                                    className="border-[1px] border-gray-200 rounded-sm focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
+                                    name="email"
+                                    type="text"
+                                    onChange={(e) => handleInputChange(e)}
                                 />
                             </div>
-                            <div className="flex flex-col mb-4">
-                                <label htmlFor="password">Password</label>
+                            <div className="flex flex-col mb-8">
+                                <label htmlFor="password" className="text-gray-500 font-light text-md text-left">Password</label>
                                 <input
-                                    className="border-[1px] border-gray-200 focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
-                                    required name="password" type="password" onChange={(e) => handleInputChange(e)}
+                                    required
+                                    className="border-[1px] border-gray-200 rounded-sm focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
+                                    name="password"
+                                    type="password"
+                                    onChange={(e) => handleInputChange(e)}
                                 />
                             </div>
                             <button
-                                type="submit"                                
-                                className="text-turquoise w-56 mt-2 border-[1px] border-turquoise p-2 rounded-md bg-white cursor-pointer hover:bg-turquoise hover:text-white transition duration-150 ease-out hover:ease-in"
+                                type="submit"
+                                className="text-turquoise w-72 mt-2 border-[1px] border-turquoise p-2 rounded-md bg-white cursor-pointer hover:bg-turquoise hover:text-white transition duration-150 ease-out hover:ease-in"
                             >
                                 {isLogged ? <Loader /> : "Iniciar sesión"}
-                            </button>                                                            
+                            </button>
                         </form>
                         <button
                             onClick={() => navigate("/register")}
-                            className="text-white p-2 w-56 mt-2 rounded-md bg-turquoise cursor-pointer hover:bg-white hover:border-[1px] hover:border-turquoise hover:text-turquoise transition duration-150 ease-out hover:ease-in">
+                            className="text-white p-2 w-72 mt-2 rounded-md bg-turquoise cursor-pointer hover:bg-white hover:border-[1px] hover:border-turquoise hover:text-turquoise transition duration-150 ease-out hover:ease-in">
                             Registrarse
                         </button>
-                        {error && <p className="mt-4 text-gray-500 text-center w-52">{error}</p>}
+                        {error && <p className="mt-4 text-gray-500 text-center w-72">{error}</p>}
                     </>
                 }
             </div>

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import SearchIcon from '../icons/SearchIcon'
+import SearchIcon from '../icons/SearchIcon';
 
 function Searchbar() {
 
     const location = useLocation()
     const navigate = useNavigate()
-    const [inputText, setInputText] = useState("");
+    const [inputText, setInputText] = useState("");    
 
     const handleInputChange = (e) => {
         setInputText(e.target.value);
@@ -23,8 +23,7 @@ function Searchbar() {
                     splited[index] = `title=${inputText}`
                     found = true
                 }
-            })
-            console.log(found)
+            })            
             if (!found) splited.push(`title=${inputText}`)
             navigate(`products/${splited.join('&')}`)
         } else {

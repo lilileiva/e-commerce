@@ -23,7 +23,7 @@ function Categories() {
 
     const mutate = useMutation([PRODUCTS_QUERY_KEY, { params: filter }], () => fetchProducts({ params: filter }), {
         onSuccess: () => {
-            queryClient.resetQueries([PRODUCTS_QUERY_KEY]);
+            queryClient.invalidateQueries([PRODUCTS_QUERY_KEY]);
             navigate(`/products/?${filter}`)
         }
     })

@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 
 function FilterBar() {
-    
+
     const location = useLocation()
     const navigate = useNavigate()
     const [filter, setFilter] = useState("")
@@ -14,8 +14,8 @@ function FilterBar() {
     const [minPrice, setMinPrice] = useState("")
     const [maxPrice, setMaxPrice] = useState("")
     const [title, setTitle] = useState("")
-    
     const queryClient = useQueryClient();
+
     const { data, status } = useQuery(CATEGORIES_QUERY_KEY, fetchCategories)
 
     const handleInputChange = (e) => {
@@ -23,8 +23,8 @@ function FilterBar() {
             const search = location.search
             let splited = search.split('&')
             splited.map((item, index) => {
-                if (item.split('=')[0] === 'title') {  
-                    setTitle(`&${item}`)                              
+                if (item.split('=')[0] === 'title') {
+                    setTitle(`&${item}`)
                 }
             })
         }
@@ -35,15 +35,20 @@ function FilterBar() {
             if (e.target.value != "") {
                 setMinPrice(`&price_min=${e.target.value}`)
             } else {
-                setMinPrice("&price_min=1")                
-            }            
+                setMinPrice("&price_min=1")
+            }
+            if (maxPrice == "") {
+                setMaxPrice("&price_max=1000000")
+            }
         }
-        if (e.target.name == "price_max") {              
-            if (e.target.value != "") {                                
+        if (e.target.name == "price_max") {
+            if (e.target.value != "") {
                 setMaxPrice(`&price_max=${e.target.value}`)
             } else {
-                console.log('2')
-                setMaxPrice("&price_max=1000000")                
+                setMaxPrice("&price_max=1000000")
+            }
+            if (minPrice == "") {
+                setMinPrice("&price_min=1")
             }
         }
     }
@@ -56,7 +61,7 @@ function FilterBar() {
     const handleInputSubmit = (e) => {
         e.preventDefault()
         setFilter(category + minPrice + maxPrice)
-        queryClient.resetQueries([PRODUCTS_QUERY_KEY]);
+        queryClient.invalidateQueries([PRODUCTS_QUERY_KEY]);
         navigate(`/products/?${filter}`)
     }
 
@@ -85,20 +90,20 @@ function FilterBar() {
                         <input
                             name="price_min"
                             type="text"
-                            placeholder="Min"                            
+                            placeholder="Min"
                             onChange={(e) => handleInputChange(e)}
                             className="w-5/12 border-[1px] border-gray-100 rounded-sm pl-2 focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
                         />
                         <input
                             name="price_max"
                             type="text"
-                            placeholder="Max"                            
+                            placeholder="Max"
                             onChange={(e) => handleInputChange(e)}
                             className="w-5/12 border-[1px] border-gray-100 rounded-sm pl-2 focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
                         />
                     </div>
                 </div>
-                <button                    
+                <button
                     onClick={(e) => handleInputSubmit(e)}
                     className="w-fit self-center border-2 border-turquoise font-bold text-turquoise p-4 rounded-md cursor-pointer hover:bg-turquoise hover:text-white transition duration-150 ease-out hover:ease-in"
                 >
