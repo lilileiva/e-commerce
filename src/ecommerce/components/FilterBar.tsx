@@ -32,12 +32,19 @@ function FilterBar() {
             setCategory(`&categoryId=${e.target.value}`)
         }
         if (e.target.name == "price_min") {
-            setMinPrice(`&price_min=${e.target.value}`)
-            maxPrice == "" ? setMaxPrice("&price_mmax=1000000") : null
+            if (e.target.value != "") {
+                setMinPrice(`&price_min=${e.target.value}`)
+            } else {
+                setMinPrice("&price_min=1")                
+            }            
         }
-        if (e.target.name == "price_max") {
-            minPrice == "" ? setMinPrice("&price_min=1") : null
-            setMaxPrice(`&price_max=${e.target.value}`)
+        if (e.target.name == "price_max") {              
+            if (e.target.value != "") {                                
+                setMaxPrice(`&price_max=${e.target.value}`)
+            } else {
+                console.log('2')
+                setMaxPrice("&price_max=1000000")                
+            }
         }
     }
 
@@ -78,20 +85,20 @@ function FilterBar() {
                         <input
                             name="price_min"
                             type="text"
-                            placeholder="Min"
+                            placeholder="Min"                            
                             onChange={(e) => handleInputChange(e)}
                             className="w-5/12 border-[1px] border-gray-100 rounded-sm pl-2 focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
                         />
                         <input
                             name="price_max"
                             type="text"
-                            placeholder="Max"
+                            placeholder="Max"                            
                             onChange={(e) => handleInputChange(e)}
                             className="w-5/12 border-[1px] border-gray-100 rounded-sm pl-2 focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
                         />
                     </div>
                 </div>
-                <button
+                <button                    
                     onClick={(e) => handleInputSubmit(e)}
                     className="w-fit self-center border-2 border-turquoise font-bold text-turquoise p-4 rounded-md cursor-pointer hover:bg-turquoise hover:text-white transition duration-150 ease-out hover:ease-in"
                 >
