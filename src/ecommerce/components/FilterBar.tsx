@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { useQuery, useQueryClient, useMutation } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { CATEGORIES_QUERY_KEY, PRODUCTS_QUERY_KEY } from "../constants"
 import { fetchCategories } from "../services/categories";
-import { fetchProducts } from "../services/products";
 import { useLocation, useNavigate } from "react-router-dom";
 
 

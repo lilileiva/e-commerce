@@ -6,11 +6,6 @@ interface createUserProps {
     password: string;
 }
 
-interface loginUserProps {
-    email: string;
-    password: string;
-}
-
 export const createUser = async ({ name, email, password }: createUserProps) => {
     try {
         const response = await fetch(`${baseUrl}/users/`, {
@@ -34,6 +29,11 @@ export const createUser = async ({ name, email, password }: createUserProps) => 
         console.error('Error fetching API data:', error);
     }
 };
+
+interface loginUserProps {
+    email: string;
+    password: string;
+}
 
 export const loginUser = async ({ email, password }: loginUserProps) => {
     try {

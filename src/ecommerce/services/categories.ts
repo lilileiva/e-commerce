@@ -15,7 +15,7 @@ export const fetchCategories = async () => {
 
 export const fetchCategory = async ({ categoryId }) => {
     try {        
-        const response = await fetch(`${baseUrl}/categories/${categoryId.toString()}`)
+        const response = await fetch(`${baseUrl}/categories/${categoryId}`)
         if (!response.ok) {
             throw new Error("Error HTTP: " + response.status);
         }
