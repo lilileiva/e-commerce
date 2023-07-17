@@ -15,7 +15,6 @@ function Register() {
     const [isRegistered, setIsRegistered] = useState(false)
     const token = window.localStorage.getItem("token");
 
-
     const validate = (e) => {
         if (e.target.name === "name") {
             if (!e.target.value.match(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/)) {

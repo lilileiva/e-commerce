@@ -87,7 +87,11 @@ function FilterBar({ setOrder }) {
                         <label htmlFor="order" className="font-semibold text-lg text-gray-500">
                             Ordenar
                         </label>
-                        <select name="order" className="w-full cursor-pointer border-[1px] border-gray-200 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none" onChange={(e) => handleInputChange(e)}>
+                        <select
+                            name="order"
+                            className="w-full cursor-pointer border-[1px] border-gray-200 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"
+                            onChange={(e) => handleInputChange(e)}
+                        >
                             <option value="">-----</option>
                             <option value="title_asc">
                                 Alfabéticamente: A a Z

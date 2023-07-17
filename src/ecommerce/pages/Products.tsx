@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from 'react-query';
 import { PRODUCTS_QUERY_KEY } from "../constants";
@@ -7,11 +8,12 @@ import camera from "../../assets/camera-img.png";
 import FilterBar from "../components/FilterBar";
 import Loader from "../components/Loader";
 
-function Products({order, setOrder}) {
+function Products() {
 
     const navigate = useNavigate()
     const location = useLocation()
-        
+    const [order, setOrder] = useState("")
+
     const { data, status } = useQuery([PRODUCTS_QUERY_KEY, { filter: location.search, order }], () => fetchProducts({ filter: location.search, order }))
 
     return (
