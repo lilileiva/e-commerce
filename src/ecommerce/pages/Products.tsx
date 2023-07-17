@@ -16,7 +16,7 @@ function Products({order, setOrder}) {
 
     return (
         <div className="flex flex-col justify-top content-center w-full h-[calc(100vh-200px)]">
-            <div className="grid grid-cols-[25%_auto] gap-10 h-full">
+            <div className="grid grid-cols-[auto_auto] gap-10 h-full">
                 <FilterBar setOrder={setOrder} />
                 <div className="w-full h-[calc(100vh-200px)] overflow-y-scroll">
                     <p className="inline-flex text-xl w-fit text-gray-500 font-medium border-b-2 border-turquoise rounded-b-sm py-1 h-fit">
