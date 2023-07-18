@@ -75,7 +75,7 @@ function FilterBar({ setOrder }) {
 
     return (
         <>
-            {showFilters ? <div className="h-80 w-80 flex flex-col justify-top align-left shadow shadow-slate-300 rounded-md p-4 h-fit transition duration-150">
+            {showFilters ? <div className="h-80 w-80 flex flex-col justify-top align-left shadow shadow-slate-300 rounded-md p-4 h-fit duration-150">
                 <div className="flex mb-4 justify-between items-center">
                     <h3 className="font-semibold text-gray-400">Filtros</h3>
                     <button onClick={() => setShowFilters(false)}>
@@ -148,14 +148,13 @@ function FilterBar({ setOrder }) {
                         Buscar
                     </button>
                 </div>
-            </div> : <div className="w-fit">
+            </div> : <div className="w-min duration-150">
                 <button
                     className="bg-skyblue rounded-md p-2"
                     onClick={() => setShowFilters(true)}>
                     <MenuFoldIcon size='30' />
                 </button>
-            </div>
-            }
+            </div>}
         </>
     );
 }

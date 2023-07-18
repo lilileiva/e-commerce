@@ -18,15 +18,15 @@ function Products() {
 
     return (
         <div className="flex flex-col justify-top content-center w-full h-[calc(100vh-200px)]">
-            <div className="grid grid-cols-[auto_auto] gap-10 h-full">
+            <div className="grid grid-cols-[min-content_auto] gap-10 h-full w-full">
                 <FilterBar setOrder={setOrder} />
-                <div className="w-full h-[calc(100vh-200px)] overflow-y-scroll">
+                <div className="w-full h-[calc(100vh-200px)] overflow-y-scroll w-full">
                     <p className="inline-flex text-xl w-fit text-gray-500 font-medium border-b-2 border-turquoise rounded-b-sm py-1 h-fit">
                         Todos los
                         <p className="text-transparent">-</p>
                         <p className="text-turquoise">productos</p>
                     </p>
-                    <ul className="flex flex-wrap justify-center gap-10 mt-10 h-full">
+                    <ul className="flex flex-wrap justify-center gap-10 mt-10 h-full w-full">
                         {
                             data && data.length > 0 && status === 'success' && data.map((product) => (
                                 <li className="flex flex-col justify-center items-center w-52 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer"
@@ -57,7 +57,7 @@ function Products() {
                                 </li>
                             ))
                         }
-                        {data && data.length == 0 && status === 'success' && <p>No se encontraron productos</p>}
+                        {data && data.length == 0 && status === 'success' && <p className="w-full">No se encontraron productos</p>}
                         {status === 'loading' && <Loader />}
                         {status === 'error' && <p>Error al cargar los productos</p>}
                     </ul>

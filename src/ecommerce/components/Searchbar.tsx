@@ -6,7 +6,7 @@ function Searchbar() {
 
     const location = useLocation()
     const navigate = useNavigate()
-    const [inputText, setInputText] = useState("");    
+    const [inputText, setInputText] = useState("");
 
     const handleInputChange = (e) => {
         setInputText(e.target.value);
@@ -23,7 +23,7 @@ function Searchbar() {
                     splited[index] = `title=${inputText}`
                     found = true
                 }
-            })            
+            })
             if (!found) splited.push(`title=${inputText}`)
             navigate(`products/${splited.join('&')}`)
         } else {
@@ -32,11 +32,16 @@ function Searchbar() {
     }
 
     return (
-        <form className="bg-skyblue px-4 py-2 rounded-xl flex gap-4" onSubmit={(e) => handleInputSubmit(e)}>
+        <form className="bg-skyblue px-4 py-2 rounded-xl flex gap-4 w-fit" onSubmit={(e) => handleInputSubmit(e)}>
             <button type="submit">
                 <SearchIcon size='27' />
             </button>
-            <input className="bg-skyblue focus:outline-none text-gray-500" type="text" placeholder="Buscar un producto..." onChange={(e) => handleInputChange(e)} />
+            <input
+                type="text"
+                placeholder="Buscar un producto..."
+                className="bg-skyblue w-14 text-gray-500 outline-none duration-300 focus:outline-none focus:duration-500 focus:w-full"
+                onChange={(e) => handleInputChange(e)}
+            />
         </form>
     );
 }

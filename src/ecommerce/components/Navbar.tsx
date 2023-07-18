@@ -48,13 +48,13 @@ function Navbar() {
             </div>
             <hr className='border-gray-200 my-5' />
             <div className='inline-flex text-base justify-evenly'>
-                <Link to="/" className='text-gray-700 font-normal py-1 px-2 bg-slate-100 rounded-xl'>
+                <Link to="/" className='text-gray-700 font-normal py-1 px-2 bg-slate-100 rounded-xl hover:bg-gray-300 duration-75'>
                     Inicio
                 </Link>
-                <Link to="/products" className='text-gray-700 font-normal py-1 px-2 bg-slate-100 rounded-xl'>
+                <Link to="/products" className='text-gray-700 font-normal py-1 px-2 bg-slate-100 rounded-xl hover:bg-gray-300 duration-75'>
                     Todos los productos
                 </Link>
-                <Link to="/categories" className='text-gray-700 font-normal py-1 px-2 bg-slate-100 rounded-xl'>
+                <Link to="/categories" className='text-gray-700 font-normal py-1 px-2 bg-slate-100 rounded-xl hover:bg-gray-300 duration-75'>
                     Categorías
                 </Link>
             </div>
