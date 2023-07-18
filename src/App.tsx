@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import './index.css'
 
@@ -16,7 +17,7 @@ import Home from './ecommerce/pages/Home'
 function App() {
 
   return (
-    <div className='px-20 grid grid-row-3 grid-cols-1 justify-center content-top w-full'>
+    <div className='px-20 grid grid-rows-[200px_auto] grid-cols-1 justify-center content-top w-full h-full'>
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />        
@@ -28,7 +29,7 @@ function App() {
         <Route path='register/' element={<Register />} />
         <Route path='products/create/' element={<CreateProduct />} />
         <Route path='products/edit/:productId' element={<EditProduct />} />
-      </Routes>
+      </Routes>      
     </div>
   )
 }
