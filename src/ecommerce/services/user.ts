@@ -56,3 +56,25 @@ export const loginUser = async ({ email, password }: loginUserProps) => {
         console.error('Error fetching API data:', error);
     }
 };
+
+export const checkAvailableEmail = async ({ email }) => {
+    try {
+        const response = await fetch(`${baseUrl}/users/is-available`, {
+            method: "post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email                
+            })
+        })
+        if (!response.ok) {
+            throw new Error("Error HTTP: " + response.status);
+        }        
+        const responseJson = await response.json()
+        return responseJson
+    } catch (error) {
+        console.error('Error fetching API data:', error);
+    }
+}

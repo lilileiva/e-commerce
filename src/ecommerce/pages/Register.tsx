@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { createUser } from "../services/user"
+import { checkAvailableEmail, createUser } from "../services/user"
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
+import { useQuery } from "react-query";
 
 function Register() {
 
@@ -15,6 +16,8 @@ function Register() {
     const [isRegistered, setIsRegistered] = useState(false)
     const token = window.localStorage.getItem("token");
 
+    const { data, status } = useQuery(['is-available', { email }], () => checkAvailableEmail({ email }))
+
     const validate = (e) => {
         if (e.target.name === "name") {
             if (!e.target.value.match(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/)) {
@@ -22,17 +25,21 @@ function Register() {
             } else {
                 delete inputErrors["name"]
             }
-        }        
+        }
         if (e.target.name === "email") {
-            if (!e.target.value.match(/(?:[a-z0-9+!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/i)) {                
+            if (!e.target.value.match(/(?:[a-z0-9+!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/i)) {
                 setInputErrors({ ...inputErrors, email: "El correo electrónico no es válido." })
+            }            
+            if (data && status === "success" && data["isAvailable"] === false) {
+                console.log('ol')
+                setInputErrors({ ...inputErrors, email: "El correo electrónico ya está en uso." })
             } else {
                 delete inputErrors["email"]
             }
         }
         if (e.target.name === "password") {
-            if (e.target.value.length < 4 ) {
-                setInputErrors({...inputErrors, password: "La contraseña debe tener al menos 4 caracteres."})
+            if (e.target.value.length < 4) {
+                setInputErrors({ ...inputErrors, password: "La contraseña debe tener al menos 4 caracteres." })
             } else {
                 delete inputErrors["password"]
             }
@@ -57,7 +64,7 @@ function Register() {
     const register = async () => {
         try {
             const response = await createUser({ name, email, password })
-            if (response != undefined && response.status === 201) {                
+            if (response != undefined && response.status === 201) {
                 setMessage("Cuenta creada exitosamente. Inicie sesión.")
                 setIsRegistered(false)
             } else {
@@ -71,6 +78,7 @@ function Register() {
         }
     }
 
+    console.log(inputErrors)
     const handleInputSubmit = (e) => {
         e.preventDefault();
         if (Object.keys(inputErrors).length === 0) {
