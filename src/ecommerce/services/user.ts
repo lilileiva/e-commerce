@@ -1,5 +1,35 @@
 import { baseUrl } from "../constants"
 
+export const getUsers = async () => {
+    try {
+        const response = await fetch(`${baseUrl}/users/`)            
+        if (!response.ok) {
+            throw new Error("Error HTTP: " + response.status);
+        }
+        const users = await response.json()
+        return users        
+    } catch (error) {
+        console.error('Error fetching API data:', error);
+    }
+};
+
+interface getUserProps {
+    email: string;
+}
+
+export const getUser = async ({ email }: getUserProps) => {
+    try {
+        const response = await fetch(`${baseUrl}/users/`)            
+        if (!response.ok) {
+            throw new Error("Error HTTP: " + response.status);
+        }
+        const users = await response.json()        
+        return users.find((user) => user.email === email)
+    } catch (error) {
+        console.error('Error fetching API data:', error);
+    }
+}
+
 interface createUserProps {
     name: string;
     email: string;
@@ -19,33 +49,6 @@ export const createUser = async ({ name, email, password }: createUserProps) => 
                 email: email,
                 password: password,
                 avatar: "https://api.lorem.space/image/face?w=640&h=480&r=867"
-            })
-        })
-        if (!response.ok) {
-            throw new Error("Error HTTP: " + response.status);
-        }
-        return response
-    } catch (error) {
-        console.error('Error fetching API data:', error);
-    }
-};
-
-interface loginUserProps {
-    email: string;
-    password: string;
-}
-
-export const loginUser = async ({ email, password }: loginUserProps) => {
-    try {
-        const response = await fetch(`${baseUrl}/auth/login`, {
-            method: "post",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password
             })
         })
         if (!response.ok) {

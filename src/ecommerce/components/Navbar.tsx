@@ -10,7 +10,7 @@ function Navbar() {
     const token = window.localStorage.getItem("token");
 
     const closeSession = () => {
-        window.localStorage.removeItem("token");
+        window.localStorage.clear();
         navigate("/");
     }
 
@@ -24,9 +24,13 @@ function Navbar() {
                     <Searchbar />
                     {
                         token ? <>
-                            <Link to="/" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium'>
+                            <Link to="/user/details/" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium'>
                                 <UserIcon size='27' />
                                 Mi perfil
+                            </Link>
+                            <Link to="/cart-detail" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium'>
+                                <CartIcon size='27' />
+                                Carrito
                             </Link>
                             <button
                                 onClick={() => closeSession()}

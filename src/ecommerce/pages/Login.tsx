@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../services/user";
+import { loginUser } from "../services/auth";
 import Loader from "../components/Loader";
+import { useQuery } from "react-query";
+import { USER_QUERY_KEY } from "../constants";
+import { getUser } from "../services/user";
 
 function Login() {
 
@@ -21,6 +24,8 @@ function Login() {
         }
     }
 
+    const {data, status} = useQuery([USER_QUERY_KEY, {email}], () => getUser({email}), {retry: 10})
+
     const login = async () => {
         try {
             let response = await loginUser({ email, password })
@@ -28,6 +33,10 @@ function Login() {
                 response = await response.json()
                 const token = await response["access_token"];
                 window.localStorage.setItem("token", token);
+            if (data && status === "success") {
+                window.localStorage.setItem("userEmail", data["email"])
+                window.localStorage.setItem("userRole", data["role"])
+            }
                 navigate("/");
             } else {
                 setIsLogged(false)
