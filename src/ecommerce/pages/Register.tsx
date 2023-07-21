@@ -103,7 +103,7 @@ function Register() {
                         </h2>
                         <form onSubmit={(e) => handleInputSubmit(e)} className="flex flex-col justify-center align-center w-72 h-fit">
                             <div className="flex flex-col mb-8">
-                                <label htmlFor="name" className="text-gray-500 font-light text-md text-left">Name</label>
+                                <label htmlFor="name" className="text-gray-500 font-light text-md text-left">Nombre</label>
                                 <input
                                     required
                                     className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"
@@ -125,7 +125,7 @@ function Register() {
                                 {inputErrors["email"] && <p className="text-turquoise text-sm text-center w-72 absolute mt-14">{inputErrors["email"]}</p>}
                             </div>
                             <div className="flex flex-col mb-8">
-                                <label htmlFor="password" className="text-gray-500 font-light text-md text-left">Password</label>
+                                <label htmlFor="password" className="text-gray-500 font-light text-md text-left">Contraseña</label>
                                 <input
                                     required
                                     className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"

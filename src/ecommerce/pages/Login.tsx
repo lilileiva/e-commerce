@@ -82,7 +82,7 @@ function Login() {
                                 />
                             </div>
                             <div className="flex flex-col mb-8">
-                                <label htmlFor="password" className="text-gray-500 font-light text-md text-left">Password</label>
+                                <label htmlFor="password" className="text-gray-500 font-light text-md text-left">Contraseña</label>
                                 <input
                                     required
                                     className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
