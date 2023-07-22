@@ -3,8 +3,10 @@ import { useNavigate } from "react-router";
 import { CATEGORIES_QUERY_KEY } from "../constants";
 import { fetchCategories } from "../services/categories";
 import { useQuery } from "react-query";
+import camera from "../../assets/camera-img.png";
 
 import Loader from "../components/Loader";
+import { createProduct } from "../services/products";
 
 function CreateProduct() {
 
@@ -17,6 +19,7 @@ function CreateProduct() {
         images: []
     })
     const [inputErrors, setInputErrors] = useState({});
+    const [image, setImage] = useState("")
     const [error, setError] = useState(null);
     const [isCreated, setIsCreated] = useState(false);
     const userRole = window.localStorage.getItem("userRole");
@@ -53,15 +56,34 @@ function CreateProduct() {
                 delete inputErrors["description"]
             }
         }
+        if (e.target.name === "image") {
+            if (!e.target.value.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/)) {
+                setInputErrors({ ...inputErrors, images: "El URL de la imágen no es válido" })
+            } else {
+                delete inputErrors["images"]
+            }
+        }
     }
 
-    const handleInputChange = (e) => {        
+    const addImage = () => {
+        setProductDetails({
+            ...productDetails,
+            images: [...productDetails.images, image]
+        })
+        setImage("")
+    }
+
+    const deleteImage = (index) => {
+        setProductDetails({
+            ...productDetails,
+            images: productDetails.images.filter((image, i) => i !== index)
+        })
+    }
+
+    const handleInputChange = (e) => {
         if (e.target.name === "image") {
             validate(e)
-            setProductDetails({
-                ...productDetails,
-                [e.target.name]: [...productDetails.images, e.target.value]
-            })
+            setImage(e.target.value)
         } else {
             validate(e)
             setProductDetails({
@@ -71,15 +93,26 @@ function CreateProduct() {
         }
     }
 
-    const handleInputSubmit = (e) => {
+    const handleInputSubmit = async (e) => {
         e.preventDefault();
-        setIsCreated(true)
-        console.log(productDetails)
+        if (Object.keys(inputErrors).length === 0) {
+            setIsCreated(true)
+            try {               
+                const response = await createProduct(productDetails)
+                if (response.status === 201) {
+                    const product = await response.json()                    
+                    navigate(`/products/${product.id}`)
+                }
+            } catch (error) {
+                setError(error.toString())
+                console.log(error)
+            }
+        }        
     }
 
     return (
         <div className="mt-4 flex flex-col justify-top items-center h-full">
-            <div className="flex flex-col justify-center items-center w-96 h-fit py-6 shadow shadow-slate-300 rounded-md">
+            <div className="flex flex-col justify-center items-center w-1/2 h-fit p-6 shadow shadow-slate-300 rounded-md">
                 {
                     userRole !== "admin" ? <>
                         <p>Esta página no existe</p>
@@ -87,7 +120,7 @@ function CreateProduct() {
                         <h2 className="mb-6 text-gray-500 font-semibold text-lg text-left">
                             Crear producto
                         </h2>
-                        <form onSubmit={(e) => handleInputSubmit(e)} className="flex flex-col justify-center align-center w-80 h-fit">
+                        <form onSubmit={(e) => handleInputSubmit(e)} className="flex flex-col justify-center align-center w-full h-fit">
                             <div className="flex flex-col mb-6">
                                 <label
                                     htmlFor="title"
@@ -102,7 +135,7 @@ function CreateProduct() {
                                     type="text"
                                     onChange={(e) => handleInputChange(e)}
                                 />
-                                {inputErrors["title"] && <p className="text-turquoise text-sm text-center w-72 absolute mt-14">{inputErrors["title"]}</p>}
+                                {inputErrors["title"] && <p className="text-turquoise text-sm text-center w-full absolute mt-14">{inputErrors["title"]}</p>}
                             </div>
                             <div className="flex flex-col mb-6">
                                 <label
@@ -118,7 +151,7 @@ function CreateProduct() {
                                     type="text"
                                     onChange={(e) => handleInputChange(e)}
                                 />
-                                {inputErrors["price"] && <p className="text-turquoise text-sm text-center w-72 absolute mt-14">{inputErrors["price"]}</p>}
+                                {inputErrors["price"] && <p className="text-turquoise text-sm text-center w-full absolute mt-14">{inputErrors["price"]}</p>}
                             </div>
                             <div className="flex flex-col mb-6">
                                 <label htmlFor="description" className="text-gray-500 font-light text-md text-left">Descripción</label>
@@ -127,7 +160,7 @@ function CreateProduct() {
                                     name="description"
                                     onChange={(e) => handleInputChange(e)}
                                 ></textarea>
-                                {inputErrors["description"] && <p className="text-turquoise text-sm text-center w-72 absolute mt-14">{inputErrors["description"]}</p>}
+                                {inputErrors["description"] && <p className="text-turquoise text-sm text-center w-full absolute mt-14">{inputErrors["description"]}</p>}
                             </div>
                             <div className="flex flex-col mb-6">
                                 <label htmlFor="categoryId" className="text-gray-500 font-light text-md text-left">
@@ -147,24 +180,43 @@ function CreateProduct() {
                                         ))
                                     }
                                 </select>
-                                {inputErrors["categories"] && <p className="text-turquoise text-sm text-center w-72 absolute mt-14">{inputErrors["categories"]}</p>}
+                                {inputErrors["categories"] && <p className="text-turquoise text-sm text-center w-full absolute mt-14">{inputErrors["categories"]}</p>}
                             </div>
                             <div className="flex flex-col mb-6">
                                 <label htmlFor="image" className="text-gray-500 font-light text-md text-left">
                                     Imágenes
                                 </label>
                                 <input
-                                    required
                                     className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
                                     name="image"
                                     type="text"
+                                    placeholder="URL de imágen"
+                                    onChange={(e) => handleInputChange(e)}
+                                    value={image}
                                 />
-                                <input className="mt-2 cursor-pointer text-turquoise bg-skyblue rounded-md" type="submit" value="Agregar imagen" onSubmit={(e) => handleInputChange(e)} />
-                                {inputErrors["images"] && <p className="text-turquoise text-sm text-center w-72 absolute mt-14">{inputErrors["images"]}</p>}
+                                <button className="mt-2 cursor-pointer text-turquoise bg-skyblue rounded-md py-4" type="button" onClick={() => addImage()}>
+                                    Agregar imágen
+                                </button>
+                                <ul className="flex overflow-x-scroll mt-4 gap-2 w-full">
+                                    {productDetails.images.length > 0 && productDetails.images.map((image, index) => (
+                                        <li className="w-32 h-32" key={index}>
+                                            <button
+                                                onClick={() => deleteImage(index)}
+                                                className="text-white bg-turquoise w-6 h-6 rounded-md absolute"
+                                            >
+                                                X
+                                            </button>
+                                            <img src={image} alt="product image"
+                                                className="w-32 h-32 object-cover rounded-md" onError={(e) => { e.target.src = camera }}
+                                            />
+                                        </li>
+                                    ))}
+                                </ul>
+                                {inputErrors["images"] && <p className="text-turquoise text-sm text-center w-full">{inputErrors["images"]}</p>}
                             </div>
                             <button
                                 type="submit"
-                                className="text-white w-80 mt-2 p-2 rounded-md bg-turquoise cursor-pointer border-[1px] hover:text-turquoise hover:bg-white hover:border-turquoise transition duration-150 ease-out hover:ease-in"
+                                className="text-white w-full mt-2 p-2 rounded-md bg-turquoise cursor-pointer border-[1px] hover:text-turquoise hover:bg-white hover:border-turquoise transition duration-150 ease-out hover:ease-in"
                             >
                                 {isCreated ? <Loader /> : "Crear producto"}
                             </button>

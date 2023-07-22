@@ -45,7 +45,7 @@ function Login() {
         } catch (error) {
             console.log(error)
             setIsLogged(false)
-            setError(error);
+            setError(error.toString());
         }
     }
 

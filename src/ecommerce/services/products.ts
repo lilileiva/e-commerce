@@ -40,10 +40,10 @@ export const fetchProduct = async ({ productId }: productProps) => {
 
 interface createProductProps {
     title: string,
-    price: number,
+    price: string,
     description: string,
-    categoryId: number,
-    images: []
+    categoryId: string,
+    images: any
 }
 
 export const createProduct = async ({ title, price, description, categoryId, images }: createProductProps) => {

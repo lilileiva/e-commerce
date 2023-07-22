@@ -74,7 +74,7 @@ function Register() {
         } catch (error) {
             console.log(error)
             setIsRegistered(false)
-            setError(error);
+            setError(error.toString());
         }
     }
     
