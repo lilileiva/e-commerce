@@ -41,7 +41,7 @@ function Products() {
                         {
                             data && data.length > 0 && status === 'success' && data.map((product) => (
                                 <li className="flex flex-col justify-center items-center w-52 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer"
-                                    key={product.name}
+                                    key={product.id}
                                     onClick={() => navigate(`/products/${product.id}`)}>
                                     <div className="w-52 h-52">
                                         <img

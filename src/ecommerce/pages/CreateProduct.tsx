@@ -103,6 +103,7 @@ function CreateProduct() {
                     navigate(`/products/${product.id}`)
                 }
             } catch (error) {
+                setIsCreated(false)
                 setError(error.toString())                
             }
         }        
@@ -197,10 +198,10 @@ function CreateProduct() {
                                 </button>
                                 <ul className="flex overflow-x-scroll mt-4 gap-2 w-full">
                                     {productDetails.images.length > 0 && productDetails.images.map((image, index) => (
-                                        <li className="w-32 h-32" key={index}>
+                                        <li className="w-32 h-32 relative" key={index}>
                                             <button
                                                 onClick={() => deleteImage(index)}
-                                                className="text-white bg-turquoise w-6 h-6 rounded-md absolute"
+                                                className="text-white bg-turquoise w-6 h-6 rounded-md absolute right-0"
                                             >
                                                 X
                                             </button>

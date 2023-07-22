@@ -52,6 +52,7 @@ function CreateCategory() {
                     navigate(`/categories/`)
                 }
             } catch (error) {
+                setIsCreated(false)
                 setError(error.toString())                
             }
         }

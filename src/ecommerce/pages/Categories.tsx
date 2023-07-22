@@ -7,6 +7,7 @@ import { fetchProducts } from "../services/products";
 import camera from "../../assets/camera-img.png";
 
 import Loader from "../components/Loader";
+import EditIcon from "../icons/EditIcon";
 
 
 function Categories() {
@@ -54,9 +55,15 @@ function Categories() {
                 {
                     data && data.length > 0 && data.map((category) => (
                         <li className="flex flex-col justify-center align-center w-52 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer"
-                            key={category.name}
+                            key={category.id}
                             onClick={() => getProductsByCategory(category.id)}>
-                            <div className="w-52 h-52">
+                            <div className="w-52 h-52 relative">
+                                <button
+                                    onClick={() => navigate(`/categories/edit/${category.id}`)}
+                                    className="text-white bg-turquoise w-6 h-6 rounded-md absolute right-0"
+                                >
+                                    <EditIcon size='20' />
+                                </button>
                                 <img
                                     className="object-cover w-52 h-52"
                                     src={category.image}
