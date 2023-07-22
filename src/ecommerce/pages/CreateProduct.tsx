@@ -26,8 +26,7 @@ function CreateProduct() {
 
     const { data, status } = useQuery(CATEGORIES_QUERY_KEY, fetchCategories)
 
-    const validate = (e) => {
-        console.log((e.target.value).length < 2)
+    const validate = (e) => {        
         if (e.target.name === "title") {
             if ((e.target.value).length < 2) {
                 setInputErrors({ ...inputErrors, title: "El título no es válido." })
@@ -104,8 +103,7 @@ function CreateProduct() {
                     navigate(`/products/${product.id}`)
                 }
             } catch (error) {
-                setError(error.toString())
-                console.log(error)
+                setError(error.toString())                
             }
         }        
     }
@@ -135,7 +133,7 @@ function CreateProduct() {
                                     type="text"
                                     onChange={(e) => handleInputChange(e)}
                                 />
-                                {inputErrors["title"] && <p className="text-turquoise text-sm text-center w-full absolute mt-14">{inputErrors["title"]}</p>}
+                                {inputErrors["title"] && <p className="text-turquoise text-sm text-center left-0 right-0 absolute mt-14">{inputErrors["title"]}</p>}
                             </div>
                             <div className="flex flex-col mb-6">
                                 <label
@@ -151,7 +149,7 @@ function CreateProduct() {
                                     type="text"
                                     onChange={(e) => handleInputChange(e)}
                                 />
-                                {inputErrors["price"] && <p className="text-turquoise text-sm text-center w-full absolute mt-14">{inputErrors["price"]}</p>}
+                                {inputErrors["price"] && <p className="text-turquoise text-sm text-center left-0 right-0 absolute mt-14">{inputErrors["price"]}</p>}
                             </div>
                             <div className="flex flex-col mb-6">
                                 <label htmlFor="description" className="text-gray-500 font-light text-md text-left">Descripción</label>
@@ -160,7 +158,7 @@ function CreateProduct() {
                                     name="description"
                                     onChange={(e) => handleInputChange(e)}
                                 ></textarea>
-                                {inputErrors["description"] && <p className="text-turquoise text-sm text-center w-full absolute mt-14">{inputErrors["description"]}</p>}
+                                {inputErrors["description"] && <p className="text-turquoise text-sm text-center left-0 right-0 absolute mt-14">{inputErrors["description"]}</p>}
                             </div>
                             <div className="flex flex-col mb-6">
                                 <label htmlFor="categoryId" className="text-gray-500 font-light text-md text-left">
@@ -180,7 +178,7 @@ function CreateProduct() {
                                         ))
                                     }
                                 </select>
-                                {inputErrors["categories"] && <p className="text-turquoise text-sm text-center w-full absolute mt-14">{inputErrors["categories"]}</p>}
+                                {inputErrors["categories"] && <p className="text-turquoise text-sm text-center left-0 right-0 absolute mt-14">{inputErrors["categories"]}</p>}
                             </div>
                             <div className="flex flex-col mb-6">
                                 <label htmlFor="image" className="text-gray-500 font-light text-md text-left">
@@ -212,7 +210,7 @@ function CreateProduct() {
                                         </li>
                                     ))}
                                 </ul>
-                                {inputErrors["images"] && <p className="text-turquoise text-sm text-center w-full">{inputErrors["images"]}</p>}
+                                {inputErrors["images"] && <p className="text-turquoise text-sm text-center left-0 right-0">{inputErrors["images"]}</p>}
                             </div>
                             <button
                                 type="submit"

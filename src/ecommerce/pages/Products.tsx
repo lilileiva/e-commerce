@@ -6,7 +6,6 @@ import { fetchProducts } from "../services/products";
 import camera from "../../assets/camera-img.png";
 
 import FilterBar from "../components/FilterBar";
-import CreateProduct from "./CreateProduct";
 import Loader from "../components/Loader";
 
 function Products() {
@@ -23,22 +22,21 @@ function Products() {
             <div className="grid grid-cols-[min-content_auto] gap-10 h-full w-full">
                 <div className="flex flex-col w-min">
                     <FilterBar setOrder={setOrder} />
-                    {userRole === "admin" && <div className="h-80 w-80 flex flex-col justify-top align-left shadow shadow-slate-300 rounded-md p-4 h-fit duration-150 my-4">
-                        <h3 className="font-semibold text-gray-400">Administración</h3>
-                        <button
+                </div>
+                <div className="w-full h-[calc(100vh-200px)] overflow-y-scroll w-full">
+                    <div className="w-full flex justify-between items-center">
+                        <p className="inline-flex text-xl w-fit text-gray-500 font-medium border-b-2 border-turquoise rounded-b-sm py-1 h-fit">
+                            Todos los
+                            <p className="text-transparent">-</p>
+                            <p className="text-turquoise">productos</p>
+                        </p>
+                        {userRole === "admin" && <button
                             className="w-fit my-4 self-center border-2 border-turquoise font-bold text-turquoise p-4 rounded-md cursor-pointer hover:bg-turquoise hover:text-white transition duration-150 ease-out hover:ease-in"
                             onClick={() => navigate("/products/create")}
                         >
                             Crear producto
-                        </button>
-                    </div>}
-                </div>
-                <div className="w-full h-[calc(100vh-200px)] overflow-y-scroll w-full">
-                    <p className="inline-flex text-xl w-fit text-gray-500 font-medium border-b-2 border-turquoise rounded-b-sm py-1 h-fit">
-                        Todos los
-                        <p className="text-transparent">-</p>
-                        <p className="text-turquoise">productos</p>
-                    </p>
+                        </button>}
+                    </div>
                     <ul className="flex flex-wrap justify-center gap-10 mt-10 h-full w-full">
                         {
                             data && data.length > 0 && status === 'success' && data.map((product) => (

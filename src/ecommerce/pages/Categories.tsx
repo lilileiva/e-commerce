@@ -16,6 +16,7 @@ function Categories() {
     const queryClient = useQueryClient();
     const { data, status } = useQuery(CATEGORIES_QUERY_KEY, fetchCategories)
     const [filter, setFilter] = useState(null)
+    const userRole = window.localStorage.getItem("userRole")
 
     const getProductsByCategory = (categoryId) => {
         setFilter(`&categoryId=${categoryId}`)
@@ -29,18 +30,26 @@ function Categories() {
     })
 
     useEffect(() => {
-        if (filter != null) {            
+        if (filter != null) {
             mutation.mutate(filter)
         }
     }, [filter])
 
     return (
         <div className="flex flex-col justify-top content-center h-[calc(100vh-200px)]">
-            <p className="inline-flex text-xl w-fit text-gray-500 font-medium border-b-2 border-turquoise rounded-b-sm py-1">
-                Todas las
-                <p className="text-transparent">-</p>
-                <p className="text-turquoise">categorías</p>
-            </p>
+            <div className="w-full flex justify-between items-center">
+                <p className="inline-flex text-xl w-fit text-gray-500 font-medium border-b-2 border-turquoise rounded-b-sm py-1">
+                    Todas las
+                    <p className="text-transparent">-</p>
+                    <p className="text-turquoise">categorías</p>
+                </p>
+                {userRole === "admin" && <button
+                    className="w-fit my-4 self-center border-2 border-turquoise font-bold text-turquoise p-4 rounded-md cursor-pointer hover:bg-turquoise hover:text-white transition duration-150 ease-out hover:ease-in"
+                    onClick={() => navigate("/categories/create")}
+                >
+                    Crear categoría
+                </button>}
+            </div>
             <ul className="flex flex-wrap justify-center gap-10 mt-10 overflow-y-scroll">
                 {
                     data && data.length > 0 && data.map((category) => (

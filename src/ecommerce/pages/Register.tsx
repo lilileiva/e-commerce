@@ -71,8 +71,7 @@ function Register() {
                 setIsRegistered(false)
                 setError("No se pudo registrar la cuenta. Verifique que los datos ingresados sean correctos.")
             }
-        } catch (error) {
-            console.log(error)
+        } catch (error) {            
             setIsRegistered(false)
             setError(error.toString());
         }

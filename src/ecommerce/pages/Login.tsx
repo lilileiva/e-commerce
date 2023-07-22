@@ -42,8 +42,7 @@ function Login() {
                 setIsLogged(false)
                 setError("No se pudo iniciar sesión. Verifique que los datos ingresados sean correctos.")
             }
-        } catch (error) {
-            console.log(error)
+        } catch (error) {            
             setIsLogged(false)
             setError(error.toString());
         }
