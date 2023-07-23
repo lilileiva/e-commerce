@@ -190,17 +190,18 @@ function CreateProduct() {
                                     className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
                                     name="image"
                                     type="text"
-                                    placeholder="URL de imágen"
+                                    placeholder="URL de imagen"
                                     onChange={(e) => handleInputChange(e)}
                                     value={image}
                                 />
                                 <button className="mt-2 cursor-pointer text-turquoise bg-skyblue rounded-md py-4" type="button" onClick={() => addImage()}>
-                                    Agregar imágen
+                                    Agregar imagen
                                 </button>
                                 <ul className="flex overflow-x-scroll mt-4 gap-2 w-full">
                                     {productDetails.images.length > 0 && productDetails.images.map((image, index) => (
                                         <li className="w-32 h-32 relative" key={index}>
                                             <button
+                                                type="button"
                                                 onClick={() => deleteImage(index)}
                                                 className="text-white bg-turquoise w-6 h-6 rounded-md absolute right-0"
                                             >

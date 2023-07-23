@@ -6,21 +6,27 @@ import { CATEGORIES_QUERY_KEY, CATEGORY_QUERY_KEY } from "../constants";
 import { fetchCategory, editCategory, deleteCategory } from "../services/categories";
 import camera from "../../assets/camera-img.png";
 import Loader from "../components/Loader";
+import Modal from "../components/Modal";
 
 function EditCategory() {
 
-    const navigate = useNavigate()
     const { categoryId } = useParams();
+    const userRole = window.localStorage.getItem("userRole");
+    const navigate = useNavigate()
     const queryClient = useQueryClient();
-
-    queryClient.invalidateQueries([CATEGORY_QUERY_KEY]);
-    const { data, status } = useQuery([CATEGORY_QUERY_KEY, { categoryId }], () => fetchCategory({ categoryId }))
-
+    const [inputErrors, setInputErrors] = useState({});
+    const [error, setError] = useState(null);
+    const [isEdited, setIsEdited] = useState(false);
+    const [loadButton, setLoadButton] = useState(false);
+    const [modal, setModal] = useState(false);
     const [categoryDetails, setCategoryDetails] = useState({
         name: "",
         image: "",
         categoryId: ""
     })
+
+    queryClient.invalidateQueries([CATEGORY_QUERY_KEY]);
+    const { data, status } = useQuery([CATEGORY_QUERY_KEY, { categoryId }], () => fetchCategory({ categoryId }))
 
     useEffect(() => {
         if (data && status === "success") {
@@ -30,13 +36,7 @@ function EditCategory() {
                 categoryId: data.id
             })
         }
-    }, [data])
-
-    const [inputErrors, setInputErrors] = useState({});
-    const [error, setError] = useState(null);
-    const [isEdited, setIsEdited] = useState(false);
-    const [isDeleted, setIsDeleted] = useState(false);
-    const userRole = window.localStorage.getItem("userRole");
+    }, [data])    
 
     const validate = (e) => {
         if (e.target.name === "name") {
@@ -81,7 +81,7 @@ function EditCategory() {
     }
 
     const handleDeleteCategory = async (categoryId) => {
-        setIsDeleted(true)
+        setLoadButton(true)
         try {            
             const response = await deleteCategory({ categoryId })
             if (response.status === 200) {
@@ -89,7 +89,7 @@ function EditCategory() {
                 queryClient.invalidateQueries([CATEGORIES_QUERY_KEY]);
             }
         } catch (error) {
-            setIsDeleted(false)
+            setLoadButton(false)
             setError(error.toString())
         }
     }
@@ -152,9 +152,9 @@ function EditCategory() {
                                     <button
                                         type="button"
                                         className="text-white w-full mt-8 p-2 rounded-md bg-red-500 cursor-pointer border-[1px] hover:text-white hover:bg-red-700 transition duration-150 ease-out hover:ease-in"
-                                        onClick={() => handleDeleteCategory(data.id)}
+                                        onClick={() => setModal(!modal)}
                                     >
-                                        {isDeleted ? <Loader /> : "Eliminar categoría"}
+                                        Eliminar categoría
                                     </button>
                                 </form>
                             </>
@@ -162,6 +162,15 @@ function EditCategory() {
                         {error && <p className="mt-4 text-gray-500 text-center w-72">{error}</p>}
                         {status === 'loading' && <Loader />}
                         {status === 'error' && <p>Ha ocurrido un error</p>}
+                        {modal && <Modal
+                            text='¿Estás seguro de eliminar esta categoría?'
+                            btnText='Eliminar categoría'
+                            loadButton={loadButton}
+                            func={handleDeleteCategory}
+                            arg={data.id}
+                            modal={modal}
+                            setModal={setModal}
+                        />}
                     </>
                 }
             </div>

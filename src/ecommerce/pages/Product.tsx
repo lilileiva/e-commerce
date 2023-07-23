@@ -17,13 +17,14 @@ function Product() {
                     <h1>{data.title}</h1>
                     <h2>{data.price}</h2>
                     <p>{data.description}</p>
-                    <p>{data.category.name}</p>                    
-                    <img
-                        className="object-cover w-52 h-52"
-                        src={data.images[0]}
-                        alt={data.title}
-                        onError={(e) => { e.target.src = camera }}
-                    />
+                    <p>{data.category.name}</p>
+                    {data.images.length > 0 && data.images.map((image, index) => (
+                        <li className="flex w-32 h-32 relative overflow-x-hidden" key={index}>
+                            <img src={image} alt="product image"
+                                className="w-32 h-32 object-cover rounded-md" onError={(e) => { e.target.src = camera }}
+                            />
+                        </li>
+                    ))}
                 </div>
             }
         </div>
