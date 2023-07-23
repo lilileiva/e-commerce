@@ -34,7 +34,7 @@ function EditCategory() {
 
     const [inputErrors, setInputErrors] = useState({});
     const [error, setError] = useState(null);
-    const [isCreated, setIsCreated] = useState(false);
+    const [isEdited, setIsEdited] = useState(false);
     const [isDeleted, setIsDeleted] = useState(false);
     const userRole = window.localStorage.getItem("userRole");
 
@@ -66,7 +66,7 @@ function EditCategory() {
     const handleInputSubmit = async (e) => {
         e.preventDefault();
         if (Object.keys(inputErrors).length === 0) {
-            setIsCreated(true)
+            setIsEdited(true)
             try {
                 const response = await editCategory(categoryDetails)
                 if (response) {
@@ -74,7 +74,7 @@ function EditCategory() {
                     queryClient.invalidateQueries([CATEGORIES_QUERY_KEY]);
                 }
             } catch (error) {
-                setIsCreated(false)
+                setIsEdited(false)
                 setError(error.toString())
             }
         }
@@ -82,11 +82,11 @@ function EditCategory() {
 
     const handleDeleteCategory = async (categoryId) => {
         setIsDeleted(true)
-        try {
-            console.log(categoryId)
+        try {            
             const response = await deleteCategory({ categoryId })
             if (response.status === 200) {
                 navigate("/categories")
+                queryClient.invalidateQueries([CATEGORIES_QUERY_KEY]);
             }
         } catch (error) {
             setIsDeleted(false)
@@ -147,7 +147,7 @@ function EditCategory() {
                                         type="submit"
                                         className="text-white w-full mt-2 p-2 rounded-md bg-turquoise cursor-pointer border-[1px] hover:text-turquoise hover:bg-white hover:border-turquoise transition duration-150 ease-out hover:ease-in"
                                     >
-                                        {isCreated ? <Loader /> : "Editar categoría"}
+                                        {isEdited ? <Loader /> : "Editar"}
                                     </button>
                                     <button
                                         type="button"

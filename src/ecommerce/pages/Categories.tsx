@@ -58,12 +58,12 @@ function Categories() {
                             key={category.id}
                             onClick={() => getProductsByCategory(category.id)}>
                             <div className="w-52 h-52 relative">
-                                <button
+                                {userRole === "admin" && <button
                                     onClick={() => navigate(`/categories/edit/${category.id}`)}
-                                    className="text-white bg-turquoise w-6 h-6 rounded-md absolute right-0"
+                                    className="text-white pl-[2.5px] bg-turquoise w-6 h-6 rounded-md absolute right-0"
                                 >
                                     <EditIcon size='20' />
-                                </button>
+                                </button>}
                                 <img
                                     className="object-cover w-52 h-52"
                                     src={category.image}

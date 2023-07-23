@@ -26,7 +26,7 @@ function CreateProduct() {
 
     const { data, status } = useQuery(CATEGORIES_QUERY_KEY, fetchCategories)
 
-    const validate = (e) => {        
+    const validate = (e) => {
         if (e.target.name === "title") {
             if ((e.target.value).length < 2) {
                 setInputErrors({ ...inputErrors, title: "El título no es válido." })
@@ -94,19 +94,20 @@ function CreateProduct() {
 
     const handleInputSubmit = async (e) => {
         e.preventDefault();
-        if (Object.keys(inputErrors).length === 0) {
+        if (productDetails.images.length === 0) setInputErrors({ ...inputErrors, images: 'El producto debe tener al menos una imagen' })
+        else if (Object.keys(inputErrors).length === 0) {
             setIsCreated(true)
-            try {               
+            try {
                 const response = await createProduct(productDetails)
-                if (response.status === 201) {
-                    const product = await response.json()                    
+                if (response && response.status === 201) {
+                    const product = await response.json()
                     navigate(`/products/${product.id}`)
                 }
             } catch (error) {
                 setIsCreated(false)
-                setError(error.toString())                
+                setError(error.toString())
             }
-        }        
+        }
     }
 
     return (

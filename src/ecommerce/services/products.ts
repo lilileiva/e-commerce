@@ -22,10 +22,7 @@ export const fetchProducts = async ({ filter, order }: productsProps) => {
     }
 };
 
-interface productProps {
-    productId: string
-}
-export const fetchProduct = async ({ productId }: productProps) => {
+export const fetchProduct = async ({ productId }) => {
     try {
         const response = await fetch(`${baseUrl}/products/${productId}`)
         if (!response.ok) {
@@ -56,11 +53,63 @@ export const createProduct = async ({ title, price, description, categoryId, ima
             },
             body: JSON.stringify({
                 title: title,
-                price: price,                
+                price: price,
                 description: description,
                 categoryId: categoryId,
                 images: images
             })
+        })
+        if (!response.ok) {
+            throw new Error("Error HTTP: " + response.status);
+        }
+        return response
+    } catch (error) {
+        console.error('Error fetching API data:', error);
+    }
+};
+
+interface editProductProps {
+    title: string,
+    price: string,
+    description: string,
+    categoryId: string,
+    images: any,
+    productId: string
+}
+
+export const editProduct = async ({ title, price, description, categoryId, images, productId }: editProductProps) => {
+    try {
+        const response = await fetch(`${baseUrl}/products/${productId}`, {
+            method: "put",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title: title,
+                price: price,
+                description: description,
+                categoryId: categoryId,
+                images: images
+            })
+        })
+        if (!response.ok) {
+            throw new Error("Error HTTP: " + response.status);
+        }
+        return response
+    } catch (error) {
+        console.error('Error fetching API data:', error);
+    }
+};
+
+export const deleteProduct = async ({ productId }) => {
+    try {
+        const response = await fetch(`${baseUrl}/products/${productId}`, {
+            method: "delete",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
         })
         if (!response.ok) {
             throw new Error("Error HTTP: " + response.status);

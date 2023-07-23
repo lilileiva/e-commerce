@@ -7,6 +7,7 @@ import camera from "../../assets/camera-img.png";
 
 import FilterBar from "../components/FilterBar";
 import Loader from "../components/Loader";
+import EditIcon from "../icons/EditIcon";
 
 function Products() {
 
@@ -40,10 +41,17 @@ function Products() {
                     <ul className="flex flex-wrap justify-center gap-10 mt-10 h-full w-full">
                         {
                             data && data.length > 0 && status === 'success' && data.map((product) => (
-                                <li className="flex flex-col justify-center items-center w-52 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer"
+                                <li
+                                    className="z-0 relative flex flex-col justify-center items-center w-52 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer"
                                     key={product.id}
-                                    onClick={() => navigate(`/products/${product.id}`)}>
-                                    <div className="w-52 h-52">
+                                    onClick={() => navigate(`/products/edit/${product.id}`)}>
+                                    <div className="w-52 h-52 relative">
+                                        {userRole === "admin" && <button
+                                            className="z-10 absolute text-white pl-[2.5px] bg-turquoise w-6 h-6 rounded-md absolute right-0"
+                                            onClick={() => navigate(`/products/edit/${product.id}`)}
+                                        >
+                                            <EditIcon size='20' />
+                                        </button>}
                                         <img
                                             className="object-cover w-52 h-52"
                                             src={product.images[0]}
