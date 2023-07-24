@@ -50,7 +50,7 @@ function Navbar() {
                     }
                 </div>
             </div>
-            <hr className='border-gray-200 my-5' />
+            <hr className='border-gray-200 my-4' />
             <div className='inline-flex text-base justify-evenly'>
                 <Link to="/" className='text-gray-700 font-normal py-1 px-2 bg-slate-100 rounded-xl hover:bg-gray-300 duration-75'>
                     Inicio
@@ -62,7 +62,7 @@ function Navbar() {
                     Categorías
                 </Link>
             </div>
-            <hr className='border-gray-200 my-5' />
+            <hr className='border-gray-200 my-4' />
         </div>
     );
 }
