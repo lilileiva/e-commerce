@@ -116,7 +116,7 @@ function FilterBar({ setOrder }) {
                             <option value="">Todas las categorías</option>
                             {
                                 data && status == "success" && data.map((category) => (
-                                    <option value={category.id} className="capitalize">
+                                    <option value={category.id} className="capitalize" key={category.id}>
                                         {category.name}
                                     </option>
                                 ))

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import { useQuery } from "react-query";
 import { IS_AVAILABLE_QUERY_KEY } from "../constants";
+import CustomButton from "../components/CustomButton";
 
 function Register() {
 
@@ -89,14 +90,10 @@ function Register() {
         <div className="mt-4 flex flex-col justify-top items-center h-full">
             <div className="flex flex-col justify-center items-center w-80 h-fit py-6 shadow shadow-slate-300 rounded-md">
                 {
-                    token ? <>
-                        <p>No podés registrarte ni loguearte porque has iniciado sesión</p>
-                        <button
-                            onClick={() => navigate("/")}
-                            className="text-white p-2 w-56 mt-2 rounded-md bg-turquoise cursor-pointer hover:bg-white hover:border-[1px] hover:border-turquoise hover:text-turquoise transition duration-150 ease-out hover:ease-in">
-                            Ir a la página principal
-                        </button>
-                    </> : <>
+                    token ? <div className="px-6 flex flex-col items-center">
+                        <p className="text-center mb-2">No podés registrarte ni loguearte porque has iniciado sesión.</p>
+                        <CustomButton width="56" text="Ir a la página principal" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick={() => navigate("/")} />
+                    </div> : <>
                         <h2 className="mb-6 text-gray-500 font-semibold text-lg text-left">
                             Crea tu cuenta
                         </h2>
