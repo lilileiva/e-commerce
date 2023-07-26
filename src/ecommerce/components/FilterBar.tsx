@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import CloseIcon from "../icons/CloseIcon";
 import MenuFoldIcon from "../icons/MenuFoldIcon";
+import CustomButton from "./CustomButton";
 
 function FilterBar({ setOrder }) {
 
@@ -141,12 +142,7 @@ function FilterBar({ setOrder }) {
                             />
                         </div>
                     </div>
-                    <button
-                        onClick={(e) => handleInputSubmit(e)}
-                        className="w-fit self-center border-2 border-turquoise font-bold text-turquoise p-4 rounded-md cursor-pointer hover:bg-turquoise hover:text-white transition duration-150 ease-out hover:ease-in"
-                    >
-                        Buscar
-                    </button>
+                    <CustomButton width="fit" text="Buscar" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick={(e) => handleInputSubmit(e)}/>
                 </div>
             </div> : <div className="w-min duration-150">
                 <button

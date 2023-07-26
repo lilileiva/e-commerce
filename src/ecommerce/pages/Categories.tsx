@@ -4,10 +4,9 @@ import { CATEGORIES_QUERY_KEY, PRODUCTS_QUERY_KEY } from "../constants"
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { fetchCategories } from "../services/categories";
 import { fetchProducts } from "../services/products";
-import camera from "../../assets/camera-img.png";
 
-import Loader from "../components/Loader";
-import EditIcon from "../icons/EditIcon";
+import CustomButton from "../components/CustomButton";
+import CategoriesList from "../components/CategoriesList";
 
 
 function Categories() {
@@ -45,41 +44,9 @@ function Categories() {
                         <p className="text-transparent">-</p>
                         <p className="text-turquoise">categorías</p>
                     </p>
-                    {userRole === "admin" && <button
-                        className="w-fit my-4 self-center border-2 border-turquoise font-bold text-turquoise p-4 rounded-md cursor-pointer hover:bg-turquoise hover:text-white transition duration-150 ease-out hover:ease-in"
-                        onClick={() => navigate("/categories/create")}
-                    >
-                        Crear categoría
-                    </button>}
+                    {userRole === "admin" && <CustomButton width="fit" text="Crear categoría" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick={() => navigate("/categories/create")} />}
                 </div>
-                <ul className="flex flex-wrap justify-center gap-10 mt-10 overflow-y-scroll">
-                    {
-                        data && data.length > 0 && data.map((category) => (
-                            <li className="flex flex-col justify-center align-center w-52 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer"
-                                key={category.id}
-                                onClick={() => getProductsByCategory(category.id)}>
-                                <div className="w-52 h-52 relative">
-                                    {userRole === "admin" && <button
-                                        onClick={() => navigate(`/categories/edit/${category.id}`)}
-                                        className="text-white pl-[2.5px] bg-turquoise w-6 h-6 rounded-md absolute right-0"
-                                    >
-                                        <EditIcon size='20' />
-                                    </button>}
-                                    <img
-                                        className="object-cover w-52 h-52"
-                                        src={category.image}
-                                        alt={category.name}
-                                        onError={(e) => { e.target.src = camera }}
-                                    />
-                                </div>
-                                <p className="w-full z-10 bg-white pl-2 text-gray-700 capitalize truncate">{category.name}</p>
-                            </li>
-                        ))
-                    }
-                    {(data && data.length == 0 || !data) && status === 'success' && <p>No se encontraron categorías</p>}
-                    {status === 'loading' && <Loader />}
-                    {status === 'error' && <p>Error al cargar las categorías</p>}
-                </ul>
+                <CategoriesList data={data} status={status} getProductsByCategory={getProductsByCategory} />
             </div>
         </div>
     );

@@ -39,7 +39,7 @@ function Searchbar() {
             <input
                 type="text"
                 placeholder="Buscar un producto..."
-                className="bg-skyblue w-14 text-gray-500 outline-none duration-300 focus:outline-none focus:duration-500 focus:w-full"
+                className="bg-skyblue w-14 text-gray-300 ease-in-out duration-500 outline-none focus:duration-300 focus:outline-none focus:w-full"
                 onChange={(e) => handleInputChange(e)}
             />
         </form>
