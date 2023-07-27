@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
-import { useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { CATEGORIES_QUERY_KEY, CATEGORY_QUERY_KEY } from "../constants";
 import { fetchCategory, editCategory, deleteCategory } from "../services/categories";
 import camera from "../../assets/camera-img.png";
@@ -36,7 +36,7 @@ function EditCategory() {
                 categoryId: data.id
             })
         }
-    }, [data])    
+    }, [data])
 
     const validate = (e) => {
         if (e.target.name === "name") {
@@ -63,35 +63,39 @@ function EditCategory() {
         })
     }
 
+    const editMutation = useMutation([CATEGORY_QUERY_KEY], () => editCategory(categoryDetails), {
+        onSuccess: () => {
+            navigate("/categories")
+            queryClient.invalidateQueries([CATEGORIES_QUERY_KEY]);
+        },
+        onError: (error) => {
+            setIsEdited(false)
+            setError(error.toString())
+        }
+    })
+
     const handleInputSubmit = async (e) => {
         e.preventDefault();
         if (Object.keys(inputErrors).length === 0) {
             setIsEdited(true)
-            try {
-                const response = await editCategory(categoryDetails)
-                if (response) {
-                    navigate(`/categories/`)
-                    queryClient.invalidateQueries([CATEGORIES_QUERY_KEY]);
-                }
-            } catch (error) {
-                setIsEdited(false)
-                setError(error.toString())
-            }
+            editMutation.mutate()
         }
     }
 
-    const handleDeleteCategory = async (categoryId) => {
-        setLoadButton(true)
-        try {            
-            const response = await deleteCategory({ categoryId })
-            if (response.status === 200) {
-                navigate("/categories")
-                queryClient.invalidateQueries([CATEGORIES_QUERY_KEY]);
-            }
-        } catch (error) {
+    const deleteMutation = useMutation([CATEGORY_QUERY_KEY, {categoryId}], () => deleteCategory({ categoryId }), {
+        onSuccess: () => {
+            navigate("/categories")
+            queryClient.invalidateQueries([CATEGORIES_QUERY_KEY]);
+        },
+        onError: (error) => {
             setLoadButton(false)
             setError(error.toString())
         }
+    })
+
+    const handleDeleteCategory = async (categoryId) => {
+        setLoadButton(true)
+        deleteMutation.mutate(categoryId)
     }
 
     return (
@@ -138,7 +142,7 @@ function EditCategory() {
                                         />
                                         {
                                             categoryDetails.image != "" && <img src={categoryDetails.image} alt="product image"
-                                                className="w-32 h-32 object-cover rounded-md self-center mt-2" onError={(e) => { e.target.src = camera }}
+                                                className="w-32 h-32 object-cover rounded-md self-center mt-2" onError={(e) => { e.target["src"] = camera }}
                                             />
                                         }
                                         {inputErrors["image"] && <p className="text-turquoise text-sm text-center left-0 right-0">{inputErrors["image"]}</p>}

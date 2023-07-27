@@ -23,9 +23,9 @@ function UserDetails() {
 
     return (
         <div className="flex flex-col items-center">
-            <div className="w-96 flex flex-col justify-center items-center shadow-md p-8">
+            <div className="w-96 flex flex-col justify-center items-center shadow-md rounded-md p-8">
                 {data && status === 'success' && token ? <>
-                    <h2 className="text-2xl font-bold mb-4 text-gray-800">Detalles de usuario</h2>
+                    <h2 className="text-2xl font-bold mb-4 text-gray-500">Detalles de usuario</h2>
                     <p className="text-gray-800">Email: {data.email}</p>
                     <p className="text-gray-800">Nombre: {data.name}</p>
                     <img

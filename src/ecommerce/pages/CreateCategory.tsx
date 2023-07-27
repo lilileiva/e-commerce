@@ -4,6 +4,8 @@ import camera from "../../assets/camera-img.png";
 import { createCategory } from "../services/categories";
 
 import Loader from "../components/Loader";
+import { useMutation } from "react-query";
+import { CATEGORY_QUERY_KEY } from "../constants";
 
 function CreateCategory() {
 
@@ -42,19 +44,21 @@ function CreateCategory() {
         })
     }
 
+    const { mutate } = useMutation([CATEGORY_QUERY_KEY], () =>  createCategory(categoryDetails), {
+        onSuccess: () => {
+            navigate(`/categories/`)
+        },
+        onError: (error) => {
+            setIsCreated(false)
+            setError(error.toString())
+        }
+    })
+
     const handleInputSubmit = async (e) => {
         e.preventDefault();        
         if (Object.keys(inputErrors).length === 0) {
             setIsCreated(true)
-            try {
-                const response = await createCategory(categoryDetails)
-                if (response.status === 201) {
-                    navigate(`/categories/`)
-                }
-            } catch (error) {
-                setIsCreated(false)
-                setError(error.toString())                
-            }
+            mutate()
         }
     }
 

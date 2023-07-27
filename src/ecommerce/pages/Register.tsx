@@ -88,7 +88,7 @@ function Register() {
 
     return (
         <div className="mt-4 flex flex-col justify-top items-center h-full">
-            <div className="flex flex-col justify-center items-center w-80 h-fit py-6 shadow shadow-slate-300 rounded-md">
+            <div className="flex flex-col justify-center items-center w-80 h-fit py-6 shadow shadow-md rounded-md">
                 {
                     token ? <div className="px-6 flex flex-col items-center">
                         <p className="text-center mb-2">No podés registrarte ni loguearte porque has iniciado sesión.</p>

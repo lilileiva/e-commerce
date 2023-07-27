@@ -3,7 +3,7 @@ import Loader from "../components/Loader";
 import { deleteProduct, editProduct, fetchProduct } from "../services/products";
 import { useEffect, useState } from "react";
 import { CATEGORIES_QUERY_KEY, PRODUCTS_QUERY_KEY, PRODUCT_QUERY_KEY } from "../constants";
-import { useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { fetchCategories } from "../services/categories";
 import Modal from "../components/Modal";
 import ImagesScrollList from "../components/ImagesScrollList";
@@ -120,36 +120,40 @@ function EditProduct() {
         }
     }
 
+    const editMutation = useMutation([PRODUCT_QUERY_KEY], () => editProduct(productDetails), {
+        onSuccess: (product) => {
+            navigate(`/products/${product.id}`)
+            queryClient.invalidateQueries([PRODUCTS_QUERY_KEY]);
+        },
+        onError: (error) => {
+            setIsEdited(false)
+            setError(error.toString())
+        }
+    })
+
     const handleInputSubmit = async (e) => {
         e.preventDefault();
         if (productDetails.images.length === 0) setInputErrors({ ...inputErrors, images: 'El producto debe tener al menos una imagen' })
         else if (Object.keys(inputErrors).length === 0) {
             setIsEdited(true)
-            try {
-                const response = await editProduct(productDetails)
-                if (response && response.status === 200) {
-                    const product = await response.json()
-                    navigate(`/products/${product.id}`)
-                }
-            } catch (error) {
-                setIsEdited(false)
-                setError(error.toString())
-            }
+            editMutation.mutate()
         }
     }
 
-    const handleDeleteProduct = async (productId) => {
-        setLoadButton(true)
-        try {
-            const response = await deleteProduct({ productId })
-            if (response.status === 200) {
-                navigate("/products")
-                queryClient.invalidateQueries([PRODUCTS_QUERY_KEY, { filter: "", order: "" }]);
-            }
-        } catch (error) {
+    const deleteMutation = useMutation([PRODUCT_QUERY_KEY, { productId }], () => deleteProduct({ productId }), {
+        onSuccess: () => {
+            navigate("/products")
+            queryClient.invalidateQueries([PRODUCTS_QUERY_KEY, { filter: "", order: "" }]);
+        },
+        onError: (error) => {
             setLoadButton(false)
             setError(error.toString())
         }
+    })
+
+    const handleDeleteProduct = async (productId) => {
+        setLoadButton(true)
+        deleteMutation.mutate(productId)
     }
 
     return (

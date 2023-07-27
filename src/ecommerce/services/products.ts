@@ -62,7 +62,7 @@ export const createProduct = async ({ title, price, description, categoryId, ima
         if (!response.ok) {
             throw new Error("Error HTTP: " + response.status);
         }
-        return response
+        return response.json()
     } catch (error) {
         console.error('Error fetching API data:', error);
     }
@@ -96,7 +96,7 @@ export const editProduct = async ({ title, price, description, categoryId, image
         if (!response.ok) {
             throw new Error("Error HTTP: " + response.status);
         }
-        return response
+        return response.json()
     } catch (error) {
         console.error('Error fetching API data:', error);
     }

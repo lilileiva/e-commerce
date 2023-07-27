@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { CATEGORIES_QUERY_KEY } from "../constants";
+import { CATEGORIES_QUERY_KEY, PRODUCT_QUERY_KEY } from "../constants";
 import { fetchCategories } from "../services/categories";
-import { useQuery } from "react-query";
-import camera from "../../assets/camera-img.png";
+import { useMutation, useQuery } from "react-query";
 
 import Loader from "../components/Loader";
 import { createProduct } from "../services/products";
@@ -93,21 +92,22 @@ function CreateProduct() {
         }
     }
 
+    const { mutate } = useMutation([PRODUCT_QUERY_KEY], () => createProduct(productDetails), {
+        onSuccess: (product) => {
+            navigate(`/products/${product.id}`)
+        },
+        onError: (error) => {
+            setIsCreated(false)
+            setError(error.toString())
+        }
+    })
+
     const handleInputSubmit = async (e) => {
         e.preventDefault();
         if (productDetails.images.length === 0) setInputErrors({ ...inputErrors, images: 'El producto debe tener al menos una imagen' })
         else if (Object.keys(inputErrors).length === 0) {
             setIsCreated(true)
-            try {
-                const response = await createProduct(productDetails)
-                if (response && response.status === 201) {
-                    const product = await response.json()
-                    navigate(`/products/${product.id}`)
-                }
-            } catch (error) {
-                setIsCreated(false)
-                setError(error.toString())
-            }
+            mutate()
         }
     }
 
