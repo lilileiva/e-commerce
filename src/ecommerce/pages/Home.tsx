@@ -1,6 +1,10 @@
 function Home() {
     return (
-        <div>Home</div>
+        <div>
+            <div className="w-full h-64 bg-gray-300 rounded-lg">
+
+            </div>
+        </div>
     );
 }
 

@@ -4,14 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { CATEGORIES_QUERY_KEY, CATEGORY_QUERY_KEY } from "../constants";
 import { fetchCategory, editCategory, deleteCategory } from "../services/categories";
+import { validateCategoryDetails } from "../utils/validations";
 import camera from "../../assets/camera-img.png";
+
 import Loader from "../components/Loader";
 import Modal from "../components/Modal";
 
 function EditCategory() {
 
     const { categoryId } = useParams();
-    const userRole = window.localStorage.getItem("userRole");
     const navigate = useNavigate()
     const queryClient = useQueryClient();
     const [inputErrors, setInputErrors] = useState({});
@@ -24,6 +25,11 @@ function EditCategory() {
         image: "",
         categoryId: ""
     })
+    const userRole = window.localStorage.getItem("userRole");
+    
+    useEffect(() => {
+        if (userRole !== "admin") navigate("/")
+    }, [userRole])
 
     queryClient.invalidateQueries([CATEGORY_QUERY_KEY]);
     const { data, status } = useQuery([CATEGORY_QUERY_KEY, { categoryId }], () => fetchCategory({ categoryId }))
@@ -38,25 +44,8 @@ function EditCategory() {
         }
     }, [data])
 
-    const validate = (e) => {
-        if (e.target.name === "name") {
-            if ((e.target.value).length < 2) {
-                setInputErrors({ ...inputErrors, name: "El nombre no es válido" })
-            } else {
-                delete inputErrors["name"]
-            }
-        }
-        if (e.target.name === "image") {
-            if (!e.target.value.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/)) {
-                setInputErrors({ ...inputErrors, image: "El URL de la imágen no es válido" })
-            } else {
-                delete inputErrors["image"]
-            }
-        }
-    }
-
-    const handleInputChange = (e) => {
-        validate(e)
+    const handleInputChange = (e) => {        
+        validateCategoryDetails(e, inputErrors, setInputErrors)
         setCategoryDetails({
             ...categoryDetails,
             [e.target.name]: e.target.value

@@ -21,7 +21,7 @@ function ProductsList({ data, status }) {
                     >
                         <div className="w-52 h-52">
                             {userRole === "admin" && <button
-                                className="absolute z-10 text-white pl-[2.5px] bg-turquoise w-6 h-6 rounded-md absolute right-0"
+                                className="z-10 text-white pl-[2.5px] bg-turquoise w-6 h-6 rounded-md absolute right-0"
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     navigate(`/products/edit/${product.id}`)
@@ -33,11 +33,11 @@ function ProductsList({ data, status }) {
                                 className="object-cover w-52 h-52"
                                 src={product.images[0]}
                                 alt={product.title}
-                                onError={(e) => { e.target.src = camera }}
+                                onError={(e) => { e.target["src"] = camera }}
                             />
                         </div>
-                        <div className="flex flex-col w-full items-center">
-                            <p className="w-5/6 bg-white text-gray-700 capitalize text-center truncate">
+                        <div className="flex flex-col w-full h-20 justify-center items-center">
+                            <p className="w-5/6 bg-white text-gray-700 font-bold capitalize text-center truncate">
                                 {product.title}
                             </p>
                             <p className="w-5/6 bg-white text-gray-700 capitalize text-center truncate">

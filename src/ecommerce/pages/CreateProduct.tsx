@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CATEGORIES_QUERY_KEY, PRODUCT_QUERY_KEY } from "../constants";
 import { fetchCategories } from "../services/categories";
 import { useMutation, useQuery } from "react-query";
+import { createProduct } from "../services/products";
+import { validateProductDetails } from "../utils/validations";
 
 import Loader from "../components/Loader";
-import { createProduct } from "../services/products";
 import ImagesScrollList from "../components/ImagesScrollList";
 
 function CreateProduct() {
@@ -23,46 +24,11 @@ function CreateProduct() {
     const [error, setError] = useState(null);
     const [isCreated, setIsCreated] = useState(false);
     const userRole = window.localStorage.getItem("userRole");
+    useEffect(() => {
+        if (userRole !== "admin") navigate("/")
+    }, [userRole])
 
     const { data, status } = useQuery(CATEGORIES_QUERY_KEY, fetchCategories)
-
-    const validate = (e) => {
-        if (e.target.name === "title") {
-            if ((e.target.value).length < 2) {
-                setInputErrors({ ...inputErrors, title: "El título no es válido." })
-            } else {
-                delete inputErrors["title"]
-            }
-        }
-        if (e.target.name === "price") {
-            if (e.target.value != Number(e.target.value)) {
-                setInputErrors({ ...inputErrors, price: "El precio no es válido." })
-            } else {
-                delete inputErrors["price"]
-            }
-        }
-        if (e.target.name === "categories") {
-            if (e.target.value != Number(e.target.value) && data && status === "success" && !data.find(category => category.id === Number(e.target.value))) {
-                setInputErrors({ ...inputErrors, categories: "La categoría no existe" })
-            } else {
-                delete inputErrors["categories"]
-            }
-        }
-        if (e.target.name === "description") {
-            if (e.target.value.length < 4) {
-                setInputErrors({ ...inputErrors, description: "La descripción no es válida" })
-            } else {
-                delete inputErrors["description"]
-            }
-        }
-        if (e.target.name === "image") {
-            if (!e.target.value.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/)) {
-                setInputErrors({ ...inputErrors, images: "El URL de la imágen no es válido" })
-            } else {
-                delete inputErrors["images"]
-            }
-        }
-    }
 
     const addImage = () => {
         setProductDetails({
@@ -80,11 +46,11 @@ function CreateProduct() {
     }
 
     const handleInputChange = (e) => {
-        if (e.target.name === "image") {
-            validate(e)
+        if (e.target.name === "image") {            
+            validateProductDetails(e, inputErrors, setInputErrors)
             setImage(e.target.value)
-        } else {
-            validate(e)
+        } else {            
+            validateProductDetails(e, inputErrors, setInputErrors)
             setProductDetails({
                 ...productDetails,
                 [e.target.name]: e.target.value

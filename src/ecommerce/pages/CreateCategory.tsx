@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import camera from "../../assets/camera-img.png";
 import { createCategory } from "../services/categories";
+import { CATEGORY_QUERY_KEY } from "../constants";
+import { useMutation } from "react-query";
+import { validateCategoryDetails } from "../utils/validations";
+import camera from "../../assets/camera-img.png";
 
 import Loader from "../components/Loader";
-import { useMutation } from "react-query";
-import { CATEGORY_QUERY_KEY } from "../constants";
 
 function CreateCategory() {
 
@@ -18,33 +19,19 @@ function CreateCategory() {
     const [error, setError] = useState(null);
     const [isCreated, setIsCreated] = useState(false);
     const userRole = window.localStorage.getItem("userRole");
+    useEffect(() => {
+        if (userRole !== "admin") navigate("/")
+    }, [userRole])
 
-    const validate = (e) => {        
-        if (e.target.name === "name") {
-            if ((e.target.value).length < 2) {
-                setInputErrors({ ...inputErrors, name: "El nombre no es válido" })
-            } else {
-                delete inputErrors["name"]
-            }
-        }
-        if (e.target.name === "image") {
-            if (!e.target.value.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/)) {
-                setInputErrors({ ...inputErrors, image: "El URL de la imágen no es válido" })
-            } else {
-                delete inputErrors["image"]
-            }
-        }
-    }
-
-    const handleInputChange = (e) => {
-        validate(e)
+    const handleInputChange = (e) => {        
+        validateCategoryDetails(e, inputErrors, setInputErrors)
         setCategoryDetails({
             ...categoryDetails,
             [e.target.name]: e.target.value
         })
     }
 
-    const { mutate } = useMutation([CATEGORY_QUERY_KEY], () =>  createCategory(categoryDetails), {
+    const { mutate } = useMutation([CATEGORY_QUERY_KEY], () => createCategory(categoryDetails), {
         onSuccess: () => {
             navigate(`/categories/`)
         },
@@ -55,7 +42,7 @@ function CreateCategory() {
     })
 
     const handleInputSubmit = async (e) => {
-        e.preventDefault();        
+        e.preventDefault();
         if (Object.keys(inputErrors).length === 0) {
             setIsCreated(true)
             mutate()

@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { checkAvailableEmail, createUser } from "../services/user"
 import { useNavigate } from "react-router-dom";
-import Loader from "../components/Loader";
 import { useQuery } from "react-query";
 import { IS_AVAILABLE_QUERY_KEY } from "../constants";
+import { validateRegister } from "../utils/validations";
+
+import Loader from "../components/Loader";
 import CustomButton from "../components/CustomButton";
 
 function Register() {
@@ -18,46 +20,19 @@ function Register() {
     const [isRegistered, setIsRegistered] = useState(false)
     const token = window.localStorage.getItem("token");
 
-    const { data, status } = useQuery([IS_AVAILABLE_QUERY_KEY, { email }], () => checkAvailableEmail({ email }), {retry: 10})
-
-    const validate = (e) => {
-        if (e.target.name === "name") {
-            if (!e.target.value.match(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/)) {
-                setInputErrors({ ...inputErrors, name: "El nombre no es válido." })
-            } else {
-                delete inputErrors["name"]
-            }
-        }
-        if (e.target.name === "email") {
-            if (!e.target.value.match(/(?:[a-z0-9+!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/i)) {
-                return setInputErrors({ ...inputErrors, email: "El correo electrónico no es válido." })
-            }            
-            if (data && status === "success" && data["isAvailable"] === false) {             
-                return setInputErrors({ ...inputErrors, email: "El correo electrónico ya está en uso." })
-            } else {
-                delete inputErrors["email"]
-            }
-        }
-        if (e.target.name === "password") {
-            if (e.target.value.length < 4) {
-                setInputErrors({ ...inputErrors, password: "La contraseña debe tener al menos 4 caracteres." })
-            } else {
-                delete inputErrors["password"]
-            }
-        }
-    }
+    const { data, status } = useQuery([IS_AVAILABLE_QUERY_KEY, { email }], () => checkAvailableEmail({ email }), { retry: 10 })
 
     const handleInputChange = (e) => {
         if (e.target.name === "name") {
-            validate(e)
+            validateRegister(e, data, status, inputErrors, setInputErrors)            
             setName(e.target.value);
         }
         if (e.target.name === "email") {
-            validate(e)
+            validateRegister(e, data, status, inputErrors, setInputErrors)            
             setEmail(e.target.value);
         }
         if (e.target.name === "password") {
-            validate(e)
+            validateRegister(e, data, status, inputErrors, setInputErrors)            
             setPassword(e.target.value);
         }
     }
@@ -72,12 +47,12 @@ function Register() {
                 setIsRegistered(false)
                 setError("No se pudo registrar la cuenta. Verifique que los datos ingresados sean correctos.")
             }
-        } catch (error) {            
+        } catch (error) {
             setIsRegistered(false)
             setError(error.toString());
         }
     }
-    
+
     const handleInputSubmit = (e) => {
         e.preventDefault();
         if (Object.keys(inputErrors).length === 0) {

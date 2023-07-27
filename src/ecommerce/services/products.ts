@@ -1,5 +1,5 @@
 import { baseUrl } from "../constants"
-import { orderProducts } from "../utils";
+import { orderProducts } from "../utils/orderProducts";
 
 interface productsProps {
     filter: string,
