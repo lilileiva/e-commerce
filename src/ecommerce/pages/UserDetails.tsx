@@ -3,7 +3,7 @@ import { USERS_QUERY_KEY } from "../constants";
 import { getUser } from "../services/user";
 import camera from "../../assets/camera-img.png";
 import { useNavigate } from "react-router";
-import CustomButton from "../components/CustomButton";
+import CustomButton from "../components/buttons/CustomButton";
 import Loader from "../components/Loader";
 
 function UserDetails() {

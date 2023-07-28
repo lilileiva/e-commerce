@@ -1,16 +1,15 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { PRODUCT_QUERY_KEY } from "../constants";
 import { fetchProduct } from "../services/products";
 import { useQuery } from "react-query";
 import Loader from "../components/Loader";
 import Carousel from "../components/Carousel";
-import CustomButton from "../components/CustomButton";
-import EditIcon from "../icons/EditIcon";
+import CustomButton from "../components/buttons/CustomButton";
+import EditButton from "../components/buttons/EditButton";
 
 
 function Product() {
 
-    const navigate = useNavigate()
     const userRole = window.localStorage.getItem("userRole")
     const { productId } = useParams()
     const { data, status } = useQuery([PRODUCT_QUERY_KEY, productId], () => fetchProduct({ productId }))
@@ -22,15 +21,7 @@ function Product() {
                 <div className="flex flex-col gap-4 mt-6">
                     <div className="flex justify-between items-center">
                         <h1 className="text-gray-700 text-2xl">{data.title}</h1>
-                        {userRole === "admin" && <button
-                            className="text-white pl-[2.5px] bg-turquoise w-6 h-6 rounded-md right-0"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                navigate(`/products/edit/${data.id}`)
-                            }}
-                        >
-                            <EditIcon size='20' />
-                        </button>}
+                        {userRole === "admin" && <EditButton endpoint={`/products/edit/${data.id}`} />}
                     </div>
                     <h2 className="text-gray-700 text-3xl">${data.price}</h2>
                     <p className="text-gray-700">{data.description}</p>

@@ -5,7 +5,7 @@ import Loader from "../components/Loader";
 import { useQuery } from "react-query";
 import { USER_QUERY_KEY } from "../constants";
 import { getUser } from "../services/user";
-import CustomButton from "../components/CustomButton";
+import CustomButton from "../components/buttons/CustomButton";
 
 function Login() {
 

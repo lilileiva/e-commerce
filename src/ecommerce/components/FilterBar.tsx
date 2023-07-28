@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import CloseIcon from "../icons/CloseIcon";
 import MenuFoldIcon from "../icons/MenuFoldIcon";
-import CustomButton from "./CustomButton";
+import CustomButton from "./buttons/CustomButton";
 
 function FilterBar({ setOrder }) {
 

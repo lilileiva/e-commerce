@@ -5,7 +5,7 @@ import { PRODUCTS_QUERY_KEY } from "../constants";
 import { fetchProducts } from "../services/products";
 
 import FilterBar from "../components/FilterBar";
-import CustomButton from "../components/CustomButton";
+import CustomButton from "../components/buttons/CustomButton";
 import ProductsList from "../components/ProductsList";
 
 function Products() {

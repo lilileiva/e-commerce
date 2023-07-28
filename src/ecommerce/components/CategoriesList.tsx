@@ -1,12 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import camera from "../../assets/camera-img.png";
 
 import Loader from "./Loader";
-import EditIcon from "../icons/EditIcon";
+import EditButton from "./buttons/EditButton";
 
 function CategoriesList({ data, status, getProductsByCategory }) {
 
-    const navigate = useNavigate()
     const userRole = window.localStorage.getItem("userRole")
 
     return (
@@ -17,17 +15,12 @@ function CategoriesList({ data, status, getProductsByCategory }) {
                         key={category.id}
                         onClick={() => getProductsByCategory(category.id)}>
                         <div className="w-52 h-52 relative">
-                            {userRole === "admin" && <button
-                                onClick={() => navigate(`/categories/edit/${category.id}`)}
-                                className="text-white pl-[2.5px] bg-turquoise w-6 h-6 rounded-md absolute right-0"
-                            >
-                                <EditIcon size='20' />
-                            </button>}
+                            {userRole === "admin" && <EditButton endpoint={`/categories/edit/${category.id}`} />}
                             <img
                                 className="object-cover w-52 h-52"
                                 src={category.image}
                                 alt={category.name}
-                                onError={(e) => { e.target.src = camera }}
+                                onError={(e) => { e.target["src"] = camera }}
                             />
                         </div>
                         <p className="w-full z-10 bg-white pl-2 text-gray-700 capitalize truncate">{category.name}</p>

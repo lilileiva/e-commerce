@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import camera from "../../assets/camera-img.png";
 
 import Loader from "../components/Loader";
-import EditIcon from "../icons/EditIcon";
-import CustomButton from "./CustomButton";
+import CustomButton from "./buttons/CustomButton";
+import EditButton from "./buttons/EditButton";
 
 function ProductsList({ data, status }) {
 
@@ -20,15 +20,7 @@ function ProductsList({ data, status }) {
                         key={product.id}
                     >
                         <div className="w-52 h-52">
-                            {userRole === "admin" && <button
-                                className="z-10 text-white pl-[2.5px] bg-turquoise w-6 h-6 rounded-md absolute right-0"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    navigate(`/products/edit/${product.id}`)
-                                }}
-                            >
-                                <EditIcon size='20' />
-                            </button>}
+                            {userRole === "admin" && <EditButton endpoint={`/products/edit/${product.id}`} />}
                             <img
                                 className="object-cover w-52 h-52"
                                 src={product.images[0]}

@@ -6,7 +6,7 @@ import { IS_AVAILABLE_QUERY_KEY } from "../constants";
 import { validateRegister } from "../utils/validations";
 
 import Loader from "../components/Loader";
-import CustomButton from "../components/CustomButton";
+import CustomButton from "../components/buttons/CustomButton";
 
 function Register() {
 

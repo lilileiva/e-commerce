@@ -5,7 +5,7 @@ import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { fetchCategories } from "../services/categories";
 import { fetchProducts } from "../services/products";
 
-import CustomButton from "../components/CustomButton";
+import CustomButton from "../components/buttons/CustomButton";
 import CategoriesList from "../components/CategoriesList";
 
 
