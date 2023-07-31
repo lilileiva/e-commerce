@@ -26,23 +26,18 @@ function EditCategory() {
         categoryId: ""
     })
     const userRole = window.localStorage.getItem("userRole");
-    
-    useEffect(() => {
-        if (userRole !== "admin") navigate("/")
-    }, [userRole])
+    if (userRole !== "admin") navigate("/")
 
     queryClient.invalidateQueries([CATEGORY_QUERY_KEY]);
-    const { data, status } = useQuery([CATEGORY_QUERY_KEY, { categoryId }], () => fetchCategory({ categoryId }))
-
-    useEffect(() => {
-        if (data && status === "success") {
+    const { data, status } = useQuery([CATEGORY_QUERY_KEY, { categoryId }], () => fetchCategory({ categoryId }), {
+        onSuccess: (data) => {
             setCategoryDetails({
                 name: data.name,
                 image: data.image,
                 categoryId: data.id
             })
         }
-    }, [data])
+    })
 
     const handleInputChange = (e) => {        
         validateCategoryDetails(e, inputErrors, setInputErrors)

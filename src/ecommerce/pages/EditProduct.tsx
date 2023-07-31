@@ -32,18 +32,11 @@ function EditProduct() {
         productId: ""
     })
     const userRole = window.localStorage.getItem("userRole");
-    
-    useEffect(() => {
-        if (userRole !== "admin") navigate("/")
-    }, [userRole])
+    if (userRole !== "admin") navigate("/")
 
     queryClient.invalidateQueries([PRODUCT_QUERY_KEY]);
-    const { data, status } = useQuery([PRODUCT_QUERY_KEY, { productId }], () => fetchProduct({ productId }))
-    queryClient.invalidateQueries([CATEGORIES_QUERY_KEY]);
-    const categories = useQuery(CATEGORIES_QUERY_KEY, fetchCategories)
-
-    useEffect(() => {
-        if (data && status === "success") {
+    const { data, status } = useQuery([PRODUCT_QUERY_KEY, { productId }], () => fetchProduct({ productId }), {
+        onSuccess: (data) => {
             setProductDetails({
                 title: data.title,
                 price: data.price,
@@ -52,13 +45,14 @@ function EditProduct() {
                 images: data.images,
                 productId: productId
             })
-            if (categories && categories.data) {
-                setCategoriesList(categories.data.filter((category) => category.id != data.category.id))
-            } else {
-                setCategoriesList(categories.data)
-            }
         }
-    }, [data])
+    })
+    queryClient.invalidateQueries([CATEGORIES_QUERY_KEY]);
+    useQuery(CATEGORIES_QUERY_KEY, fetchCategories, {
+        onSuccess: (categories) => {
+            setCategoriesList(categories.data.filter((category) => category.id != data.category.id))
+        }
+    })
 
     const addImage = () => {
         setProductDetails({

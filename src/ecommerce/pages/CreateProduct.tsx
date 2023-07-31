@@ -24,9 +24,7 @@ function CreateProduct() {
     const [error, setError] = useState(null);
     const [isCreated, setIsCreated] = useState(false);
     const userRole = window.localStorage.getItem("userRole");
-    useEffect(() => {
-        if (userRole !== "admin") navigate("/")
-    }, [userRole])
+    if (userRole !== "admin") navigate("/")
 
     const { data, status } = useQuery(CATEGORIES_QUERY_KEY, fetchCategories)
 
