@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../services/user";
+import { loginUser } from "../services/auth";
 import Loader from "../components/Loader";
+import { useQuery } from "react-query";
+import { USER_QUERY_KEY } from "../constants";
+import { getUser } from "../services/user";
+import CustomButton from "../components/CustomButton";
 
 function Login() {
 
@@ -21,6 +25,8 @@ function Login() {
         }
     }
 
+    const { data, status } = useQuery([USER_QUERY_KEY, { email }], () => getUser({ email }), { retry: 10 })
+
     const login = async () => {
         try {
             let response = await loginUser({ email, password })
@@ -28,15 +34,18 @@ function Login() {
                 response = await response.json()
                 const token = await response["access_token"];
                 window.localStorage.setItem("token", token);
+                if (data && status === "success") {
+                    window.localStorage.setItem("userEmail", data["email"])
+                    window.localStorage.setItem("userRole", data["role"])
+                }
                 navigate("/");
             } else {
                 setIsLogged(false)
                 setError("No se pudo iniciar sesión. Verifique que los datos ingresados sean correctos.")
             }
         } catch (error) {
-            console.log(error)
             setIsLogged(false)
-            setError(error);
+            setError(error.toString());
         }
     }
 
@@ -50,14 +59,10 @@ function Login() {
         <div className="mt-4 flex flex-col justify-top items-center h-full">
             <div className="flex flex-col justify-center items-center w-80 h-fit py-6 shadow shadow-slate-300 rounded-md">
                 {
-                    token ? <>
-                        <p>Ya has iniciado sesión</p>
-                        <button
-                            onClick={() => navigate("/")}
-                            className="text-white p-2 w-56 mt-2 rounded-md bg-turquoise cursor-pointer hover:bg-white hover:border-[1px] hover:border-turquoise hover:text-turquoise transition duration-150 ease-out hover:ease-in">
-                            Ir a la página principal
-                        </button>
-                    </> : <>
+                    token ? <div className="px-6 flex flex-col items-center">
+                        <p className="text-center">Ya has iniciado sesión.</p>
+                        <CustomButton width="56" text="Ir a la página principal" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick={() => navigate("/")} />
+                    </div> : <>
                         <h2 className="mb-6 text-gray-500 font-semibold text-lg text-left">
                             Iniciá sesión
                         </h2>
@@ -73,7 +78,7 @@ function Login() {
                                 />
                             </div>
                             <div className="flex flex-col mb-8">
-                                <label htmlFor="password" className="text-gray-500 font-light text-md text-left">Password</label>
+                                <label htmlFor="password" className="text-gray-500 font-light text-md text-left">Contraseña</label>
                                 <input
                                     required
                                     className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-[1px] focus:border-strong-skyblue focus:outline-none"

@@ -1,7 +1,12 @@
 import { useState } from "react";
-import { createUser } from "../services/user"
+import { checkAvailableEmail, createUser } from "../services/user"
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "react-query";
+import { IS_AVAILABLE_QUERY_KEY } from "../constants";
+import { validateRegister } from "../utils/validations";
+
 import Loader from "../components/Loader";
+import CustomButton from "../components/CustomButton";
 
 function Register() {
 
@@ -15,41 +20,19 @@ function Register() {
     const [isRegistered, setIsRegistered] = useState(false)
     const token = window.localStorage.getItem("token");
 
-    const validate = (e) => {
-        if (e.target.name === "name") {
-            if (!e.target.value.match(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/)) {
-                setInputErrors({ ...inputErrors, name: "El nombre no es válido." })
-            } else {
-                delete inputErrors["name"]
-            }
-        }        
-        if (e.target.name === "email") {
-            if (!e.target.value.match(/(?:[a-z0-9+!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/i)) {                
-                setInputErrors({ ...inputErrors, email: "El correo electrónico no es válido." })
-            } else {
-                delete inputErrors["email"]
-            }
-        }
-        if (e.target.name === "password") {
-            if (e.target.value.length < 4 ) {
-                setInputErrors({...inputErrors, password: "La contraseña debe tener al menos 4 caracteres."})
-            } else {
-                delete inputErrors["password"]
-            }
-        }
-    }
+    const { data, status } = useQuery([IS_AVAILABLE_QUERY_KEY, { email }], () => checkAvailableEmail({ email }), { retry: 10 })
 
     const handleInputChange = (e) => {
         if (e.target.name === "name") {
-            validate(e)
+            validateRegister(e, data, status, inputErrors, setInputErrors)            
             setName(e.target.value);
         }
         if (e.target.name === "email") {
-            validate(e)
+            validateRegister(e, data, status, inputErrors, setInputErrors)            
             setEmail(e.target.value);
         }
         if (e.target.name === "password") {
-            validate(e)
+            validateRegister(e, data, status, inputErrors, setInputErrors)            
             setPassword(e.target.value);
         }
     }
@@ -57,7 +40,7 @@ function Register() {
     const register = async () => {
         try {
             const response = await createUser({ name, email, password })
-            if (response != undefined && response.status === 201) {                
+            if (response != undefined && response.status === 201) {
                 setMessage("Cuenta creada exitosamente. Inicie sesión.")
                 setIsRegistered(false)
             } else {
@@ -65,9 +48,8 @@ function Register() {
                 setError("No se pudo registrar la cuenta. Verifique que los datos ingresados sean correctos.")
             }
         } catch (error) {
-            console.log(error)
             setIsRegistered(false)
-            setError(error);
+            setError(error.toString());
         }
     }
 
@@ -81,22 +63,18 @@ function Register() {
 
     return (
         <div className="mt-4 flex flex-col justify-top items-center h-full">
-            <div className="flex flex-col justify-center items-center w-80 h-fit py-6 shadow shadow-slate-300 rounded-md">
+            <div className="flex flex-col justify-center items-center w-80 h-fit py-6 shadow shadow-md rounded-md">
                 {
-                    token ? <>
-                        <p>No podés registrarte ni loguearte porque has iniciado sesión</p>
-                        <button
-                            onClick={() => navigate("/")}
-                            className="text-white p-2 w-56 mt-2 rounded-md bg-turquoise cursor-pointer hover:bg-white hover:border-[1px] hover:border-turquoise hover:text-turquoise transition duration-150 ease-out hover:ease-in">
-                            Ir a la página principal
-                        </button>
-                    </> : <>
+                    token ? <div className="px-6 flex flex-col items-center">
+                        <p className="text-center mb-2">No podés registrarte ni loguearte porque has iniciado sesión.</p>
+                        <CustomButton width="56" text="Ir a la página principal" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick={() => navigate("/")} />
+                    </div> : <>
                         <h2 className="mb-6 text-gray-500 font-semibold text-lg text-left">
                             Crea tu cuenta
                         </h2>
                         <form onSubmit={(e) => handleInputSubmit(e)} className="flex flex-col justify-center align-center w-72 h-fit">
                             <div className="flex flex-col mb-8">
-                                <label htmlFor="name" className="text-gray-500 font-light text-md text-left">Name</label>
+                                <label htmlFor="name" className="text-gray-500 font-light text-md text-left">Nombre</label>
                                 <input
                                     required
                                     className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"
@@ -118,7 +96,7 @@ function Register() {
                                 {inputErrors["email"] && <p className="text-turquoise text-sm text-center w-72 absolute mt-14">{inputErrors["email"]}</p>}
                             </div>
                             <div className="flex flex-col mb-8">
-                                <label htmlFor="password" className="text-gray-500 font-light text-md text-left">Password</label>
+                                <label htmlFor="password" className="text-gray-500 font-light text-md text-left">Contraseña</label>
                                 <input
                                     required
                                     className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"

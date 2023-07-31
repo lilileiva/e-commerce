@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import CloseIcon from "../icons/CloseIcon";
 import MenuFoldIcon from "../icons/MenuFoldIcon";
+import CustomButton from "./CustomButton";
 
 function FilterBar({ setOrder }) {
 
@@ -75,7 +76,7 @@ function FilterBar({ setOrder }) {
 
     return (
         <>
-            {showFilters ? <div className="h-80 w-80 flex flex-col justify-top align-left shadow shadow-slate-300 rounded-md p-4 h-fit transition duration-150">
+            {showFilters ? <div className="h-80 w-80 flex flex-col justify-top align-left shadow shadow-slate-300 rounded-md p-4 h-fit duration-150">
                 <div className="flex mb-4 justify-between items-center">
                     <h3 className="font-semibold text-gray-400">Filtros</h3>
                     <button onClick={() => setShowFilters(false)}>
@@ -115,7 +116,7 @@ function FilterBar({ setOrder }) {
                             <option value="">Todas las categorías</option>
                             {
                                 data && status == "success" && data.map((category) => (
-                                    <option value={category.id} className="capitalize">
+                                    <option value={category.id} className="capitalize" key={category.id}>
                                         {category.name}
                                     </option>
                                 ))
@@ -141,21 +142,15 @@ function FilterBar({ setOrder }) {
                             />
                         </div>
                     </div>
-                    <button
-                        onClick={(e) => handleInputSubmit(e)}
-                        className="w-fit self-center border-2 border-turquoise font-bold text-turquoise p-4 rounded-md cursor-pointer hover:bg-turquoise hover:text-white transition duration-150 ease-out hover:ease-in"
-                    >
-                        Buscar
-                    </button>
+                    <CustomButton width="fit" text="Buscar" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick={(e) => handleInputSubmit(e)}/>
                 </div>
-            </div> : <div className="w-fit">
+            </div> : <div className="w-min duration-150">
                 <button
                     className="bg-skyblue rounded-md p-2"
                     onClick={() => setShowFilters(true)}>
                     <MenuFoldIcon size='30' />
                 </button>
-            </div>
-            }
+            </div>}
         </>
     );
 }

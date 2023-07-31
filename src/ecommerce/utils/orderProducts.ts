@@ -1,4 +1,4 @@
-import {Product} from './interfaces/interfaces'
+import {Product} from '../interfaces/interfaces'
 
 export const orderProducts = (products: Product[], order: string) => {
     if (order === "price_asc") {
