@@ -1,11 +1,13 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { PRODUCT_QUERY_KEY } from "../constants";
 import { fetchProduct } from "../services/products";
+import { useContext } from "react";
 import { useQuery } from "react-query";
 import Loader from "../components/Loader";
 import Carousel from "../components/Carousel";
 import CustomButton from "../components/CustomButton";
 import EditIcon from "../icons/EditIcon";
+import GlobalStateContext from "../context/globalStateContext";
 
 
 function Product() {
@@ -14,6 +16,12 @@ function Product() {
     const userRole = window.localStorage.getItem("userRole")
     const { productId } = useParams()
     const { data, status } = useQuery([PRODUCT_QUERY_KEY, productId], () => fetchProduct({ productId }))
+
+    const { dispatch } = useContext(GlobalStateContext);
+
+    const addProductToCart = (product) => {
+        dispatch({ type: 'ADD_PRODUCT', payload: product });
+    };
 
     return (
         <div className="w-full flex justify-center">
@@ -36,7 +44,12 @@ function Product() {
                     <p className="text-gray-700">{data.description}</p>
                     <p className="text-gray-500">Categoría: {data.category.name}</p>
                     <CustomButton width="56" text="Comprar" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick="" />
-                    <CustomButton width="56" text="Agregar al carrito" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick="" />
+                    <CustomButton width="56" text="Agregar al carrito" bgColor="white" textColor="turquoise" borderColor="turquoise"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            addProductToCart(data)
+                        }}
+                    />
                 </div>
             </div>}
             {status === 'loading' && <Loader />}

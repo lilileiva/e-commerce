@@ -1,6 +1,35 @@
+import { useContext } from "react";
+import CartProducts from "../components/CartProducts";
+import CustomButton from "../components/CustomButton";
+import GlobalStateContext from "../context/globalStateContext";
+
 function CartDetail() {
+
+    const { state } = useContext(GlobalStateContext);
+    const { totalProducts, totalPrice } = state;  
+
     return (
-        <div>Cart detail</div>
+        <div className="w-full flex justify-center">
+            <div className="flex flex-col w-10/12 justify-top content-center h-[calc(100vh-200px)]">
+                <div className="w-full flex justify-between items-center">
+                    <p className="inline-flex text-xl w-fit text-gray-500 font-medium border-b-2 border-turquoise rounded-b-sm py-1">
+                        Productos del
+                        <p className="text-transparent">-</p>
+                        <p className="text-turquoise">carrito</p>
+                    </p>
+                    {totalProducts != 0 && <h2 className="text-gray-400">Cantidad de productos: {totalProducts}</h2>}
+                </div>
+                <div className="w-full flex justify-between items-center bg-gray-100 rounded-lg content-center mt-6 p-2">
+                {totalPrice != 0 && <h2 className="text-xl text-gray-500">Precio total: ${totalPrice}</h2>}
+                <CustomButton width="fit" text="Finalizar compra" bgColor="turquoise" textColor="white" borderColor="turquoise"
+                            onClick={(e) => {
+                                e.stopPropagation();                                
+                            }}
+                        />
+                </div>
+                <CartProducts />
+            </div>
+        </div>
     );
 }
 
