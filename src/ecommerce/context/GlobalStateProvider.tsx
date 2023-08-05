@@ -15,6 +15,7 @@ const stateReducer = (state, action) => {
 		case 'ADD_PRODUCT':
 			if (productIndex === -1) {
 				const newProduct = { ...action.payload, quantity: 1 };
+				newProduct.totalPrice = Number(action.payload.price);
 				return {
 					...state,
 					totalProducts: state.totalProducts + 1,
@@ -24,7 +25,7 @@ const stateReducer = (state, action) => {
 			} else {
 				const updatedProduct = { ...state.cartProducts[productIndex] };
 				updatedProduct.quantity += 1;
-				updatedProduct.price += updatedProduct.price;
+				updatedProduct.totalPrice += Number(action.payload.price);				
 				return {
 					...state,
 					totalProducts: state.totalProducts + 1,
@@ -36,18 +37,20 @@ const stateReducer = (state, action) => {
 			if (productIndex !== -1) {
 				const updatedProduct = { ...state.cartProducts[productIndex] };
 				updatedProduct.quantity -= 1;
-				updatedProduct.price -= updatedProduct.price;
+				updatedProduct.totalPrice -= Number(action.payload.price);
 
 				if (updatedProduct.quantity <= 0) {
 					return {
 						...state,
 						totalProducts: state.totalProducts > 1 ? state.totalProducts - 1 : 0,
+						totalPrice: state.totalPrice - Number(action.payload.price),
 						cartProducts: state.cartProducts.filter((p) => p.id !== action.payload.id)
 					};
 				} else {
 					return {
 						...state,
 						totalProducts: state.totalProducts - 1,
+						totalPrice: state.totalPrice - Number(action.payload.price),
 						cartProducts: [...products, updatedProduct]
 					};
 				}

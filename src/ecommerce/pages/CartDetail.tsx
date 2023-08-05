@@ -22,7 +22,7 @@ function CartDetail() {
                 <CartProducts />
                 {totalPrice != 0 && <>
                     <div className="w-full flex justify-between items-center bg-gray-100 rounded-lg content-center mt-6 p-2">
-                        <h2 className="text-xl text-gray-500">Precio total: ${totalPrice}</h2>
+                        <h2 className="text-xl text-gray-600 font-bold">Precio total: ${totalPrice}</h2>
                         <CustomButton width="fit" text="Finalizar compra" bgColor="turquoise" textColor="white" borderColor="turquoise"
                             onClick={(e) => {
                                 e.stopPropagation();
