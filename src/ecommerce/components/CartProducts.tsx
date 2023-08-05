@@ -15,43 +15,43 @@ function CartProducts() {
     };
 
     return (
-        <ul className="flex flex-wrap justify-center gap-10 mt-10 h-full w-full">
+        <ul className="justify-top gap-10 mt-10 h-full w-full">
             {
                 cartProducts && cartProducts.length > 0 && cartProducts.map((product) => (
                     <li
                         onClick={() => navigate(`/products/${product.id}`)}
-                        className="relative z-0 flex flex-col justify-center items-center w-52 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer"
+                        className="relative z-0 mt-4 flex justify-center items-center w-full h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer"
                         key={product.id}
                     >
-                        <div className="w-52 h-52">
+                        <div className="w-24 h-24">
                             <img
-                                className="object-cover w-52 h-52"
+                                className="object-cover w-24 h-24"
                                 src={product.images[0]}
                                 alt={product.title}
                                 onError={(e) => { e.target["src"] = camera }}
                             />
                         </div>
-                        <div className="flex flex-col w-full h-20 justify-center items-center">
+                        <div className="flex w-full h-20 justify-center items-center">
                             <p className="w-5/6 bg-white text-gray-700 font-bold capitalize text-center truncate">
                                 {product.title}
                             </p>
                             <p className="w-5/6 bg-white text-gray-700 capitalize text-center truncate">
-                                {product.quantity}
+                                x {product.quantity}
                             </p>
                             <p className="w-5/6 bg-white font-medium text-gray-600 text-center text-lg truncate">
-                                ${product.price}
+                                Subtotal: ${product.price}
                             </p>
                         </div>
                         <CustomButton width="fit" text="Eliminar del carrito" bgColor="white" textColor="turquoise" borderColor="turquoise"
                             onClick={(e) => {
-                                e.stopPropagation();                                
+                                e.stopPropagation();
                                 removeProductToCart(product)
                             }}
                         />
                     </li>
                 ))
             }
-            {cartProducts && cartProducts.length == 0 && <p className="w-full">Aún no agregaste productos</p>}            
+            {cartProducts && cartProducts.length == 0 && <p className="w-full text-center">Aún no agregaste productos</p>}
         </ul>
     );
 }

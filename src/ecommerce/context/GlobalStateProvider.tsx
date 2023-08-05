@@ -24,6 +24,7 @@ const stateReducer = (state, action) => {
 			} else {
 				const updatedProduct = { ...state.cartProducts[productIndex] };
 				updatedProduct.quantity += 1;
+				updatedProduct.price += updatedProduct.price;
 				return {
 					...state,
 					totalProducts: state.totalProducts + 1,
@@ -35,6 +36,7 @@ const stateReducer = (state, action) => {
 			if (productIndex !== -1) {
 				const updatedProduct = { ...state.cartProducts[productIndex] };
 				updatedProduct.quantity -= 1;
+				updatedProduct.price -= updatedProduct.price;
 
 				if (updatedProduct.quantity <= 0) {
 					return {
