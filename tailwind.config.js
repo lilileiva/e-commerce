@@ -8,7 +8,7 @@ export default {
     extend: {
       backgroundColor: {
         'skyblue': '#E3F7FF',
-        'turquoise': '#1ABCFE'
+        'turquoise': '#1ABCFE'        
       },
       textColor: {        
         'turquoise': '#1ABCFE'

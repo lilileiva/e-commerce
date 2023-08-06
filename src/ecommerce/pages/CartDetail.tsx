@@ -2,9 +2,11 @@ import { useContext } from "react";
 import CartProducts from "../components/CartProducts";
 import CustomButton from "../components/CustomButton";
 import GlobalStateContext from "../context/globalStateContext";
+import { useNavigate } from "react-router-dom";
 
 function CartDetail() {
 
+    const navigate = useNavigate();
     const { state } = useContext(GlobalStateContext);
     const { totalProducts, totalPrice } = state;
 
@@ -26,6 +28,7 @@ function CartDetail() {
                         <CustomButton width="fit" text="Finalizar compra" bgColor="turquoise" textColor="white" borderColor="turquoise"
                             onClick={(e) => {
                                 e.stopPropagation();
+                                navigate("/checkout/successful/")
                             }}
                         />
                     </div>
