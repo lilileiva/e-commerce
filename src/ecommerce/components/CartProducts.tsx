@@ -9,7 +9,7 @@ function CartProducts() {
     const navigate = useNavigate()
     const { state, dispatch } = useContext(GlobalStateContext);
     const { cartProducts } = state;
-    const products = cartProducts.sort((a, b) => a.id - b.id);
+    const products = cartProducts.sort((a, b) => a.id - b.id);       
 
     const addProductToCart = (product) => {
         dispatch({ type: 'ADD_PRODUCT', payload: product });

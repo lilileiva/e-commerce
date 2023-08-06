@@ -17,7 +17,7 @@ function Product() {
     const { productId } = useParams()
     const { data, status } = useQuery([PRODUCT_QUERY_KEY, productId], () => fetchProduct({ productId }))
 
-    const { dispatch } = useContext(GlobalStateContext);
+    const { dispatch } = useContext(GlobalStateContext);    
 
     const addProductToCart = (product) => {
         dispatch({ type: 'ADD_PRODUCT', payload: product });

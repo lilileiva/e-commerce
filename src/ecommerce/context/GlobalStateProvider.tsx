@@ -9,7 +9,6 @@ const initialState = {
 
 const stateReducer = (state, action) => {
 	
-
 	switch (action.type) {
 		case 'ADD_PRODUCT':
 			let productIndex = state.cartProducts.findIndex((p) => p.id === action.payload.id);
@@ -35,10 +34,10 @@ const stateReducer = (state, action) => {
 				};
 			}
 		case 'REMOVE_PRODUCT':
-			productIndex = state.cartProducts.findIndex((p) => p.id === action.payload.id);
-			products = state.cartProducts.filter((p) => p.id !== action.payload.id);
-			if (productIndex !== -1) {
-				const updatedProduct = { ...state.cartProducts[productIndex] };
+			let productIndexR = state.cartProducts.findIndex((p) => p.id === action.payload.id);
+			const productsR = state.cartProducts.filter((p) => p.id !== action.payload.id);
+			if (productIndexR !== -1) {
+				const updatedProduct = { ...state.cartProducts[productIndexR] };
 				updatedProduct.quantity -= 1;
 				updatedProduct.totalPrice -= Number(action.payload.price);
 
@@ -54,7 +53,7 @@ const stateReducer = (state, action) => {
 						...state,
 						totalProducts: state.totalProducts - 1,
 						totalPrice: state.totalPrice - Number(action.payload.price),
-						cartProducts: [...products, updatedProduct]
+						cartProducts: [...productsR, updatedProduct]
 					};
 				}
 			}
