@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CATEGORIES_QUERY_KEY, PRODUCT_QUERY_KEY } from "../constants";
 import { fetchCategories } from "../services/categories";
@@ -39,7 +39,7 @@ function CreateProduct() {
     const deleteImage = (index) => {
         setProductDetails({
             ...productDetails,
-            images: productDetails.images.filter((image, i) => i !== index)
+            images: productDetails.images.splice(index, 1)
         })
     }
 

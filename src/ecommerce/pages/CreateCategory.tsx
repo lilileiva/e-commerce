@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createCategory } from "../services/categories";
 import { CATEGORY_QUERY_KEY } from "../constants";
@@ -87,7 +87,7 @@ function CreateCategory() {
                                 />
                                 {
                                     categoryDetails.image != "" && <img src={categoryDetails.image} alt="product image"
-                                        className="w-32 h-32 object-cover rounded-md self-center mt-2" onError={(e) => { e.target.src = camera }}
+                                        className="w-32 h-32 object-cover rounded-md self-center mt-2" onError={(e) => { e.target["src"] = camera }}
                                     />
                                 }
                                 {inputErrors["image"] && <p className="text-turquoise text-sm text-center left-0 right-0">{inputErrors["image"]}</p>}

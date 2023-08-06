@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import { deleteProduct, editProduct, fetchProduct } from "../services/products";
@@ -65,7 +65,7 @@ function EditProduct() {
     const deleteImage = (index) => {
         setProductDetails({
             ...productDetails,
-            images: productDetails.images.filter((image, i) => i !== index)
+            images: productDetails.images.slice(index, 1)
         })
     }
 

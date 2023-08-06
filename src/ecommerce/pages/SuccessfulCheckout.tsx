@@ -2,13 +2,12 @@ import { useContext, useEffect } from "react";
 import BagCheckIcon from "../icons/BagCheckIcon";
 import GlobalStateContext from "../context/globalStateContext";
 import { useLocation, useNavigate } from "react-router-dom";
-import CustomButton from "../components/CustomButton";
 
 function SuccessfulCheckout() {
 
     const location = useLocation();    
     const navigate = useNavigate()
-    const { state, dispatch } = useContext(GlobalStateContext);
+    const { dispatch } = useContext(GlobalStateContext);
 
     const cleanCart = () => {
         dispatch({ type: 'CLEAN' });

@@ -42,7 +42,7 @@ function Carousel({ data }) {
                 {data?.images.map((image, i) => (
                     <li className={`"w-32 h-32 relative rounded-md ${current === i ? "border-2 border-strong-skyblue" : "border-2"} `} key={i}>
                         <img src={image} alt="product image"
-                            className="w-32 h-32 object-cover rounded-md p-2" onError={(e) => { e.target.src = camera }}
+                            className="w-32 h-32 object-cover rounded-md p-2" onError={(e) => { e.target["src"] = camera }}
                         />
                     </li>
                 ))}
