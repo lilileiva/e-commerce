@@ -25,7 +25,7 @@ export const validateRegister = (e, data, status, inputErrors, setInputErrors) =
     }
 }
 
-export const validateProductDetails = (e, inputErrors, setInputErrors) => {
+export const validateProductDetails = (e, data, status, inputErrors, setInputErrors) => {
     if (e.target.name === "title") {
         if ((e.target.value).length < 2) {
             setInputErrors({ ...inputErrors, title: "El título no es válido." })

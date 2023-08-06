@@ -45,10 +45,10 @@ function CreateProduct() {
 
     const handleInputChange = (e) => {
         if (e.target.name === "image") {            
-            validateProductDetails(e, inputErrors, setInputErrors)
+            validateProductDetails(e, data, status, inputErrors, setInputErrors)
             setImage(e.target.value)
         } else {            
-            validateProductDetails(e, inputErrors, setInputErrors)
+            validateProductDetails(e, data, status, inputErrors, setInputErrors)
             setProductDetails({
                 ...productDetails,
                 [e.target.name]: e.target.value
