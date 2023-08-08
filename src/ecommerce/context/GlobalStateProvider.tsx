@@ -8,13 +8,14 @@ const initialState = {
 };
 
 const stateReducer = (state, action) => {
-	let productIndex = state.cartProducts.findIndex((p) => p.id === action.payload.id);
-	const products = state.cartProducts.filter((p) => p.id !== action.payload.id);
-
+	
 	switch (action.type) {
 		case 'ADD_PRODUCT':
+			let productIndex = state.cartProducts.findIndex((p) => p.id === action.payload.id);
+			let products = state.cartProducts.filter((p) => p.id !== action.payload.id);
 			if (productIndex === -1) {
 				const newProduct = { ...action.payload, quantity: 1 };
+				newProduct.totalPrice = Number(action.payload.price);
 				return {
 					...state,
 					totalProducts: state.totalProducts + 1,
@@ -24,6 +25,7 @@ const stateReducer = (state, action) => {
 			} else {
 				const updatedProduct = { ...state.cartProducts[productIndex] };
 				updatedProduct.quantity += 1;
+				updatedProduct.totalPrice += Number(action.payload.price);				
 				return {
 					...state,
 					totalProducts: state.totalProducts + 1,
@@ -32,25 +34,37 @@ const stateReducer = (state, action) => {
 				};
 			}
 		case 'REMOVE_PRODUCT':
-			if (productIndex !== -1) {
-				const updatedProduct = { ...state.cartProducts[productIndex] };
+			let productIndexR = state.cartProducts.findIndex((p) => p.id === action.payload.id);
+			const productsR = state.cartProducts.filter((p) => p.id !== action.payload.id);
+			if (productIndexR !== -1) {
+				const updatedProduct = { ...state.cartProducts[productIndexR] };
 				updatedProduct.quantity -= 1;
+				updatedProduct.totalPrice -= Number(action.payload.price);
 
 				if (updatedProduct.quantity <= 0) {
 					return {
 						...state,
 						totalProducts: state.totalProducts > 1 ? state.totalProducts - 1 : 0,
+						totalPrice: state.totalPrice - Number(action.payload.price),
 						cartProducts: state.cartProducts.filter((p) => p.id !== action.payload.id)
 					};
 				} else {
 					return {
 						...state,
 						totalProducts: state.totalProducts - 1,
-						cartProducts: [...products, updatedProduct]
+						totalPrice: state.totalPrice - Number(action.payload.price),
+						cartProducts: [...productsR, updatedProduct]
 					};
 				}
 			}
 			return state;
+		case 'CLEAN':
+			return {
+				...state,
+				totalProducts: 0,
+				totalPrice: 0,
+				cartProducts: []
+			}
 		default:
 			return state;
 	}

@@ -12,7 +12,7 @@ function ProductsList({ data, status }) {
     const navigate = useNavigate()
     const userRole = window.localStorage.getItem("userRole")
 
-    const { dispatch } = useContext(GlobalStateContext);
+    const { dispatch } = useContext(GlobalStateContext);    
 
     const addProductToCart = (product) => {
         dispatch({ type: 'ADD_PRODUCT', payload: product });

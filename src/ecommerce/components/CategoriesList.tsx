@@ -27,7 +27,7 @@ function CategoriesList({ data, status, getProductsByCategory }) {
                                 className="object-cover w-52 h-52"
                                 src={category.image}
                                 alt={category.name}
-                                onError={(e) => { e.target.src = camera }}
+                                onError={(e) => { e.target["src"] = camera }}
                             />
                         </div>
                         <p className="w-full z-10 bg-white pl-2 text-gray-700 capitalize truncate">{category.name}</p>

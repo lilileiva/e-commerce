@@ -16,7 +16,7 @@ function ImagesScrollList({images, deleteImage}) {
                         src={image}
                         alt="product image"
                         className="w-full h-full object-cover rounded-md"
-                        onError={(e) => { e.target.src = camera }}
+                        onError={(e) => { e.target["src"] = camera }}
                     />
                 </li>
             ))}
