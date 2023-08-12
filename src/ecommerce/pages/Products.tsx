@@ -19,13 +19,13 @@ function Products() {
 
     return (
         <div className="flex flex-col justify-top content-center w-full h-[calc(100vh-200px)]">
-            <div className="grid grid-cols-[min-content_auto] gap-10 h-full w-full">
-                <div className="flex flex-col w-min">
+            <div className="grid lg:grid-cols-[min-content_auto] lg:gap-10 md:gap-4 gap-2 h-full w-full grid-row-1">
+                <div className="flex flex-col lg:w-min w-full">
                     <FilterBar setOrder={setOrder} />
                 </div>
                 <div className="w-full h-[calc(100vh-200px)] overflow-y-scroll w-full">
                     <div className="w-full flex justify-between items-center">
-                        <p className="inline-flex text-xl w-fit text-gray-500 font-medium border-b-2 border-turquoise rounded-b-sm py-1 h-fit">
+                        <p className="inline-flex lg:text-xl md:text-lg text-md w-fit text-gray-500 lg:font-medium border-b-2 border-turquoise rounded-b-sm py-1 h-fit">
                             Todos los
                             <p className="text-transparent">-</p>
                             <p className="text-turquoise">productos</p>

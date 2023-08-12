@@ -21,7 +21,7 @@ function Carousel({ data }) {
             <div className="overflow-hidden relative w-full h-max flex justify-between items-center">
                 <div
                     className="rounded-md w-full h-96 ease-out duration-200 shadow"
-                    style={{ backgroundImage: `url(${image})` }}>
+                    style={{ backgroundImage: `url(${image})`, backgroundSize: "cover" }}>
                 </div>
                 {data.images.length > 1 && <div className="w-full flex justify-between absolute">
                     <button

@@ -16,8 +16,8 @@ function Product() {
     const userRole = window.localStorage.getItem("userRole")
     const { productId } = useParams()
     const { data, status } = useQuery([PRODUCT_QUERY_KEY, productId], () => fetchProduct({ productId }))
+    const { dispatch } = useContext(GlobalStateContext);
 
-    const { dispatch } = useContext(GlobalStateContext);    
 
     const addProductToCart = (product) => {
         dispatch({ type: 'ADD_PRODUCT', payload: product });
@@ -25,7 +25,7 @@ function Product() {
 
     return (
         <div className="w-full flex justify-center">
-            {data && status === 'success' && <div className="w-10/12 flex justify-center gap-8 grid grid-cols-2">
+            {data && status === 'success' && <div className="w-10/12 flex justify-center gap-8 grid lg:grid-cols-2 grid-cols-1">
                 <Carousel data={data} />
                 <div className="flex flex-col gap-4 mt-6">
                     <div className="flex justify-between items-center">

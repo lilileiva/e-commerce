@@ -21,7 +21,7 @@ import SuccessfulCheckout from './ecommerce/pages/SuccessfulCheckout'
 function App() {
 
   return (
-    <div className='px-20 grid grid-rows-[max-content_auto] grid-cols-1 justify-center content-top w-full h-full'>
+    <div className='lg:px-40 md:px-10 px-4 grid grid-rows-[max-content_auto] grid-cols-1 justify-center content-top w-full h-full'>
       <GlobalStateProvider>
         <Navbar />
         <Routes>

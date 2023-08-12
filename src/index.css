@@ -29,6 +29,9 @@
   display: flex;
   justify-content: center;
   align-content: top;
+  justify-items: center;  
+  display: grid;
+  grid-template-columns: 100%;
 }
 
 html, body {

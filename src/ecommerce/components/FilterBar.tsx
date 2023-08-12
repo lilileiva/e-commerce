@@ -76,21 +76,21 @@ function FilterBar({ setOrder }) {
 
     return (
         <>
-            {showFilters ? <div className="h-80 w-80 flex flex-col justify-top align-left shadow shadow-slate-300 rounded-md p-4 h-fit duration-150">
+            {showFilters ? <div className="h-80 lg:w-80 w-full flex flex-col justify-top align-left shadow shadow-slate-300 rounded-md p-4 h-fit duration-150">
                 <div className="flex mb-4 justify-between items-center">
                     <h3 className="font-semibold text-gray-400">Filtros</h3>
                     <button onClick={() => setShowFilters(false)}>
                         <CloseIcon size='25' />
                     </button>
                 </div>
-                <div className="h-full flex flex-col justify-around align-left">
-                    <div className="flex flex-col mb-6">
-                        <label htmlFor="order" className="font-semibold text-lg text-gray-500">
+                <div className="h-full lg:flex lg:flex-col lg:justify-around md:grid md:grid-cols-[auto_auto_auto_min-content] md:gap-4 md:items-center align-left sm:flex-col">
+                    <div className="flex flex-col mb-6 w-full">
+                        <label htmlFor="order" className="lg:font-semibold lg:text-lg text-md text-gray-500">
                             Ordenar
                         </label>
                         <select
                             name="order"
-                            className="w-full cursor-pointer border-[1px] border-gray-200 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"
+                            className="w-full h-6 rounded-sm cursor-pointer border-[1px] border-gray-200 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"
                             onChange={(e) => handleInputChange(e)}
                         >
                             <option value="">-----</option>
@@ -108,11 +108,11 @@ function FilterBar({ setOrder }) {
                             </option>
                         </select>
                     </div>
-                    <div className="flex flex-col mb-6">
-                        <label htmlFor="categories" className="font-semibold text-lg text-gray-500">
+                    <div className="flex flex-col mb-6 w-full">
+                        <label htmlFor="categories" className="lg:font-semibold lg:text-lg text-md text-gray-500">
                             Categorías
                         </label>
-                        <select name="categories" className="w-full cursor-pointer border-[1px] border-gray-200 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none" onChange={(e) => handleInputChange(e)}>
+                        <select name="categories" className="w-full h-6 rounded-sm cursor-pointer border-[1px] border-gray-200 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none" onChange={(e) => handleInputChange(e)}>
                             <option value="">Todas las categorías</option>
                             {
                                 data && status == "success" && data.map((category) => (
@@ -124,7 +124,7 @@ function FilterBar({ setOrder }) {
                         </select>
                     </div>
                     <div className="flex flex-col mb-6">
-                        <h2 className="font-semibold text-lg text-gray-500">Rango de precios</h2>
+                        <h2 className="lg:font-semibold lg:text-lg text-md text-gray-500">Rango de precios</h2>
                         <div className="inline-flex justify-left gap-2 w-full">
                             <input
                                 name="price_min"
@@ -146,7 +146,7 @@ function FilterBar({ setOrder }) {
                 </div>
             </div> : <div className="w-min duration-150">
                 <button
-                    className="bg-skyblue rounded-md p-2"
+                    className="bg-skyblue rounded-md md:p-2 p-[1px]"
                     onClick={() => setShowFilters(true)}>
                     <MenuFoldIcon size='30' />
                 </button>
