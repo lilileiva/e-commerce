@@ -1,12 +1,19 @@
 import '../../index.css'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Searchbar from './Searchbar';
 import CartIcon from '../icons/CartIcon'
 import UserIcon from '../icons/UserIcon'
+import { useEffect } from 'react';
 
 function Navbar() {
     
-    const token = window.localStorage.getItem("token");    
+    let token = window.localStorage.getItem("token");
+
+    const location = useLocation()
+
+    useEffect(() => {
+        token = window.localStorage.getItem("token");
+    }, [location])
 
     return (
         <div className='flex flex-col justify-between py-5 w-full h-fit'>

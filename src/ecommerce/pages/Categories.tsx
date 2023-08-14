@@ -37,7 +37,7 @@ function Categories() {
 
     return (
         <div className="w-full flex justify-center">
-            <div className="flex flex-col w-10/12 justify-top content-center h-[calc(100vh-200px)]">
+            <div className="flex flex-col w-10/12 justify-top content-center h-fit pb-4">
                 <div className="w-full flex justify-between items-center">
                     <p className="inline-flex text-xl w-fit text-gray-500 font-medium border-b-2 border-turquoise rounded-b-sm py-1">
                         Todas las
