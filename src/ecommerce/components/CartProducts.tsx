@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import CustomButton from "./CustomButton";
 import GlobalStateContext from "../context/globalStateContext";
 import camera from "../../assets/camera-img.png";
+import TrashButton from "./TrashButton";
 
 function CartProducts() {
 
@@ -16,6 +17,10 @@ function CartProducts() {
     };
 
     const removeProductToCart = (product) => {
+        if (product.quantity > 1) dispatch({ type: 'REMOVE_PRODUCT', payload: product });
+    };
+
+    const removeAllProducts = (product) => {
         dispatch({ type: 'REMOVE_PRODUCT', payload: product });
     };
 
@@ -24,7 +29,7 @@ function CartProducts() {
             {
                 products && products.length > 0 && products.map((product) => (
                     <li
-                        className="relative z-0 mt-4 grid grid-cols-[100px_auto_150px] w-full h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer"
+                        className="relative z-0 mt-4 grid grid-cols-[100px_auto_60px] w-full h-fit rounded-xl border-white overflow-auto shadow shadow-slate-300 cursor-pointer"
                         key={product.name}
                     >
                         <div className="w-24 h-24">
@@ -36,8 +41,8 @@ function CartProducts() {
                                 onError={(e) => { e.target["src"] = camera }}
                             />
                         </div>
-                        <div className="flex lg:flex-row md:flex-row flex-col justify-center content-center items-center gap-2 w-full">
-                            <p className="h-fit lg:w-56 w-44 bg-white text-gray-700 font-bold capitalize text-center truncate text-left">
+                        <div className="flex lg:flex-row md:flex-row flex-col justify-around content-center items-center gap-2 w-full">
+                            <p className="h-fit lg:w-56 md:w-48 w-40 bg-white text-gray-700 lg:text-base text-sm font-bold capitalize text-center truncate text-left">
                                 {product.title}
                             </p>
                             <div className="flex w-24">
@@ -57,17 +62,16 @@ function CartProducts() {
                                     +
                                 </button>
                             </div>
-                            <p className="h-fit w-44 bg-white font-medium text-gray-600 text-center text-lg truncate">
+                            <p className="h-fit w-fit bg-white lg:text-base md:text-base text-sm text-gray-600 text-center text-lg truncate">
                                 Subtotal: ${product.totalPrice}
                             </p>
                         </div>
-                        <div className="w-32 self-center ">
-                            <CustomButton width="32" text="Eliminar del carrito" bgColor="white" textColor="turquoise" borderColor="turquoise"
+                        <div className="w-fit flex items-center justify-center">
+                            <TrashButton width="fit" bgColor="white" color="#1ABCFE" borderColor="turquoise"
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    removeProductToCart(product)
-                                }}
-                            />
+                                    removeAllProducts(product)
+                                }} />
                         </div>
                     </li>
                 ))
