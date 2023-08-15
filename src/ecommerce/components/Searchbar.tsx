@@ -32,7 +32,7 @@ function Searchbar() {
     }
 
     return (
-        <form className="bg-skyblue px-4 py-2 rounded-xl flex gap-4 w-fit" onSubmit={(e) => handleInputSubmit(e)}>
+        <form className="bg-skyblue px-4 lg:py-2 md:py-2 py-[4px] rounded-xl flex gap-4 w-fit" onSubmit={(e) => handleInputSubmit(e)}>
             <button type="submit">
                 <SearchIcon size='27' />
             </button>

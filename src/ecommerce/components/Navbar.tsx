@@ -17,27 +17,27 @@ function Navbar() {
 
     return (
         <div className='flex flex-col justify-between py-5 w-full h-fit'>
-            <div className='lg:flex-row md:flex-row lg:justify-between md:justify-between flex flex-col justify-center text-lg gap-2'>
-                <Link to="/" className='text-3xl font-semibold self-center text-turquoise lg:text-3xl text-xl text-center'>
+            <div className='lg:flex-row md:flex-row lg:justify-between md:justify-between flex flex-col justify-center gap-2'>
+                <Link to="/" className='font-semibold self-center text-turquoise lg:text-3xl text-2xl text-center'>
                     MegaMart
                 </Link>
                 <div className='inline-flex justify-between align-center lg:gap-10 gap-4'>
                     <Searchbar />
                     {token ? <>
-                        <Link to="/user/details/" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg text-base'>
+                        <Link to="/user/details/" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
                             <UserIcon size='27' />
                             Mi cuenta
                         </Link>
-                        <Link to="/cart-detail" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg text-base'>
+                        <Link to="/cart-detail" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
                             <CartIcon size='27' />
                             Carrito
                         </Link>
                     </> : <>
-                        <Link to="/register" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg text-base'>
+                        <Link to="/register" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
                             <UserIcon size='27' />
                             Iniciar sesión / Registrarse
                         </Link>
-                        <Link to="/cart-detail" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg text-base'>
+                        <Link to="/cart-detail" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
                             <CartIcon size='27' />
                             Carrito
                         </Link>

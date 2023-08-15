@@ -31,7 +31,7 @@
   align-content: top;
   justify-items: center;  
   display: grid;
-  grid-template-columns: 100%;  
+  grid-template-columns: 100%;
 }
 
 html, body {
@@ -44,5 +44,6 @@ html, body {
   color: black;
   display: flex;
   justify-content: center;
-  align-content: center;  
+  align-content: center;
+  scroll-behavior: smooth;
 }
