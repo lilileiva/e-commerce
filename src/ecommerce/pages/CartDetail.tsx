@@ -6,9 +6,15 @@ import { useNavigate } from "react-router-dom";
 
 function CartDetail() {
 
+    const token = window.localStorage.getItem("token");
     const navigate = useNavigate();
     const { state } = useContext(GlobalStateContext);
     const { totalProducts, totalPrice } = state;
+
+    const purchase = (e) => {
+        e.stopPropagation();
+        token ? navigate("/checkout/successful/") : navigate("/login")
+    }
 
     return (
         <div className="w-full grid grid-cols-1">
@@ -26,10 +32,7 @@ function CartDetail() {
                     <div className="w-full flex justify-between items-center bg-gray-100 rounded-lg content-center mt-6 p-2">
                         <h2 className="text-lg text-gray-600 font-bold">Precio total: ${totalPrice}</h2>
                         <CustomButton width="fit" text="Finalizar compra" bgColor="turquoise" textColor="white" borderColor="turquoise"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                navigate("/checkout/successful/")
-                            }}
+                            onClick={(e) => purchase(e)}
                         />
                     </div>
                 </>}

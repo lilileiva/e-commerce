@@ -40,7 +40,10 @@ function Carousel({ data }) {
             </div>
             <ul className="flex w-full h-fit overflow-x-scroll py-2 gap-2 roudned-md">
                 {data?.images.map((image, i) => (
-                    <li className={`"w-32 h-32 relative rounded-md ${current === i ? "border-2 border-strong-skyblue" : "border-2"} `} key={i}>
+                    <li className={`"w-32 h-32 relative rounded-md cursor-pointer ${current === i ? "border-2 border-strong-skyblue" : "border-2"} `}
+                        key={i}
+                        onClick={() => setCurrent(i)}
+                    >
                         <img src={image} alt="product image"
                             className="w-32 h-32 object-cover rounded-md p-2" onError={(e) => { e.target["src"] = camera }}
                         />
