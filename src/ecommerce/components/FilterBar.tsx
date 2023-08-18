@@ -83,7 +83,7 @@ function FilterBar({ setOrder }) {
                         <CloseIcon size='25' />
                     </button>
                 </div>
-                <div className="h-full lg:flex lg:flex-col lg:justify-around md:grid md:grid-cols-[auto_auto_auto_min-content] md:gap-4 md:items-center align-left sm:flex-col">
+                <div className="h-full lg:flex lg:flex-col lg:justify-around md:flex md:flex-col md:gap-4 md:justify-center flex flex-col justify-center">
                     <div className="flex flex-col mb-6 w-full">
                         <label htmlFor="order" className="lg:font-semibold lg:text-lg text-md text-gray-500">
                             Ordenar

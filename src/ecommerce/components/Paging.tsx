@@ -37,7 +37,7 @@ function Paging({ listLength, page, elementsPerPage, setPage, setPageTo }) {
             {
                 pages.length > 1 && (
                     <div className="">
-                        <div className='w-fit grid grid-cols-8 gap-4'>
+                        <div className='w-fit flex flex-row gap-4'>
                             <button className="p-2 bg-gray-200 hover:bg-gray-300 rounded-md duration-200" onClick={() => getPrevious()}>
                                 <LeftArrowIcon size='20' />
                             </button>
