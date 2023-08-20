@@ -25,13 +25,13 @@ function Carousel({ data }) {
                 </div>
                 {data.images.length > 1 && <div className="w-full flex justify-between absolute">
                     <button
-                        className="z-10 h-10 w-10 ml-2 bg-gray-200 cursor-pointer rounded-full shadow hover:bg-gray-400 duration-200 flex justify-center items-center pr-[4px]"
+                        className="z-10 h-10 w-10 ml-2 bg-gray-200 opacity-60 cursor-pointer rounded-full shadow hover:bg-gray-400 duration-200 flex justify-center items-center pr-[4px]"
                         onClick={prevImage}
                     >
                         <LeftArrowIcon size='20' />
                     </button>
                     <button
-                        className="z-10 h-10 w-10 mr-2 bg-gray-200 cursor-pointer rounded-full shadow hover:bg-gray-400 duration-200 flex justify-center items-center pl-[4px]"
+                        className="z-10 h-10 w-10 mr-2 bg-gray-200 opacity-60 cursor-pointer rounded-full shadow hover:bg-gray-400 duration-200 flex justify-center items-center pl-[4px]"
                         onClick={nextImage}
                     >
                         <RightArrowIcon size='20' />

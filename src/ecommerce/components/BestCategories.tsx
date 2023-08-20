@@ -17,9 +17,9 @@ function BestCategories({ data, status }) {
                             className="relative z-0 flex flex-col justify-center items-center lg:w-52 w-44 h-fit border-white rounded-full overflow-hidden cursor-pointer"
                             key={category.id}
                         >
-                            <div className="w-52 h-52">
+                            <div className="lg:w-52 lg:h-52 w-46 h-46">
                                 <img
-                                    className="object-cover w-52 h-52 rounded-full shadow shadow-slate-300 border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
+                                    className="object-cover lg:w-52 lg:h-52 w-46 h-46 rounded-full shadow shadow-slate-300 border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
                                     src={category.image}
                                     alt={category.title}
                                     onError={(e) => { e.target["src"] = camera }}
