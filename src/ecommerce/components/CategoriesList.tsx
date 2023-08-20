@@ -13,7 +13,7 @@ function CategoriesList({ data, status, getProductsByCategory }) {
         <ul className="flex flex-wrap justify-center gap-10 mt-10 overflow-y-scroll">
             {
                 data && data.length > 0 && data.map((category) => (
-                    <li className="flex flex-col justify-center align-center w-52 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer"
+                    <li className="flex flex-col justify-center align-center w-52 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
                         key={category.id}
                         onClick={() => getProductsByCategory(category.id)}>
                         <div className="w-52 h-52 relative">

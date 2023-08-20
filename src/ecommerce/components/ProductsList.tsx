@@ -36,7 +36,7 @@ function ProductsList({ data, status }) {
                     data && data.length > 0 && status === 'success' && dataPaged.map((product) => (
                         <li
                             onClick={() => navigate(`/products/${product.id}`)}
-                            className="relative z-0 flex flex-col justify-center items-center lg:w-52 w-44 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer"
+                            className="relative z-0 flex flex-col justify-center items-center lg:w-52 w-44 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
                             key={product.id}
                         >
                             <div className="w-52 h-52">
