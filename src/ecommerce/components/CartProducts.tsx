@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import GlobalStateContext from "../context/globalStateContext";
 import camera from "../../assets/camera-img.png";
@@ -7,21 +7,25 @@ import TrashButton from "./TrashButton";
 function CartProducts() {
 
     const navigate = useNavigate()
-    const { state, dispatch } = useContext(GlobalStateContext);
-    const { cartProducts } = state;
-    const products = cartProducts.sort((a, b) => a.id - b.id);
-
-    const addProductToCart = (product) => {
-        dispatch({ type: 'ADD_PRODUCT', payload: product });
+    const { state, dispatch } = useContext(GlobalStateContext);    
+    
+    const addProductToCart = (product) => {        
+        dispatch({ type: 'ADD_PRODUCT', payload: product });        
     };
 
-    const removeProductToCart = (product) => {
-        if (product.quantity > 1) dispatch({ type: 'REMOVE_PRODUCT', payload: product });
+    const removeProductToCart = (product) => {        
+        if (product.quantity > 1) dispatch({ type: 'REMOVE_PRODUCT', payload: product });        
     };
 
-    const removeAllProducts = (product) => {
-        dispatch({ type: 'REMOVE_PRODUCT', payload: product });
-    };
+    const removeAllProducts = (product) => {        
+        dispatch({ type: 'REMOVE_PRODUCT', payload: product });        
+    };    
+
+    useEffect(() => {        
+        window.localStorage.setItem('cart', JSON.stringify(state.cartProducts));        
+    }, [state])
+
+    const products = state.cartProducts?.sort((a, b) => a.id - b.id);
 
     return (
         <ul className="justify-top gap-10 mt-10 h-full w-full">
@@ -62,7 +66,7 @@ function CartProducts() {
                                 </button>
                             </div>
                             <p className="h-fit w-fit bg-white lg:text-base md:text-base text-sm text-gray-600 text-center text-lg truncate">
-                                Subtotal: ${product.totalPrice}
+                                Subtotal: ${product.price * product.quantity}
                             </p>
                         </div>
                         <div className="w-fit flex items-center justify-center">

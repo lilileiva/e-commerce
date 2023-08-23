@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import camera from "../../assets/camera-img.png";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import EditIcon from "../icons/EditIcon";
 import CustomButton from "./CustomButton";
@@ -13,11 +13,15 @@ function ProductsList({ data, status }) {
     const navigate = useNavigate()
     const userRole = window.localStorage.getItem("userRole")
 
-    const { dispatch } = useContext(GlobalStateContext);
+    const { state, dispatch } = useContext(GlobalStateContext);
 
     const addProductToCart = (product) => {
-        dispatch({ type: 'ADD_PRODUCT', payload: product });
+        dispatch({ type: 'ADD_PRODUCT', payload: product });        
     };
+
+    useEffect(() => {    
+        window.localStorage.setItem('cart', JSON.stringify(state.cartProducts));
+    }, [state])
 
     const [page, setPage] = useState(1);
     const elementsPerPage = 12
@@ -31,15 +35,15 @@ function ProductsList({ data, status }) {
 
     return (
         <div className="flex flex-col gap-10 justify-center w-full items-center">
-            <ul className="flex flex-wrap justify-center gap-6 mt-10 h-full w-full">
+            <ul className="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-3 grid-cols-2 justify-center gap-6 mt-10 h-full w-full">
                 {
                     data && data.length > 0 && status === 'success' && dataPaged.map((product) => (
                         <li
                             onClick={() => navigate(`/products/${product.id}`)}
-                            className="relative z-0 flex flex-col justify-center items-center lg:w-52 w-44 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
+                            className="relative z-0 flex flex-col justify-center place-self-center items-center lg:w-56 md:w-52 w-44 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
                             key={product.id}
                         >
-                            <div className="w-52 h-52">
+                            <div className="lg:w-56 md:w-52 w-44">
                                 {userRole === "admin" && <button
                                     className="z-10 text-white pl-[2.5px] bg-turquoise w-6 h-6 rounded-md absolute right-0"
                                     onClick={(e) => {
@@ -50,7 +54,7 @@ function ProductsList({ data, status }) {
                                     <EditIcon size='20' />
                                 </button>}
                                 <img
-                                    className="object-cover w-52 h-52"
+                                    className="object-cover w-full h-full"
                                     src={product.images[0]}
                                     alt={product.title}
                                     onError={(e) => { e.target["src"] = camera }}

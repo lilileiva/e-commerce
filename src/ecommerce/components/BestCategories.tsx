@@ -4,7 +4,7 @@ import camera from "../../assets/camera-img.png";
 import Loader from "../components/Loader";
 
 function BestCategories({ data, status }) {
-    console.log(data)
+        
     const navigate = useNavigate()
 
     return (

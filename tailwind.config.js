@@ -8,18 +8,20 @@ export default {
     extend: {
       backgroundColor: {
         'skyblue': '#E3F7FF',
-        'turquoise': '#1ABCFE'        
+        'turquoise': '#1ABCFE'
       },
-      textColor: {        
+      textColor: {
         'turquoise': '#1ABCFE'
       },
       borderColor: {
         'strong-skyblue': '#9AD6F0',
         'skyblue': '#E3F7FF',
         'turquoise': '#1ABCFE'
-      }
+      },
+      screens: {
+        '2sm': '5px',
+      },
     },
-  },
-  plugins: []
+    plugins: []
+  }
 }
-

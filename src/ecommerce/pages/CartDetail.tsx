@@ -9,7 +9,9 @@ function CartDetail() {
     const token = window.localStorage.getItem("token");
     const navigate = useNavigate();
     const { state } = useContext(GlobalStateContext);
-    const { totalProducts, totalPrice } = state;
+
+    const totalProducts = state?.cartProducts.reduce((acc, product) => acc + product.quantity, 0);
+    const totalPrice = state?.cartProducts.reduce((acc, product) => acc + product.quantity * product.price, 0);
 
     const purchase = (e) => {
         e.stopPropagation();

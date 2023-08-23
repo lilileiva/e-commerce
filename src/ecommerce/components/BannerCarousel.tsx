@@ -17,7 +17,7 @@ function BannerCarousel({ images }) {
     }    
 
     useEffect(() => {
-        const timer = setTimeout(nextImage, 5000)
+        const timer = setTimeout(nextImage, 4000)
         return () => {
             clearTimeout(timer);
         };

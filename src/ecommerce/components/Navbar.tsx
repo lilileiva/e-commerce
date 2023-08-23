@@ -18,7 +18,7 @@ function Navbar() {
     return (
         <div className='flex flex-col justify-between py-5 w-full h-fit'>
             <div className='lg:flex-row md:flex-row lg:justify-between md:justify-between flex flex-col justify-center gap-2'>
-                <Link to="/" className='font-semibold self-center text-turquoise lg:text-3xl text-2xl text-center'>
+                <Link to="/" className='font-semibold self-center text-turquoise text-3xl text-center'>
                     MegaMart
                 </Link>
                 <div className='inline-flex justify-between align-center lg:gap-10 gap-4'>
