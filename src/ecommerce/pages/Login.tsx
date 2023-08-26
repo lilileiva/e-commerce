@@ -60,15 +60,17 @@ function Login() {
             <div className="flex flex-col justify-center items-center w-80 h-fit py-6 shadow shadow-slate-300 rounded-md">
                 {
                     token ? <div className="px-6 flex flex-col items-center">
-                        <p className="text-center">Ya has iniciado sesión.</p>
-                        <CustomButton width="56" text="Ir a la página principal" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick={() => navigate("/")} />
+                        <p className="text-center">You are already logged in.</p>
+                        <CustomButton width="56" text="Go to home" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick={() => navigate("/")} />
                     </div> : <>
                         <h2 className="mb-6 text-gray-500 font-semibold text-lg text-left">
-                            Iniciá sesión
+                            Sign in
                         </h2>
                         <form onSubmit={(e) => handleInputSubmit(e)} className="flex flex-col justify-center align-center w-72 h-fit">
                             <div className="flex flex-col mb-8">
-                                <label htmlFor="email" className="text-gray-500 font-light text-md text-left">Email</label>
+                                <label htmlFor="email" className="text-gray-500 font-light text-md text-left">
+                                    Email
+                                </label>
                                 <input
                                     required
                                     className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
@@ -78,7 +80,9 @@ function Login() {
                                 />
                             </div>
                             <div className="flex flex-col mb-8">
-                                <label htmlFor="password" className="text-gray-500 font-light text-md text-left">Contraseña</label>
+                                <label htmlFor="password" className="text-gray-500 font-light text-md text-left">
+                                    Password
+                                </label>
                                 <input
                                     required
                                     className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
@@ -91,13 +95,13 @@ function Login() {
                                 type="submit"
                                 className="text-turquoise w-72 mt-2 border-[1px] border-turquoise p-2 rounded-md bg-white cursor-pointer hover:bg-turquoise hover:text-white transition duration-150 ease-out hover:ease-in"
                             >
-                                {isLogged ? <Loader /> : "Iniciar sesión"}
+                                {isLogged ? <Loader /> : "Sign in"}
                             </button>
                         </form>
                         <button
                             onClick={() => navigate("/register")}
                             className="text-white p-2 w-72 mt-2 rounded-md bg-turquoise cursor-pointer border-[1px] hover:bg-white hover:border-turquoise hover:text-turquoise transition duration-150 ease-out hover:ease-in">
-                            Registrarse
+                            Sign up
                         </button>
                         {error && <p className="mt-4 text-gray-500 text-center w-72">{error}</p>}
                     </>

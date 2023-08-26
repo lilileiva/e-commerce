@@ -52,10 +52,10 @@ function CreateCategory() {
             <div className="flex flex-col justify-center items-center w-1/2 h-fit p-6 shadow shadow-slate-300 rounded-md">
                 {
                     userRole !== "admin" ? <>
-                        <p>Esta página no existe</p>
+                        <p>This page does not exist</p>
                     </> : <>
                         <h2 className="mb-6 text-gray-500 font-semibold text-lg text-left">
-                            Crear categoría
+                            Create category
                         </h2>
                         <form onSubmit={(e) => handleInputSubmit(e)} className="flex flex-col justify-center align-center w-full h-fit">
                             <div className="flex flex-col mb-6">
@@ -63,7 +63,7 @@ function CreateCategory() {
                                     htmlFor="title"
                                     className="text-gray-500 font-light text-md text-left"
                                 >
-                                    Nombre
+                                    Name
                                 </label>
                                 <input
                                     required
@@ -76,13 +76,13 @@ function CreateCategory() {
                             </div>
                             <div className="flex flex-col mb-6">
                                 <label htmlFor="image" className="text-gray-500 font-light text-md text-left">
-                                    Imágenes
+                                    Images
                                 </label>
                                 <input
                                     className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
                                     name="image"
                                     type="text"
-                                    placeholder="URL de imágen"
+                                    placeholder="Image URL"
                                     onChange={(e) => handleInputChange(e)}
                                 />
                                 {

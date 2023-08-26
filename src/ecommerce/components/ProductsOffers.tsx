@@ -44,7 +44,7 @@ function ProductsOffers({ data, status }) {
                                     ${product.price}
                                 </p>
                             </div>
-                            <CustomButton width="fit" text="Agregar al carrito" bgColor="turquoise" textColor="white" borderColor="turquoise"
+                            <CustomButton width="fit" text="Add to cart" bgColor="turquoise" textColor="white" borderColor="turquoise"
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     addProductToCart(product)
@@ -53,9 +53,9 @@ function ProductsOffers({ data, status }) {
                         </li>
                     ))
                 }
-                {data && data.length == 0 && status === 'success' && <p className="w-full">No se encontraron productos</p>}
+                {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center absolute left-0 right-0">No se encontraron productos</p>}
                 {status === 'loading' && <Loader />}
-                {status === 'error' && <p>Error al cargar los productos</p>}
+                {status === 'error' && <p className="text-center absolute left-0 right-0">Error al cargar los productos</p>}
             </ul>
         </div>
     );

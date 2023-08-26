@@ -39,7 +39,7 @@ function EditCategory() {
         }
     })
 
-    const handleInputChange = (e) => {        
+    const handleInputChange = (e) => {
         validateCategoryDetails(e, inputErrors, setInputErrors)
         setCategoryDetails({
             ...categoryDetails,
@@ -66,7 +66,7 @@ function EditCategory() {
         }
     }
 
-    const deleteMutation = useMutation([CATEGORY_QUERY_KEY, {categoryId}], () => deleteCategory({ categoryId }), {
+    const deleteMutation = useMutation([CATEGORY_QUERY_KEY, { categoryId }], () => deleteCategory({ categoryId }), {
         onSuccess: () => {
             navigate("/categories")
             queryClient.invalidateQueries([CATEGORIES_QUERY_KEY]);
@@ -87,12 +87,12 @@ function EditCategory() {
             <div className="flex flex-col justify-center items-center w-1/2 h-fit p-6 shadow shadow-slate-300 rounded-md">
                 {
                     userRole !== "admin" ? <>
-                        <p>Esta página no existe</p>
+                        <p>This page does not exist</p>
                     </> : <>
                         {
                             data && status === "success" && <>
                                 <h2 className="mb-6 text-gray-500 font-semibold text-lg text-left">
-                                    Editar categoría
+                                    Update category
                                 </h2>
                                 <form onSubmit={(e) => handleInputSubmit(e)} className="flex flex-col justify-center align-center w-full h-fit">
                                     <div className="flex flex-col mb-6">
@@ -100,7 +100,7 @@ function EditCategory() {
                                             htmlFor="name"
                                             className="text-gray-500 font-light text-md text-left"
                                         >
-                                            Nombre
+                                            Name
                                         </label>
                                         <input
                                             required
@@ -114,13 +114,13 @@ function EditCategory() {
                                     </div>
                                     <div className="flex flex-col mb-6">
                                         <label htmlFor="image" className="text-gray-500 font-light text-md text-left">
-                                            Imágenes
+                                            Images
                                         </label>
                                         <input
                                             className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
                                             name="image"
                                             type="text"
-                                            placeholder="URL de imágen"
+                                            placeholder="Image URL"
                                             value={categoryDetails.image}
                                             onChange={(e) => handleInputChange(e)}
                                         />
@@ -142,14 +142,14 @@ function EditCategory() {
                                         className="text-white w-full mt-8 p-2 rounded-md bg-red-500 cursor-pointer border-[1px] hover:text-white hover:bg-red-700 transition duration-150 ease-out hover:ease-in"
                                         onClick={() => setModal(!modal)}
                                     >
-                                        Eliminar categoría
+                                        Delete category
                                     </button>
                                 </form>
                             </>
                         }
                         {error && <p className="mt-4 text-gray-500 text-center w-72">{error}</p>}
                         {status === 'loading' && <Loader />}
-                        {status === 'error' && <p>Ha ocurrido un error</p>}
+                        {status === 'error' && <p>There is an error</p>}
                         {modal && <Modal
                             text='¿Estás seguro de eliminar esta categoría?'
                             btnText='Eliminar categoría'

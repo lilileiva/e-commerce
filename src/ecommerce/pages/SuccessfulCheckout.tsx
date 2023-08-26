@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 function SuccessfulCheckout() {
 
-    const location = useLocation();    
+    const location = useLocation();
     const navigate = useNavigate()
     const { dispatch } = useContext(GlobalStateContext);
 
@@ -22,10 +22,10 @@ function SuccessfulCheckout() {
             <div className="ease-in-out duration-300">
                 <BagCheckIcon size="55" />
             </div>
-            <h1 className="text-3xl font-bold">Compra exitosa</h1>
-            <p className="text-lg">¡Gracias por tu compra!</p>
+            <h1 className="text-3xl font-bold">Succesful purchase</h1>
+            <p className="text-lg">Thank you!</p>
             <button className="bg-green-600 text-white p-2 rounded-md" onClick={() => navigate("/products")}>
-                Continuar comprando
+                Continue buying
             </button>
         </div>
     );

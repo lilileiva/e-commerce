@@ -7,6 +7,7 @@ function Searchbar() {
     const location = useLocation()
     const navigate = useNavigate()
     const [inputText, setInputText] = useState("");
+    const [search, setSearch] = useState(false);
 
     const handleInputChange = (e) => {
         setInputText(e.target.value);
@@ -32,14 +33,26 @@ function Searchbar() {
     }
 
     return (
-        <form className="bg-skyblue px-4 lg:py-2 md:py-2 py-[4px] rounded-xl flex gap-4 w-fit" onSubmit={(e) => handleInputSubmit(e)}>
-            <button type="submit">
-                <SearchIcon size='27' />
-            </button>
+        <form className="bg-skyblue px-4 py-2 rounded-xl flex lg:gap-4 md:gap-4 w-fit"
+            onSubmit={(e) => handleInputSubmit(e)}
+        >
+            {search ? (
+                <button type="submit" onSubmit={() => setSearch(false)} onClick={() => setSearch(false)}>
+                    <SearchIcon size='27' />
+                </button>
+            ) : (
+                <button onClick={() => setSearch(true)}>
+                    <SearchIcon size='27' />
+                </button>
+            )}
             <input
                 type="text"
-                placeholder="Buscar un producto..."
-                className="bg-skyblue w-14 text-gray-500 ease-in-out duration-500 outline-none focus:duration-300 focus:outline-none focus:w-full"
+                placeholder="Search product..."
+                className={
+                    search
+                        ? "bg-skyblue w-14 text-gray-500 ease-in-out duration-500 outline-none focus:outline-none focus:w-full"
+                        : "bg-skyblue lg:w-14 md:w-14 w-0 text-gray-500 ease-in-out duration-500 overflow-hidden outline-none focus:outline-none focus:w-full"
+                }
                 onChange={(e) => handleInputChange(e)}
             />
         </form>

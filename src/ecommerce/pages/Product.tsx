@@ -42,9 +42,9 @@ function Product() {
                     </div>
                     <h2 className="text-gray-700 text-3xl">${data.price}</h2>
                     <p className="text-gray-700">{data.description}</p>
-                    <p className="text-gray-500">Categoría: {data.category.name}</p>
-                    <CustomButton width="56" text="Comprar" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick="" />
-                    <CustomButton width="56" text="Agregar al carrito" bgColor="white" textColor="turquoise" borderColor="turquoise"
+                    <p className="text-gray-500">Category: {data.category.name}</p>
+                    <CustomButton width="56" text="Buy" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick="" />
+                    <CustomButton width="56" text="Add to cart" bgColor="white" textColor="turquoise" borderColor="turquoise"
                         onClick={(e) => {
                             e.stopPropagation();
                             addProductToCart(data)
@@ -53,7 +53,7 @@ function Product() {
                 </div>
             </div>}
             {status === 'loading' && <Loader />}
-            {status === 'error' && <p>Error al cargar el producto</p>}
+            {status === 'error' && <p>Error loading product</p>}
         </div>
     );
 }

@@ -79,10 +79,10 @@ function CreateProduct() {
         <div className="mt-4 flex flex-col justify-top items-center h-full">
             <div className="flex flex-col justify-center items-center w-1/2 h-fit p-6 shadow shadow-slate-300 rounded-md">
                 {userRole !== "admin" ? <>
-                    <p>Esta página no existe</p>
+                    <p>This page does not exist</p>
                 </> : <>
                     <h2 className="mb-6 text-gray-500 font-semibold text-lg text-left">
-                        Crear producto
+                        Create product
                     </h2>
                     <form onSubmit={(e) => handleInputSubmit(e)} className="flex flex-col justify-center align-center w-full h-fit">
                         <div className="flex flex-col mb-6">
@@ -90,7 +90,7 @@ function CreateProduct() {
                                 htmlFor="title"
                                 className="text-gray-500 font-light text-md text-left"
                             >
-                                Título
+                                Title
                             </label>
                             <input
                                 required
@@ -128,14 +128,14 @@ function CreateProduct() {
                         </div>
                         <div className="flex flex-col mb-6">
                             <label htmlFor="categoryId" className="text-gray-500 font-light text-md text-left">
-                                Categorías
+                                Categories
                             </label>
                             <select
                                 name="categoryId"
                                 className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
                                 onChange={(e) => handleInputChange(e)}
                             >
-                                <option value="">Todas las categorías</option>
+                                <option value="">All categories</option>
                                 {
                                     data && status == "success" && data.map((category) => (
                                         <option value={category.id} className="capitalize">
@@ -148,18 +148,18 @@ function CreateProduct() {
                         </div>
                         <div className="flex flex-col mb-6">
                             <label htmlFor="image" className="text-gray-500 font-light text-md text-left">
-                                Imágenes
+                                Images
                             </label>
                             <input
                                 className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
                                 name="image"
                                 type="text"
-                                placeholder="URL de imagen"
+                                placeholder="Image URL"
                                 onChange={(e) => handleInputChange(e)}
                                 value={image}
                             />
                             <button className="mt-2 cursor-pointer text-turquoise bg-skyblue rounded-md py-4" type="button" onClick={() => addImage()}>
-                                Agregar imagen
+                                Add imagen
                             </button>
                             <ImagesScrollList images={productDetails?.images} deleteImage={deleteImage} />
                             {inputErrors["images"] && <p className="text-turquoise text-sm text-center left-0 right-0">{inputErrors["images"]}</p>}

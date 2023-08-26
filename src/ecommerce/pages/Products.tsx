@@ -26,12 +26,12 @@ function Products() {
                 <div className="w-full h-full">
                     <div className="w-full flex justify-between items-center">
                         <p className="inline-flex lg:text-xl md:text-lg text-md w-fit text-gray-500 lg:font-medium border-b-2 border-turquoise rounded-b-sm py-1 h-fit">
-                            Todos los
+                            All
                             <p className="text-transparent">-</p>
-                            <p className="text-turquoise">productos</p>
+                            <p className="text-turquoise">products</p>
                         </p>
                         {userRole === "admin"
-                            && <CustomButton width="fit" text="Crear producto" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick={() => navigate("/products/create")} />}
+                            && <CustomButton width="fit" text="Create product" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick={() => navigate("/products/create")} />}
                     </div>
                     <ProductsList data={data} status={status} />
                 </div>

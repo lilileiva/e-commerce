@@ -4,7 +4,7 @@ import camera from "../../assets/camera-img.png";
 import Loader from "../components/Loader";
 
 function BestCategories({ data, status }) {
-        
+
     const navigate = useNavigate()
 
     return (
@@ -33,9 +33,9 @@ function BestCategories({ data, status }) {
                         </li>
                     ))
                 }
-                {data && data.length == 0 && status === 'success' && <p className="w-full">No se encontraron categorías</p>}
+                {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center absolute left-0 right-0">No se encontraron categorías</p>}
                 {status === 'loading' && <Loader />}
-                {status === 'error' && <p>Error al cargar los categoryos</p>}
+                {status === 'error' && <p className="text-center absolute left-0 right-0">Error al cargar las categorías</p>}
             </ul>
         </div>
     );

@@ -122,11 +122,11 @@ function EditProduct() {
         <div className="mt-4 flex flex-col justify-top items-center h-full">
             <div className="flex flex-col justify-center items-center w-1/2 h-fit p-6 shadow shadow-slate-300 rounded-md">
                 {userRole !== "admin" ? <>
-                    <p>Esta página no existe</p>
+                    <p>This page does not exist</p>
                 </> : <>
                     {data && status === "success" && <>
                         <h2 className="mb-6 text-gray-500 font-semibold text-lg text-left">
-                            Editar producto
+                            Update product
                         </h2>
                         <form onSubmit={(e) => handleInputSubmit(e)} className="flex flex-col justify-center align-center w-full h-fit">
                             <div className="flex flex-col mb-6">
@@ -134,7 +134,7 @@ function EditProduct() {
                                     htmlFor="title"
                                     className="text-gray-500 font-light text-md text-left"
                                 >
-                                    Título
+                                    Title
                                 </label>
                                 <input
                                     required
@@ -151,7 +151,7 @@ function EditProduct() {
                                     htmlFor="price"
                                     className="text-gray-500 font-light text-md text-left"
                                 >
-                                    Precio
+                                    Price
                                 </label>
                                 <input
                                     required
@@ -177,7 +177,7 @@ function EditProduct() {
                             </div>
                             <div className="flex flex-col mb-6">
                                 <label htmlFor="categoryId" className="text-gray-500 font-light text-md text-left">
-                                    Categorías
+                                    Categories
                                 </label>
                                 <select
                                     name="categoryId"
@@ -197,18 +197,18 @@ function EditProduct() {
                             </div>
                             <div className="flex flex-col mb-6">
                                 <label htmlFor="image" className="text-gray-500 font-light text-md text-left">
-                                    Imágenes
+                                    Images
                                 </label>
                                 <input
                                     className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
                                     name="image"
                                     type="text"
-                                    placeholder="URL de imágen"
+                                    placeholder="Image URL"
                                     onChange={(e) => handleInputChange(e)}
                                     value={image}
                                 />
                                 <button className="mt-2 cursor-pointer text-turquoise bg-skyblue rounded-md py-4" type="button" onClick={() => addImage()}>
-                                    Agregar imágen
+                                    Add image
                                 </button>
                                 <ImagesScrollList images={productDetails?.images} deleteImage={deleteImage} />
                                 {inputErrors["images"] && <p className="text-turquoise text-sm text-center left-0 right-0">{inputErrors["images"]}</p>}
@@ -224,16 +224,16 @@ function EditProduct() {
                                 className="text-white w-full mt-8 p-2 rounded-md bg-red-500 cursor-pointer border-[1px] hover:text-white hover:bg-red-700 transition duration-150 ease-out hover:ease-in"
                                 onClick={() => setModal(!modal)}
                             >
-                                Eliminar producto
+                                Delete product
                             </button>
                         </form>
                     </>}
                     {error && <p className="mt-4 text-gray-500 text-center w-72">{error}</p>}
                     {status === 'loading' && <Loader />}
-                    {status === 'error' && <p>Ha ocurrido un error</p>}
+                    {status === 'error' && <p>There is an error</p>}
                     {modal && <Modal
                         text='¿Estás seguro de eliminar este producto?'
-                        btnText='Eliminar producto'
+                        btnText='Delete product'
                         loadButton={loadButton}
                         func={handleDeleteProduct}
                         arg={data.id}

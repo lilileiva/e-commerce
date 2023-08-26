@@ -21,25 +21,25 @@ function Navbar() {
                 <Link to="/" className='font-semibold self-center text-turquoise text-3xl text-center'>
                     MegaMart
                 </Link>
-                <div className='inline-flex justify-between align-center lg:gap-10 gap-4'>
+                <div className='lg:inline-flex md:inline-flex grid grid-cols-3 justify-between align-center lg:gap-10 gap-4'>
                     <Searchbar />
                     {token ? <>
                         <Link to="/user/details/" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
                             <UserIcon size='27' />
-                            Mi cuenta
+                            My account
                         </Link>
                         <Link to="/cart-detail" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
                             <CartIcon size='27' />
-                            Carrito
+                            Cart
                         </Link>
                     </> : <>
                         <Link to="/register" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
                             <UserIcon size='27' />
-                            Iniciar sesión / Registrarse
+                            Sign in / Sign up
                         </Link>
                         <Link to="/cart-detail" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
                             <CartIcon size='27' />
-                            Carrito
+                            Cart
                         </Link>
                     </>}
                 </div>
@@ -47,13 +47,13 @@ function Navbar() {
             <hr className='border-gray-200 my-4' />
             <div className='inline-flex text-base justify-evenly gap-2'>
                 <Link to="/" className='text-gray-700 text-center flex items-center font-normal lg:text-base w-fit text-sm py-1 px-2 bg-slate-100 rounded-xl hover:bg-gray-300 duration-75'>
-                    Inicio
+                    Home
                 </Link>
                 <Link to="/products" className='text-gray-700 text-center flex items-center font-normal lg:text-base w-fit text-sm py-1 px-2 bg-slate-100 rounded-xl hover:bg-gray-300 duration-75'>
-                    Todos los productos
+                    All products
                 </Link>
                 <Link to="/categories" className='text-gray-700 text-center flex items-center font-normal lg:text-base w-fit text-sm py-1 px-2 bg-slate-100 rounded-xl hover:bg-gray-300 duration-75'>
-                    Categorías
+                    Categories
                 </Link>
             </div>
             <hr className='border-gray-200 my-4' />

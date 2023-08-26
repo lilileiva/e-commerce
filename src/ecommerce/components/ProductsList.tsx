@@ -9,17 +9,16 @@ import GlobalStateContext from "../context/globalStateContext";
 import Paging from "../components/Paging";
 
 function ProductsList({ data, status }) {
-
     const navigate = useNavigate()
     const userRole = window.localStorage.getItem("userRole")
 
     const { state, dispatch } = useContext(GlobalStateContext);
 
     const addProductToCart = (product) => {
-        dispatch({ type: 'ADD_PRODUCT', payload: product });        
+        dispatch({ type: 'ADD_PRODUCT', payload: product });
     };
 
-    useEffect(() => {    
+    useEffect(() => {
         window.localStorage.setItem('cart', JSON.stringify(state.cartProducts));
     }, [state])
 
@@ -71,7 +70,7 @@ function ProductsList({ data, status }) {
                                     ${product.price}
                                 </p>
                             </div>
-                            <CustomButton width="fit" text="Agregar al carrito" bgColor="turquoise" textColor="white" borderColor="turquoise"
+                            <CustomButton width="fit" text="Add to cart" bgColor="turquoise" textColor="white" borderColor="turquoise"
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     addProductToCart(product)
@@ -80,10 +79,10 @@ function ProductsList({ data, status }) {
                         </li>
                     ))
                 }
-                {data && data.length == 0 && status === 'success' && <p className="w-full">No se encontraron productos</p>}
-                {status === 'loading' && <Loader />}
-                {status === 'error' && <p>Error al cargar los productos</p>}
             </ul>
+            {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center">There are no products</p>}
+            {status === 'loading' && <Loader />}
+            {status === 'error' && <p className="text-center">Error loading products</p>}
             <Paging listLength={data?.length} page={page} elementsPerPage={elementsPerPage} setPage={setPage} setPageTo={setPageTo} />
         </div>
     );

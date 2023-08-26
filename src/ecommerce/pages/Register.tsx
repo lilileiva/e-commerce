@@ -24,15 +24,15 @@ function Register() {
 
     const handleInputChange = (e) => {
         if (e.target.name === "name") {
-            validateRegister(e, data, status, inputErrors, setInputErrors)            
+            validateRegister(e, data, status, inputErrors, setInputErrors)
             setName(e.target.value);
         }
         if (e.target.name === "email") {
-            validateRegister(e, data, status, inputErrors, setInputErrors)            
+            validateRegister(e, data, status, inputErrors, setInputErrors)
             setEmail(e.target.value);
         }
         if (e.target.name === "password") {
-            validateRegister(e, data, status, inputErrors, setInputErrors)            
+            validateRegister(e, data, status, inputErrors, setInputErrors)
             setPassword(e.target.value);
         }
     }
@@ -66,11 +66,11 @@ function Register() {
             <div className="flex flex-col justify-center items-center w-80 h-fit py-6 shadow shadow-md rounded-md">
                 {
                     token ? <div className="px-6 flex flex-col items-center">
-                        <p className="text-center mb-2">No podés registrarte ni loguearte porque has iniciado sesión.</p>
-                        <CustomButton width="56" text="Ir a la página principal" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick={() => navigate("/")} />
+                        <p className="text-center mb-2">You cannot sign up because you are already logged in.</p>
+                        <CustomButton width="56" text="Go to home" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick={() => navigate("/")} />
                     </div> : <>
                         <h2 className="mb-6 text-gray-500 font-semibold text-lg text-left">
-                            Crea tu cuenta
+                            Create account
                         </h2>
                         <form onSubmit={(e) => handleInputSubmit(e)} className="flex flex-col justify-center align-center w-72 h-fit">
                             <div className="flex flex-col mb-8">
@@ -85,7 +85,9 @@ function Register() {
                                 {inputErrors["name"] && <p className="text-turquoise text-sm text-center w-72 absolute mt-14">{inputErrors["name"]}</p>}
                             </div>
                             <div className="flex flex-col mb-8">
-                                <label htmlFor="email" className="text-gray-500 font-light text-md text-left">Email</label>
+                                <label htmlFor="email" className="text-gray-500 font-light text-md text-left">
+                                    Email
+                                </label>
                                 <input
                                     required
                                     className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"
@@ -96,7 +98,9 @@ function Register() {
                                 {inputErrors["email"] && <p className="text-turquoise text-sm text-center w-72 absolute mt-14">{inputErrors["email"]}</p>}
                             </div>
                             <div className="flex flex-col mb-8">
-                                <label htmlFor="password" className="text-gray-500 font-light text-md text-left">Contraseña</label>
+                                <label htmlFor="password" className="text-gray-500 font-light text-md text-left">
+                                    Password
+                                </label>
                                 <input
                                     required
                                     className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"
@@ -110,13 +114,13 @@ function Register() {
                                 type="submit"
                                 className="text-white p-2 mt-4 rounded-md bg-turquoise cursor-pointer border-[1px] hover:bg-white hover:border-turquoise hover:text-turquoise transition duration-150 ease-out hover:ease-in"
                             >
-                                {isRegistered ? <Loader /> : "Registrarse"}
+                                {isRegistered ? <Loader /> : "Sign up"}
                             </button>
                         </form>
                         <button
                             onClick={() => navigate("/login")}
                             className="text-turquoise w-72 mt-2 border-[1px] border-turquoise p-2 rounded-md bg-white cursor-pointer hover:bg-turquoise hover:text-white transition duration-150 ease-out hover:ease-in">
-                            Iniciar sesión
+                            Sign in
                         </button>
                         {message && <p className="mt-4 text-green-500 font-semibold text-center w-72">{message}</p>}
                         {error && <p className="mt-4 text-gray-500 text-center w-72">{error}</p>}

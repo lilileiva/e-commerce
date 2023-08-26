@@ -78,7 +78,7 @@ function FilterBar({ setOrder }) {
         <>
             {showFilters ? <div className="h-80 lg:w-80 w-full flex flex-col justify-top align-left shadow shadow-slate-300 rounded-md p-4 h-fit duration-150">
                 <div className="flex mb-4 justify-between items-center">
-                    <h3 className="font-semibold text-gray-400">Filtros</h3>
+                    <h3 className="font-semibold text-gray-400">Filters</h3>
                     <button onClick={() => setShowFilters(false)}>
                         <CloseIcon size='25' />
                     </button>
@@ -86,7 +86,7 @@ function FilterBar({ setOrder }) {
                 <div className="h-full lg:flex lg:flex-col lg:justify-around md:flex md:flex-col md:gap-4 md:justify-center flex flex-col justify-center">
                     <div className="flex flex-col mb-6 w-full">
                         <label htmlFor="order" className="lg:font-semibold lg:text-lg text-md text-gray-500">
-                            Ordenar
+                            Order
                         </label>
                         <select
                             name="order"
@@ -95,25 +95,25 @@ function FilterBar({ setOrder }) {
                         >
                             <option value="">-----</option>
                             <option value="title_asc">
-                                Alfabéticamente: A a Z
+                                Alphabetically: A to Z
                             </option>
                             <option value="title_desc">
-                                Alfabéticamente: Z a A
+                                Alphabetically: Z to A
                             </option>
                             <option value="price_desc">
-                                Precio: Mayor a menor
+                                Price: Higher to lower
                             </option>
                             <option value="price_asc">
-                                Precio: Menor a mayor
+                                Price: Lower to higher
                             </option>
                         </select>
                     </div>
                     <div className="flex flex-col mb-6 w-full">
                         <label htmlFor="categories" className="lg:font-semibold lg:text-lg text-md text-gray-500">
-                            Categorías
+                            Categories
                         </label>
                         <select name="categories" className="w-full h-6 rounded-sm cursor-pointer border-[1px] border-gray-200 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none" onChange={(e) => handleInputChange(e)}>
-                            <option value="">Todas las categorías</option>
+                            <option value="">All categorías</option>
                             {
                                 data && status == "success" && data.map((category) => (
                                     <option value={category.id} className="capitalize" key={category.id}>
@@ -124,7 +124,9 @@ function FilterBar({ setOrder }) {
                         </select>
                     </div>
                     <div className="flex flex-col mb-6">
-                        <h2 className="lg:font-semibold lg:text-lg text-md text-gray-500">Rango de precios</h2>
+                        <h2 className="lg:font-semibold lg:text-lg text-md text-gray-500">
+                            Price range
+                        </h2>
                         <div className="inline-flex justify-left gap-2 w-full">
                             <input
                                 name="price_min"
@@ -142,7 +144,7 @@ function FilterBar({ setOrder }) {
                             />
                         </div>
                     </div>
-                    <CustomButton width="fit" text="Buscar" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick={(e) => handleInputSubmit(e)}/>
+                    <CustomButton width="fit" text="Search" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick={(e) => handleInputSubmit(e)} />
                 </div>
             </div> : <div className="w-min duration-150">
                 <button
