@@ -45,7 +45,7 @@ function Register() {
                 setIsRegistered(false)
             } else {
                 setIsRegistered(false)
-                setError("No se pudo registrar la cuenta. Verifique que los datos ingresados sean correctos.")
+                setError("Could not sign up. Verify data is valid.")
             }
         } catch (error) {
             setIsRegistered(false)

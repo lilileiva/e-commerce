@@ -16,6 +16,7 @@ import EditCategory from './ecommerce/pages/EditCategory'
 import CreateCategory from './ecommerce/pages/CreateCategory'
 import GlobalStateProvider from './ecommerce/context/GlobalStateProvider'
 import SuccessfulCheckout from './ecommerce/pages/SuccessfulCheckout'
+import Checkout from './ecommerce/pages/Checkout'
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path='login/' element={<Login />} />
           <Route path='register/' element={<Register />} />
           <Route path='user/details/' element={<UserDetails />} />
+          <Route path='checkout/' element={<Checkout />} />
           <Route path='checkout/successful/' element={<SuccessfulCheckout />} />
         </Routes>
       </GlobalStateProvider>

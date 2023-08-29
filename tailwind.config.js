@@ -20,7 +20,7 @@ export default {
       },
       screens: {
         '2sm': '5px',
-      },
+      },     
     },
     plugins: []
   }

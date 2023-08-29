@@ -41,7 +41,7 @@ function Login() {
                 navigate("/");
             } else {
                 setIsLogged(false)
-                setError("No se pudo iniciar sesión. Verifique que los datos ingresados sean correctos.")
+                setError("Could not sign in. Verify your credentials are valid.")
             }
         } catch (error) {
             setIsLogged(false)

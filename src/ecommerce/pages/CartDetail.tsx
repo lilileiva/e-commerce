@@ -15,7 +15,7 @@ function CartDetail() {
 
     const purchase = (e) => {
         e.stopPropagation();
-        token ? navigate("/checkout/successful/") : navigate("/login")
+        token ? navigate("/checkout/") : navigate("/login")
     }
 
     return (

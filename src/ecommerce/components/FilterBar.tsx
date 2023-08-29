@@ -90,10 +90,10 @@ function FilterBar({ setOrder }) {
                         </label>
                         <select
                             name="order"
-                            className="w-full h-6 rounded-sm cursor-pointer border-[1px] border-gray-200 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"
+                            className="w-full h-6 rounded-sm cursor-pointer border-[1px] border-gray-200 text-gray-500 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"
                             onChange={(e) => handleInputChange(e)}
                         >
-                            <option value="">-----</option>
+                            <option value="" selected disabled>-----</option>
                             <option value="title_asc">
                                 Alphabetically: A to Z
                             </option>
@@ -109,11 +109,11 @@ function FilterBar({ setOrder }) {
                         </select>
                     </div>
                     <div className="flex flex-col mb-6 w-full">
-                        <label htmlFor="categories" className="lg:font-semibold lg:text-lg text-md text-gray-500">
+                        <label htmlFor="categories" className="lg:font-semibold lg:text-lg text-md text-gray-400">
                             Categories
                         </label>
-                        <select name="categories" className="w-full h-6 rounded-sm cursor-pointer border-[1px] border-gray-200 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none" onChange={(e) => handleInputChange(e)}>
-                            <option value="">All categorías</option>
+                        <select name="categories" className="w-full h-6 rounded-sm cursor-pointer border-[1px] border-gray-200 text-gray-400 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none" onChange={(e) => handleInputChange(e)}>
+                            <option value="" selected disabled>All categorías</option>
                             {
                                 data && status == "success" && data.map((category) => (
                                     <option value={category.id} className="capitalize" key={category.id}>

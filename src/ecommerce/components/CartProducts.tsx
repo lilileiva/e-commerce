@@ -79,7 +79,7 @@ function CartProducts() {
                     </li>
                 ))
             }
-            {products && products.length == 0 && <p className="w-full text-center">Aún no agregaste productos</p>}
+            {products && products.length == 0 && <p className="w-full text-center">You haven't added any products yet</p>}
         </ul>
     );
 }
