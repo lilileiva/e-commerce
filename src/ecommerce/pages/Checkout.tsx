@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Card from "../components/Card";
 
 function Checkout() {
-    
+
     const navigate = useNavigate()
 
     const token = window.localStorage.getItem("token")
@@ -27,7 +27,7 @@ function Checkout() {
                 [e.target.name]: (e.target.value).toUpperCase()
             })
         } else {
-            if (e.target.value == Number(e.target.value)) {
+            if (e.target.value == Number(e.target.value)) {                
                 setPurchaseDetails({
                     ...purchaseDetails,
                     [e.target.name]: e.target.value
@@ -39,9 +39,9 @@ function Checkout() {
     return (
         <div className="flex flex-col items-center justify-center pt-8">
             <div className="h-fit">
-                <Card showBack={showBack} purchaseDetails={purchaseDetails}/>
+                <Card showBack={showBack} purchaseDetails={purchaseDetails} />
             </div>
-            <form className="rounded-md shadow p-6 mt-32 w-[600px]" onSubmit={() => navigate("/checkout/successful")}>
+            <form className="rounded-md shadow p-6 mt-32 lg:w-[600px] md:w-[500px] w-full" onSubmit={() => navigate("/checkout/successful")}>
                 <div className="mt-6">
                     <span className="block text-sm text-gray-400 pb-2">
                         CARD NUMBER
@@ -52,6 +52,7 @@ function Checkout() {
                         onFocus={() => setShowBack(false)}
                         onChange={(e) => handleInputChange(e)}
                         name="cardNumber"
+                        value={purchaseDetails.cardNumber}
                         type="text"
                         maxLength={16}
                     />
@@ -66,6 +67,7 @@ function Checkout() {
                         onClick={() => setShowBack(false)}
                         onChange={(e) => handleInputChange(e)}
                         name="cardHolder"
+                        value={purchaseDetails.cardHolder}
                         type="text"
                     />
                 </div>
@@ -80,6 +82,7 @@ function Checkout() {
                             onFocus={() => setShowBack(false)}
                             onChange={(e) => handleInputChange(e)}
                             name="expirationMonth"
+                            value={purchaseDetails.expirationMonth}
                         >
                             <option value="month" selected disabled>
                                 MONTH
@@ -109,8 +112,9 @@ function Checkout() {
                             onFocus={() => setShowBack(false)}
                             onChange={(e) => handleInputChange(e)}
                             type="text"
-                            maxLength={4}
+                            maxLength={2}
                             name="expirationYear"
+                            value={purchaseDetails.expirationYear}
                         />
                     </div>
                     <div className="mt-6">
@@ -125,6 +129,7 @@ function Checkout() {
                             type="text"
                             name="cvv"
                             maxLength={4}
+                            value={purchaseDetails.cvv}
                         />
                     </div>
                 </div>
@@ -134,7 +139,7 @@ function Checkout() {
                     value="SUBMIT"
                 />
             </form>
-        </div>        
+        </div>
     );
 }
 

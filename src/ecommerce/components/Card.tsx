@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import visaLogo from "../../assets/visa-logo.png";
 import chip from "../../assets/chip-logo.png";
 
@@ -7,7 +5,7 @@ function Card({showBack, purchaseDetails}) {
 
     return (
         <div className="mb-[-150px] w-full relative flex justify-center">
-            <div className={showBack ? "hidden w-[350px] duration-200 h-56 p-4 rounded-xl flex flex-col justify-around bg-gradient-to-r from-cyan-500 to-blue-500 shadow" : "visible w-[350px] animation-perspective h-56 p-4 rounded-xl flex flex-col justify-around bg-gradient-to-r from-cyan-500 to-blue-500 shadow"}>
+            <div className={showBack ? "hidden lg:w-[350px] md:w-[330px] w-[300px] duration-200 h-56 p-4 rounded-xl flex flex-col justify-around bg-gradient-to-r from-cyan-500 to-blue-500 shadow" : "visible w-[350px] animation-perspective h-56 p-4 rounded-xl flex flex-col justify-around bg-gradient-to-r from-cyan-500 to-blue-500 shadow"}>
                 <div className="flex justify-between">
                     <img src={chip} alt="chip" className="w-16" />
                     <img src={visaLogo} alt="visa" className="w-32 h-12" />
@@ -33,7 +31,7 @@ function Card({showBack, purchaseDetails}) {
                 </div>
             </div>
 
-            <div className={showBack ? "visible w-[350px] duration-200 ease-out text-right h-56 py-4 rounded-xl flex flex-col justify-around bg-gradient-to-r from-cyan-500 to-blue-500 shadow" : "hidden w-[350px] hidden perspective transition duration-200 ease-out text-right h-56 py-4 rounded-xl flex flex-col justify-around bg-gradient-to-r from-cyan-500 to-blue-500 shadow"}>
+            <div className={showBack ? "visible lg:w-[350px] md:w-[330px] w-[300px] duration-200 ease-out text-right h-56 py-4 rounded-xl flex flex-col justify-around bg-gradient-to-r from-cyan-500 to-blue-500 shadow" : "hidden w-[350px] hidden perspective transition duration-200 ease-out text-right h-56 py-4 rounded-xl flex flex-col justify-around bg-gradient-to-r from-cyan-500 to-blue-500 shadow"}>
                 <div className="bg-black h-12 w-full"></div>
                 <div className="flex justify-between w-full px-4">
                     <div className="w-full flex flex-col">
