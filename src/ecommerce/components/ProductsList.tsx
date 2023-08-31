@@ -53,7 +53,7 @@ function ProductsList({ data, status }) {
                                     <EditIcon size='20' />
                                 </button>}
                                 <img
-                                    className="object-cover w-full h-full"
+                                    className="object-cover w-full lg:h-56 md:h-52 h-44"
                                     src={product.images[0]}
                                     alt={product.title}
                                     onError={(e) => { e.target["src"] = camera }}

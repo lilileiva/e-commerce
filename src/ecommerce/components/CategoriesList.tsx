@@ -25,7 +25,7 @@ function CategoriesList({ data, status, getProductsByCategory }) {
                                     <EditIcon size='20' />
                                 </button>}
                                 <img
-                                    className="object-cover w-full h-full"
+                                    className="object-cover w-full h-44"
                                     src={category.image}
                                     alt={category.name}
                                     onError={(e) => { e.target["src"] = camera }}
