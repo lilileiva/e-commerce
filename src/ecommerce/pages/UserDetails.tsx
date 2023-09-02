@@ -35,13 +35,13 @@ function UserDetails() {
                         onError={(e) => { e.target["src"] = camera }}
                     />
                     <p className="text-gray-500 mb-4">Rol: {data.role}</p>
-                    <CustomButton width="56" text="Products cart" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick={() => navigate("/cart-detail")} />
-                    <CustomButton width="56" text="Sign out" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick={() => closeSession()} />
+                    <CustomButton width="w-56" text="Products cart" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick={() => navigate("/cart-detail")} />
+                    <CustomButton width="w-56" text="Sign out" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick={() => closeSession()} />
                 </>}
                 {status === 'loading' && <Loader />}   
                 {status === 'success' && !token && <>
                     <p>Parece que no has ingresado aún...</p>
-                    <CustomButton width="56" text="Sign in" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick={() => navigate("/login")} />
+                    <CustomButton width="w-56" text="Sign in" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick={() => navigate("/login")} />
                 </>}
             </div>
         </div>

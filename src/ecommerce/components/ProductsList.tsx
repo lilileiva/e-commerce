@@ -8,7 +8,7 @@ import CustomButton from "./CustomButton";
 import GlobalStateContext from "../context/globalStateContext";
 import Paging from "../components/Paging";
 
-function ProductsList({ data, status }) {
+function ProductsList({ data, status, page, setPage }) {
     const navigate = useNavigate()
     const userRole = window.localStorage.getItem("userRole")
 
@@ -22,7 +22,6 @@ function ProductsList({ data, status }) {
         window.localStorage.setItem('cart', JSON.stringify(state.cartProducts));
     }, [state])
 
-    const [page, setPage] = useState(1);
     const elementsPerPage = 12
     const totalPages = page * elementsPerPage;
     const firstPage = totalPages - elementsPerPage;
@@ -70,7 +69,7 @@ function ProductsList({ data, status }) {
                                     ${product.price}
                                 </p>
                             </div>
-                            <CustomButton width="fit" text="Add to cart" bgColor="turquoise" textColor="white" borderColor="turquoise"
+                            <CustomButton width="w-fit" text="Add to cart" bgColor="turquoise" textColor="white" borderColor="turquoise"
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     addProductToCart(product)

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import './index.css'
 
@@ -21,13 +22,15 @@ import Checkout from './ecommerce/pages/Checkout'
 
 function App() {
 
+  const [page, setPage] = useState(1);
+
   return (
     <div className='px-4 grid grid-rows-[max-content_auto_100px] grid-cols-1 justify-center content-top w-full max-w-6xl h-full'>
       <GlobalStateProvider>
-        <Navbar />
+        <Navbar setPage={setPage} />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='products/?' element={<Products />} />
+          <Route path='products/?' element={<Products page={page} setPage={setPage} />} />
           <Route path='products/:productId' element={<Product />} />
           <Route path='products/create/' element={<CreateProduct />} />
           <Route path='products/edit/:productId' element={<EditProduct />} />

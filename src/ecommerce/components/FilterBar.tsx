@@ -144,7 +144,7 @@ function FilterBar({ setOrder }) {
                             />
                         </div>
                     </div>
-                    <CustomButton width="fit" text="Search" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick={(e) => handleInputSubmit(e)} />
+                    <CustomButton width="w-fit" text="Search" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick={(e) => handleInputSubmit(e)} />
                 </div>
             </div> : <div className="w-min duration-150">
                 <button

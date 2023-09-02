@@ -43,8 +43,8 @@ function Paging({ listLength, page, elementsPerPage, setPage, setPageTo }) {
                             </button>
                             {pagesSlice.map(page => (
                                 <a className={(currentPage === page
-                                    ? 'bg-gray-400 hover:bg-gray-300 w-8 p-2 rounded-md flex justify-center items-center cursor-pointer duration-200'
-                                    : 'bg-gray-200 hover:bg-gray-300 p-2 rounded-md flex justify-center items-center cursor-pointer duration-200'
+                                    ? 'bg-gray-400 hover:bg-gray-300 w-8 rounded-md flex justify-center items-center cursor-pointer duration-200'
+                                    : 'bg-gray-200 hover:bg-gray-300 w-8 rounded-md flex justify-center items-center cursor-pointer duration-200'
                                 )}
                                     key={page}
                                     onClick={() => setPageNumber(page)}>{page}</a>

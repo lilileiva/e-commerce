@@ -61,7 +61,7 @@ function Login() {
                 {
                     token ? <div className="px-6 flex flex-col items-center">
                         <p className="text-center">You are already logged in.</p>
-                        <CustomButton width="56" text="Go to home" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick={() => navigate("/")} />
+                        <CustomButton width="w-56" text="Go to home" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick={() => navigate("/")} />
                     </div> : <>
                         <h2 className="mb-6 text-gray-500 font-semibold text-lg text-left">
                             Sign in

@@ -43,8 +43,8 @@ function Product() {
                     <h2 className="text-gray-700 text-3xl">${data.price}</h2>
                     <p className="text-gray-700">{data.description}</p>
                     <p className="text-gray-500">Category: {data.category.name}</p>
-                    <CustomButton width="56" text="Buy" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick="" />
-                    <CustomButton width="56" text="Add to cart" bgColor="white" textColor="turquoise" borderColor="turquoise"
+                    <CustomButton width="w-56" text="Buy" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick="" />
+                    <CustomButton width="w-56" text="Add to cart" bgColor="white" textColor="turquoise" borderColor="turquoise"
                         onClick={(e) => {
                             e.stopPropagation();
                             addProductToCart(data)

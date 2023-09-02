@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import SearchIcon from '../icons/SearchIcon';
 
-function Searchbar() {
+function Searchbar({setPage}) {
 
     const location = useLocation()
     const navigate = useNavigate()
@@ -14,6 +14,7 @@ function Searchbar() {
     }
 
     const handleInputSubmit = (e) => {
+        setPage(1)
         e.preventDefault();
         if (location.search) {
             let found = false

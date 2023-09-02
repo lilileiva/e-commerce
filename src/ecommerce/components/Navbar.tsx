@@ -5,8 +5,8 @@ import CartIcon from '../icons/CartIcon'
 import UserIcon from '../icons/UserIcon'
 import { useEffect } from 'react';
 
-function Navbar() {
-    
+function Navbar({ setPage }) {
+
     let token = window.localStorage.getItem("token");
 
     const location = useLocation()
@@ -22,7 +22,7 @@ function Navbar() {
                     MegaMart
                 </Link>
                 <div className='lg:inline-flex md:inline-flex grid grid-cols-3 justify-between align-center lg:gap-10 gap-4'>
-                    <Searchbar />
+                    <Searchbar setPage={setPage} />
                     {token ? <>
                         <Link to="/user/details/" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
                             <UserIcon size='27' />

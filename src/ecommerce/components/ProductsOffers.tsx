@@ -44,7 +44,7 @@ function ProductsOffers({ data, status }) {
                                     ${product.price}
                                 </p>
                             </div>
-                            <CustomButton width="fit" text="Add to cart" bgColor="turquoise" textColor="white" borderColor="turquoise"
+                            <CustomButton width="w-fit" text="Add to cart" bgColor="turquoise" textColor="white" borderColor="turquoise"
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     addProductToCart(product)

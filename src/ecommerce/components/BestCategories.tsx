@@ -2,10 +2,29 @@ import { useNavigate } from "react-router-dom";
 import camera from "../../assets/camera-img.png";
 
 import Loader from "../components/Loader";
+import { useMutation, useQueryClient } from "react-query";
+import { PRODUCTS_QUERY_KEY } from "../constants";
+import { useEffect, useState } from "react";
+import { fetchProducts } from "../services/products";
 
 function BestCategories({ data, status }) {
 
+    const queryClient = useQueryClient();
     const navigate = useNavigate()
+    const [filter, setFilter] = useState(null)
+
+    const mutation = useMutation([PRODUCTS_QUERY_KEY, { filter, order: "" }], () => fetchProducts({ filter, order: "" }), {
+        onSuccess: () => {
+            queryClient.invalidateQueries([PRODUCTS_QUERY_KEY]);
+            navigate(`/products/?${filter}`)
+        }
+    })
+
+    useEffect(() => {
+        if (filter != null) {
+            mutation.mutate(filter)
+        }
+    }, [filter])
 
     return (
         <div className="flex flex-col gap-10 justify-center w-full items-center">
@@ -13,7 +32,7 @@ function BestCategories({ data, status }) {
                 {
                     data && data.length > 0 && status === 'success' && data.map((category) => (
                         <li
-                            onClick={() => navigate(`/categorys/${category.id}`)}
+                            onClick={() => setFilter(`&categoryId=${category.id}`)}
                             className="relative z-0 flex flex-col justify-center items-center lg:w-52 w-44 h-fit border-white rounded-full overflow-hidden cursor-pointer"
                             key={category.id}
                         >

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from 'react-query';
 import { PRODUCTS_QUERY_KEY } from "../constants";
@@ -8,12 +8,15 @@ import FilterBar from "../components/FilterBar";
 import CustomButton from "../components/CustomButton";
 import ProductsList from "../components/ProductsList";
 
-function Products() {
+function Products({ page, setPage }) {
 
     const navigate = useNavigate()
     const location = useLocation()
     const [order, setOrder] = useState("")
     const userRole = window.localStorage.getItem("userRole")
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location])
 
     const { data, status } = useQuery([PRODUCTS_QUERY_KEY, { filter: location.search, order }], () => fetchProducts({ filter: location.search, order }))
 
@@ -31,9 +34,9 @@ function Products() {
                             <p className="text-turquoise">products</p>
                         </p>
                         {userRole === "admin"
-                            && <CustomButton width="fit" text="Create product" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick={() => navigate("/products/create")} />}
+                            && <CustomButton width="w-fit" text="Create product" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick={() => navigate("/products/create")} />}
                     </div>
-                    <ProductsList data={data} status={status} />
+                    <ProductsList data={data} status={status} page={page} setPage={setPage} />
                 </div>
             </div>
         </div>

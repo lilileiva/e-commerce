@@ -44,7 +44,7 @@ function Categories() {
                         <p className="text-transparent">-</p>
                         <p className="text-turquoise">categories</p>
                     </p>
-                    {userRole === "admin" && <CustomButton width="fit" text="Create category" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick={() => navigate("/categories/create")} />}
+                    {userRole === "admin" && <CustomButton width="w-fit" text="Create category" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick={() => navigate("/categories/create")} />}
                 </div>
                 <CategoriesList data={data} status={status} getProductsByCategory={getProductsByCategory} />
             </div>
