@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import camera from "../../assets/camera-img.png";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import Loader from "../components/Loader";
 import EditIcon from "../icons/EditIcon";
 import CustomButton from "./CustomButton";
