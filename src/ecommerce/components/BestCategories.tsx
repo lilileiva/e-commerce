@@ -33,22 +33,20 @@ function BestCategories({ data, status }) {
                     data && data.length > 0 && status === 'success' && data.map((category) => (
                         <li
                             onClick={() => setFilter(`&categoryId=${category.id}`)}
-                            className="relative z-0 flex flex-col justify-center items-center lg:w-52 w-44 h-fit border-white rounded-full overflow-hidden cursor-pointer"
+                            className="relative z-0 block justify-center items-center lg:w-52 lg:h-52 w-44 h-fit border-white cursor-pointer"
                             key={category.id}
                         >
-                            <div className="lg:w-52 lg:h-52 w-46 h-46">
+                            <div className="lg:w-52 lg:h-52 w-46 h-46 overflow-hidden rounded-full border-[1px] hover:border-[1px] hover:border-turquoise">
                                 <img
-                                    className="object-cover lg:w-52 lg:h-52 w-46 h-46 rounded-full shadow shadow-slate-300 border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
+                                    className="object-cover aspect-square lg:w-52 lg:h-52 w-46 h-46 shadow shadow-slate-300 border-gray-200"
                                     src={category.image}
                                     alt={category.title}
                                     onError={(e) => { e.target["src"] = camera }}
                                 />
                             </div>
-                            <div className="flex flex-col w-full h-20 justify-center items-center">
-                                <p className="w-5/6 bg-white text-gray-700 font-bold capitalize text-center truncate">
-                                    {category.name}
-                                </p>
-                            </div>
+                            <p className="w-full bg-white text-gray-700 font-bold capitalize text-center truncate">
+                                {category.name}
+                            </p>
                         </li>
                     ))
                 }
