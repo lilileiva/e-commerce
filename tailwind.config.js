@@ -28,8 +28,8 @@ export default {
         }
       },
       animation: {
-        cardFlip: 'cardFlip 0.2s ease-out'
-      
+        cardFlip: 'cardFlip 0.2s ease-out',
+        pulseFast: 'pulse 1s linear infinite',
       }
     },
     plugins: []

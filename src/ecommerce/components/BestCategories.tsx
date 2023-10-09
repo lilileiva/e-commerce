@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import camera from "../../assets/camera-img.png";
 
-import Loader from "../components/Loader";
 import { useMutation, useQueryClient } from "react-query";
 import { PRODUCTS_QUERY_KEY } from "../constants";
 import { useEffect, useState } from "react";
 import { fetchProducts } from "../services/products";
+import BestCategoriesLoader from "./BestCategoriesLoader";
 
 function BestCategories({ data, status }) {
 
@@ -28,7 +28,7 @@ function BestCategories({ data, status }) {
 
     return (
         <div className="flex flex-col gap-10 justify-center w-full items-center">
-            <ul className="flex flex-wrap justify-center gap-6 mt-10 h-full w-full">
+            <ul className="flex flex-wrap justify-center gap-6 mt-10 h-full w-full">                
                 {
                     data && data.length > 0 && status === 'success' && data.map((category) => (
                         <li
@@ -51,7 +51,7 @@ function BestCategories({ data, status }) {
                     ))
                 }
                 {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center absolute left-0 right-0">No se encontraron categorías</p>}
-                {status === 'loading' && <Loader />}
+                {status === 'loading' && <BestCategoriesLoader length="4" />}
                 {status === 'error' && <p className="text-center absolute left-0 right-0">Error al cargar las categorías</p>}
             </ul>
         </div>

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import camera from "../../assets/camera-img.png";
 
 import { useContext, useEffect } from "react";
-import Loader from "../components/Loader";
+import ProductsLoader from "./ProductsLoader";
 import EditIcon from "../icons/EditIcon";
 import CustomButton from "./CustomButton";
 import GlobalStateContext from "../context/globalStateContext";
@@ -80,7 +80,7 @@ function ProductsList({ data, status, page, setPage }) {
                 }
             </ul>
             {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center">There are no products</p>}
-            {status === 'loading' && <Loader />}
+            {status === 'loading' && <ProductsLoader length="6" />}
             {status === 'error' && <p className="text-center">Error loading products</p>}
             <Paging listLength={data?.length} page={page} elementsPerPage={elementsPerPage} setPage={setPage} setPageTo={setPageTo} />
         </div>

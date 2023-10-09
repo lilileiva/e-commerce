@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import camera from "../../assets/camera-img.png";
 
+import ProductsLoader from "./ProductsLoader";
 import { useContext } from "react";
-import Loader from "../components/Loader";
 import CustomButton from "./CustomButton";
 import GlobalStateContext from "../context/globalStateContext";
 
@@ -25,7 +25,7 @@ function ProductsOffers({ data, status }) {
                             className="relative z-0 flex flex-col justify-center items-center lg:w-52 w-44 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
                             key={product.id}
                         >
-                            <div className="w-52 h-52">                         
+                            <div className="w-52 h-52">
                                 <img
                                     className="object-cover w-52 h-52"
                                     src={product.images[0]}
@@ -54,7 +54,7 @@ function ProductsOffers({ data, status }) {
                     ))
                 }
                 {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center absolute left-0 right-0">No se encontraron productos</p>}
-                {status === 'loading' && <Loader />}
+                {status === 'loading' && < ProductsLoader length="4" />}
                 {status === 'error' && <p className="text-center absolute left-0 right-0">Error al cargar los productos</p>}
             </ul>
         </div>
