@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { checkAvailableEmail, createUser } from "../services/user"
+import { createUser } from "../services/user"
 import { useNavigate } from "react-router-dom";
 import { validateRegister } from "../utils/validations";
 

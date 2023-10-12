@@ -60,6 +60,7 @@ export const createUser = async ({ name, email, password }: createUserProps) => 
     }
 };
 
+// NOT WORKING
 export const checkAvailableEmail = async ({ email }) => {    
     try {
         const response = await fetch(`${baseUrl}/users/is-available`, {
