@@ -55,10 +55,12 @@ function EditProduct() {
     })
 
     const addImage = () => {
-        setProductDetails({
-            ...productDetails,
-            images: [...productDetails.images, image]
-        })
+        if (image != "" && !inputErrors["images"]) {
+            setProductDetails({
+                ...productDetails,
+                images: [...productDetails.images, image]
+            })
+        }
         setImage("")
     }
 
@@ -70,10 +72,10 @@ function EditProduct() {
     }
 
     const handleInputChange = (e) => {
-        if (e.target.name === "image") {            
+        if (e.target.name === "image") {
             validateProductDetails(e, data, status, inputErrors, setInputErrors)
             setImage(e.target.value)
-        } else {            
+        } else {
             validateProductDetails(e, data, status, inputErrors, setInputErrors)
             setProductDetails({
                 ...productDetails,

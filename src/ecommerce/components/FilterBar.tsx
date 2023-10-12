@@ -23,6 +23,11 @@ function FilterBar({ setOrder }) {
 
     const { data, status } = useQuery(CATEGORIES_QUERY_KEY, fetchCategories)
 
+    useEffect(() => {        
+        if (window.innerWidth < 1024) setShowFilters(false)
+        else setShowFilters(true)        
+    }, [window])
+
     const handleInputChange = (e) => {
         if (location.search) {
             const search = location.search
@@ -65,7 +70,6 @@ function FilterBar({ setOrder }) {
         setFilter(title + category + minPrice + maxPrice)
     }, [title, category, minPrice, maxPrice])
 
-
     const handleInputSubmit = (e) => {
         e.preventDefault()
         setFilter(category + minPrice + maxPrice)
@@ -73,6 +77,7 @@ function FilterBar({ setOrder }) {
         queryClient.invalidateQueries([PRODUCTS_QUERY_KEY]);
         navigate(`/products/?${filter}`)
     }
+
 
     return (
         <>

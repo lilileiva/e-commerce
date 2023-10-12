@@ -60,7 +60,7 @@ export const createUser = async ({ name, email, password }: createUserProps) => 
     }
 };
 
-export const checkAvailableEmail = async ({ email }) => {
+export const checkAvailableEmail = async ({ email }) => {    
     try {
         const response = await fetch(`${baseUrl}/users/is-available`, {
             method: "post",
@@ -72,7 +72,7 @@ export const checkAvailableEmail = async ({ email }) => {
                 email: email                
             })
         })
-        if (!response.ok) {
+        if (!response.ok) {            
             throw new Error("Error HTTP: " + response.status);
         }        
         const responseJson = await response.json()

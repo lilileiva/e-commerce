@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { checkAvailableEmail, createUser } from "../services/user"
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "react-query";
-import { IS_AVAILABLE_QUERY_KEY } from "../constants";
 import { validateRegister } from "../utils/validations";
 
 import Loader from "../components/Loader";
@@ -20,19 +18,17 @@ function Register() {
     const [isRegistered, setIsRegistered] = useState(false)
     const token = window.localStorage.getItem("token");
 
-    const { data, status } = useQuery([IS_AVAILABLE_QUERY_KEY, { email }], () => checkAvailableEmail({ email }), { retry: 10 })
-
-    const handleInputChange = (e) => {
+    const handleInputChange = (e) => {        
         if (e.target.name === "name") {
-            validateRegister(e, data, status, inputErrors, setInputErrors)
+            validateRegister(e, inputErrors, setInputErrors)
             setName(e.target.value);
         }
         if (e.target.name === "email") {
-            validateRegister(e, data, status, inputErrors, setInputErrors)
+            validateRegister(e, inputErrors, setInputErrors)
             setEmail(e.target.value);
         }
         if (e.target.name === "password") {
-            validateRegister(e, data, status, inputErrors, setInputErrors)
+            validateRegister(e, inputErrors, setInputErrors)
             setPassword(e.target.value);
         }
     }
@@ -41,7 +37,7 @@ function Register() {
         try {
             const response = await createUser({ name, email, password })
             if (response != undefined && response.status === 201) {
-                setMessage("Cuenta creada exitosamente. Inicie sesión.")
+                setMessage("Account created successfully. Sign in.")
                 setIsRegistered(false)
             } else {
                 setIsRegistered(false)
@@ -53,8 +49,17 @@ function Register() {
         }
     }
 
-    const handleInputSubmit = (e) => {
+    const handleInputSubmit = async (e) => {
         e.preventDefault();
+        // let checkEmail = await checkAvailableEmail({ email })        
+        // if (checkEmail["isAvailable"] == false) {
+        //     setInputErrors({ ...inputErrors, email: "Email already in use" })
+        // } else {
+        //     if (Object.keys(inputErrors).length === 0) {
+        //         setIsRegistered(true)
+        //         register();
+        //     }
+        // }
         if (Object.keys(inputErrors).length === 0) {
             setIsRegistered(true)
             register();

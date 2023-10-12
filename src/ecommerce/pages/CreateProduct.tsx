@@ -29,10 +29,12 @@ function CreateProduct() {
     const { data, status } = useQuery(CATEGORIES_QUERY_KEY, fetchCategories)
 
     const addImage = () => {
-        setProductDetails({
-            ...productDetails,
-            images: [...productDetails.images, image]
-        })
+        if (image != "" && !inputErrors["images"]) {
+            setProductDetails({
+                ...productDetails,
+                images: [...productDetails.images, image]
+            })
+        }
         setImage("")
     }
 
