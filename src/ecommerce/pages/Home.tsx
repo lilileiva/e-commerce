@@ -18,7 +18,7 @@ function Home() {
     const navigate = useNavigate()
     const location = useLocation()
     const [order] = useState("")
-    const images = [watch_banner, sale_banner, balck_friday_banner]    
+    const images = [watch_banner, sale_banner, balck_friday_banner]
 
     const products = useQuery([PRODUCTS_QUERY_KEY, { filter: location.search, order }], () => fetchProducts({ filter: location.search, order }))
     const categories = useQuery([CATEGORIES_QUERY_KEY], () => fetchCategories())

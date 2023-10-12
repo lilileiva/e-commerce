@@ -12,6 +12,8 @@ import GlobalStateContext from "../context/globalStateContext";
 
 function Product() {
 
+    window.scrollTo(0, 0);
+
     const navigate = useNavigate()
     const userRole = window.localStorage.getItem("userRole")
     const { productId } = useParams()

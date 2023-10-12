@@ -28,7 +28,7 @@ function BestCategories({ data, status }) {
 
     return (
         <div className="flex flex-col gap-10 justify-center w-full items-center">
-            <ul className="flex flex-wrap justify-center gap-6 mt-10 h-full w-full">                
+            <ul className="flex flex-wrap justify-center gap-6 mt-10 h-full w-full">
                 {
                     data && data.length > 0 && status === 'success' && data.map((category) => (
                         <li

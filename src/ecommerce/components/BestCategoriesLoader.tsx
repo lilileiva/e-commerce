@@ -7,14 +7,13 @@ function BestCategoriesLoader({ length }) {
 
     return (
         <div className="flex flex-col gap-10 justify-center w-full items-center">
-            <ul className="flex flex-wrap justify-center gap-6 mt-10 h-full w-full">
+            <ul className="flex flex-wrap justify-center gap-6 h-full w-full">
                 {
                     items.map((item) => (
                         <li
-                            className="animate-pulseFast border-[1px] relative z-0 block justify-center items-center border-white"
+                            className="rounded-full animate-pulseFast border-[1px] relative z-0 block justify-center items-center lg:w-52 lg:h-52 w-44 h-44 overflow-hidden shadow shadow-slate-300 bg-gray-300"
                             key={item}
                         >
-                            <div className="w-46 h-46 lg:w-52 lg:h-52 md:w-46 md:h-46 rounded-full bg-gray-300"></div>
                         </li>
                     ))
                 }
