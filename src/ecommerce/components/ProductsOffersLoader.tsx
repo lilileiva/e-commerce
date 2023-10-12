@@ -1,6 +1,6 @@
 import CustomButton from "./CustomButton";
 
-function ProductsLoader({ length }) {
+function ProductsOffersLoader({ length }) {
 
     const items = []
     for (let i = 0; i < length; i++) {
@@ -16,9 +16,8 @@ function ProductsLoader({ length }) {
                             className="animate-pulseFast relative z-0 flex flex-col justify-center items-center w-fit h-fit rounded-xl overflow-hidden shadow shadow-slate-300 bg-gray-300 border-[1px]"
                             key={item}
                         >
-                            <div className="lg:w-56 lg:h-56 md:w-52 md:h-52 w-44 h-44"></div>
-                            <div className="flex flex-col w-full h-24 justify-center items-center">
-                            </div>
+                            <div className="lg:w-52 w-44 h-52"></div>
+                            <div className="flex flex-col w-full h-20 justify-center items-center"></div>
                             <CustomButton width="w-fit" text="Add to cart" bgColor="gray-200" textColor="transparent" borderColor="gray-300" onClick={null} />
                         </li>
                     ))
@@ -28,4 +27,4 @@ function ProductsLoader({ length }) {
     );
 }
 
-export default ProductsLoader;
+export default ProductsOffersLoader;

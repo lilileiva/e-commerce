@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import camera from "../../assets/camera-img.png";
 
-import ProductsLoader from "./ProductsLoader";
+import ProductsOffersLoader from "./ProductsOffersLoader";
 import { useContext } from "react";
 import CustomButton from "./CustomButton";
 import GlobalStateContext from "../context/globalStateContext";
@@ -54,7 +54,7 @@ function ProductsOffers({ data, status }) {
                     ))
                 }
                 {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center absolute left-0 right-0">No se encontraron productos</p>}
-                {status === 'loading' && < ProductsLoader length="4" />}
+                {status === 'loading' && < ProductsOffersLoader length="4" />}
                 {status === 'error' && <p className="text-center absolute left-0 right-0">Error al cargar los productos</p>}
             </ul>
         </div>
