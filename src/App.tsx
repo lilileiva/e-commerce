@@ -18,6 +18,7 @@ import CreateCategory from './ecommerce/pages/CreateCategory'
 import GlobalStateProvider from './ecommerce/context/GlobalStateProvider'
 import SuccessfulCheckout from './ecommerce/pages/SuccessfulCheckout'
 import Checkout from './ecommerce/pages/Checkout'
+import NotFound from './ecommerce/pages/NotFound'
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
           <Route path='user/details/' element={<UserDetails />} />
           <Route path='checkout/' element={<Checkout />} />
           <Route path='checkout/successful/' element={<SuccessfulCheckout />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </GlobalStateProvider>
     </div>
