@@ -49,7 +49,7 @@ function CreateCategory() {
 
     return (
         <div className="mt-4 flex flex-col justify-top items-center h-full">
-            <div className="flex flex-col justify-center items-center w-1/2 h-fit p-6 shadow shadow-slate-300 rounded-md">
+            <div className="flex flex-col justify-center items-center lg:w-1/2 w-11/12 h-fit p-6 shadow shadow-slate-300 rounded-md">
                 {
                     userRole !== "admin" ? <>
                         <p>This page does not exist</p>

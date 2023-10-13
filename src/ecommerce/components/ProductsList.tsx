@@ -16,6 +16,7 @@ function ProductsList({ data, status, page, setPage }) {
 
     const addProductToCart = (product) => {
         dispatch({ type: 'ADD_PRODUCT', payload: product });
+        navigate("/cart-detail")
     };
 
     useEffect(() => {
