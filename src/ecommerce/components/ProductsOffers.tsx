@@ -1,8 +1,8 @@
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import camera from "../../assets/camera-img.png";
 
 import ProductsOffersLoader from "./ProductsOffersLoader";
-import { useContext } from "react";
 import CustomButton from "./CustomButton";
 import GlobalStateContext from "../context/globalStateContext";
 
@@ -11,8 +11,12 @@ function ProductsOffers({ data, status }) {
     const navigate = useNavigate()
     const { dispatch } = useContext(GlobalStateContext);
 
+    const [isAdded, setIsAdded] = useState("")
+
     const addProductToCart = (product) => {
         dispatch({ type: 'ADD_PRODUCT', payload: product });
+        setIsAdded(product.id)
+        setTimeout(() => setIsAdded(""), 700)
     };
 
     return (
@@ -25,6 +29,7 @@ function ProductsOffers({ data, status }) {
                             className="relative z-0 flex flex-col justify-center items-center lg:w-52 w-44 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
                             key={product.id}
                         >
+                            {isAdded == product.id && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>}
                             <div className="w-52 h-52">
                                 <img
                                     className="object-cover w-52 h-52"
@@ -53,7 +58,7 @@ function ProductsOffers({ data, status }) {
                         </li>
                     ))
                 }
-                {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center absolute left-0 right-0">No se encontraron productos</p>}
+                {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center absolute left-0 right-0">There are no products</p>}
                 {status === 'loading' && < ProductsOffersLoader length="4" />}
                 {status === 'error' && <p className="text-center absolute left-0 right-0">Error al cargar los productos</p>}
             </ul>

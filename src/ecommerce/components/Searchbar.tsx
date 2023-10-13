@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import SearchIcon from '../icons/SearchIcon';
 
-function Searchbar({setPage}) {
+function Searchbar({ setPage }) {
 
     const location = useLocation()
     const navigate = useNavigate()
@@ -33,9 +33,12 @@ function Searchbar({setPage}) {
         }
     }
 
-    return (
-        <form className="bg-skyblue px-4 py-2 rounded-xl flex lg:gap-4 md:gap-4 w-fit"
+    return (        
+        <form className={
+            `bg-skyblue px-4 py-2 rounded-xl flex lg:gap-4 md:gap-4 ease-in-out duration-500 overflow-hidden ${search ? "lg:w-52 w-24" : "lg:w-32 w-14"} `
+        }
             onSubmit={(e) => handleInputSubmit(e)}
+            onClick={() => setSearch(true)}
         >
             {search ? (
                 <button type="submit" onSubmit={() => setSearch(false)} onClick={() => setSearch(false)}>
@@ -49,11 +52,7 @@ function Searchbar({setPage}) {
             <input
                 type="text"
                 placeholder="Search product..."
-                className={
-                    search
-                        ? "bg-skyblue w-14 text-gray-500 ease-in-out duration-500 outline-none focus:outline-none focus:w-full"
-                        : "bg-skyblue lg:w-14 md:w-14 w-0 text-gray-500 ease-in-out duration-500 overflow-hidden outline-none focus:outline-none focus:w-full"
-                }
+                className="bg-skyblue text-gray-500 outline-none overflow-hidden focus:outline-none focus:w-full"
                 onChange={(e) => handleInputChange(e)}
             />
         </form>

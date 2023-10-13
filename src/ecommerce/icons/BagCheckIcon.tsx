@@ -1,7 +1,7 @@
 function BagCheckIcon({ size }) {
   return (
     <svg
-      fill="green"
+      fill="white"
       viewBox="0 0 16 16"
       height={size}
       width={size}

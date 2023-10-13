@@ -1,9 +1,11 @@
 import '../../index.css'
+import { useContext, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import GlobalStateContext from "../context/globalStateContext";
+
 import Searchbar from './Searchbar';
 import CartIcon from '../icons/CartIcon'
 import UserIcon from '../icons/UserIcon'
-import { useEffect } from 'react';
 
 function Navbar({ setPage }) {
 
@@ -14,6 +16,10 @@ function Navbar({ setPage }) {
     useEffect(() => {
         token = window.localStorage.getItem("token");
     }, [location])
+
+    const { state } = useContext(GlobalStateContext);
+
+    const totalProducts = state?.cartProducts.reduce((acc, product) => acc + product.quantity, 0);
 
     return (
         <div className='flex flex-col justify-between py-5 w-full h-fit'>
@@ -28,20 +34,21 @@ function Navbar({ setPage }) {
                             <UserIcon size='27' />
                             My account
                         </Link>
-                        <Link to="/cart-detail" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
-                            <CartIcon size='27' />
-                            Cart
-                        </Link>
                     </> : <>
                         <Link to="/register" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
                             <UserIcon size='27' />
                             Sign in / Sign up
                         </Link>
-                        <Link to="/cart-detail" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
-                            <CartIcon size='27' />
-                            Cart
-                        </Link>
                     </>}
+                    <Link to="/cart-detail" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
+                        <CartIcon size='27' />
+                        Carts
+                        <p className={
+                            totalProducts > 0 ? 'px-2 py-[2px] h-fit rounded-full font-semibold text-sm text-white bg-turquoise duration-300' : 'px-2 text-white all-ease-out duration-300'
+                        }>
+                            {totalProducts}
+                        </p>
+                    </Link>
                 </div>
             </div>
             <hr className='border-gray-200 my-4' />

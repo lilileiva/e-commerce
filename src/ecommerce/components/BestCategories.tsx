@@ -50,7 +50,7 @@ function BestCategories({ data, status }) {
                         </li>
                     ))
                 }
-                {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center absolute left-0 right-0">No se encontraron categorías</p>}
+                {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center absolute left-0 right-0">There are no categories</p>}
                 {status === 'loading' && <BestCategoriesLoader length="4" />}
                 {status === 'error' && <p className="text-center absolute left-0 right-0">Error al cargar las categorías</p>}
             </ul>

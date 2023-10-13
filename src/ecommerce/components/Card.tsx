@@ -20,7 +20,9 @@ function Card({ showBack, purchaseDetails }) {
 
     return (
         <div className="mb-[-150px] w-full relative flex justify-center">
-            <div className={showBack ? "hidden" : "animate-cardFlip visible lg:w-[350px] md:w-[340px] w-[335px] h-56 p-4 rounded-xl flex flex-col justify-around bg-gradient-to-r from-cyan-500 to-blue-500 shadow"}>
+            <div className={
+                showBack ? "hidden" : "animate-cardFlip visible lg:w-[350px] md:w-[340px] w-[335px] h-56 p-4 rounded-xl flex flex-col justify-around bg-gradient-to-r from-cyan-500 to-blue-500 shadow"
+            }>
                 <div className="flex justify-between">
                     <img src={chip} alt="chip" className="w-16" />
                     <img src={visaLogo} alt="visa" className="w-32 h-12" />

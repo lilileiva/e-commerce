@@ -23,9 +23,9 @@ function FilterBar({ setOrder }) {
 
     const { data, status } = useQuery(CATEGORIES_QUERY_KEY, fetchCategories)
 
-    useEffect(() => {        
+    useEffect(() => {
         if (window.innerWidth < 1024) setShowFilters(false)
-        else setShowFilters(true)        
+        else setShowFilters(true)
     }, [window])
 
     const handleInputChange = (e) => {
@@ -117,8 +117,14 @@ function FilterBar({ setOrder }) {
                         <label htmlFor="categories" className="lg:font-semibold lg:text-lg text-md text-gray-400">
                             Categories
                         </label>
-                        <select name="categories" className="w-full h-6 rounded-sm cursor-pointer border-[1px] border-gray-200 text-gray-400 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none" onChange={(e) => handleInputChange(e)}>
-                            <option value="" selected disabled>All categorías</option>
+                        <select
+                            name="categories"
+                            className="w-full h-6 rounded-sm cursor-pointer border-[1px] border-gray-200 text-gray-400 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"
+                            onChange={(e) => handleInputChange(e)}
+                        >
+                            <option defaultValue="" disabled>
+                                All categorías
+                            </option>
                             {
                                 data && status == "success" && data.map((category) => (
                                     <option value={category.id} className="capitalize" key={category.id}>
@@ -149,7 +155,14 @@ function FilterBar({ setOrder }) {
                             />
                         </div>
                     </div>
-                    <CustomButton width="w-fit" text="Search" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick={(e) => handleInputSubmit(e)} />
+                    <CustomButton
+                        width="w-fit"
+                        text="Search"
+                        bgColor="white"
+                        textColor="turquoise"
+                        borderColor="turquoise"
+                        onClick={(e) => handleInputSubmit(e)}
+                    />
                 </div>
             </div> : <div className="w-min duration-150">
                 <button

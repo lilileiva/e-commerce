@@ -1,7 +1,7 @@
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import camera from "../../assets/camera-img.png";
 
-import { useContext, useEffect } from "react";
 import ProductsLoader from "./ProductsLoader";
 import EditIcon from "../icons/EditIcon";
 import CustomButton from "./CustomButton";
@@ -14,16 +14,19 @@ function ProductsList({ data, status, page, setPage }) {
 
     const { state, dispatch } = useContext(GlobalStateContext);
 
+    const [isAdded, setIsAdded] = useState("")
+
     const addProductToCart = (product) => {
         dispatch({ type: 'ADD_PRODUCT', payload: product });
-        navigate("/cart-detail")
+        setIsAdded(product.id)
+        setTimeout(() => setIsAdded(""), 700)
     };
 
     useEffect(() => {
         window.localStorage.setItem('cart', JSON.stringify(state.cartProducts));
     }, [state])
 
-    const elementsPerPage = 12
+    const elementsPerPage = 24
     const totalPages = page * elementsPerPage;
     const firstPage = totalPages - elementsPerPage;
     const dataPaged = data && status === "success" ? data.slice(firstPage, totalPages) : null;
@@ -42,6 +45,7 @@ function ProductsList({ data, status, page, setPage }) {
                             className="relative z-0 flex flex-col justify-center place-self-center items-center lg:w-56 md:w-52 w-44 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
                             key={product.id}
                         >
+                            {isAdded == product.id && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>}
                             <div className="lg:w-56 md:w-52 w-44">
                                 {userRole === "admin" && <button
                                     className="z-10 text-white pl-[2.5px] bg-turquoise w-6 h-6 rounded-md absolute right-0"

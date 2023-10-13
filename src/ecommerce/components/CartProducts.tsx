@@ -7,22 +7,22 @@ import TrashButton from "./TrashButton";
 function CartProducts() {
 
     const navigate = useNavigate()
-    const { state, dispatch } = useContext(GlobalStateContext);    
-    
-    const addProductToCart = (product) => {        
-        dispatch({ type: 'ADD_PRODUCT', payload: product });        
+    const { state, dispatch } = useContext(GlobalStateContext);
+
+    const addProductToCart = (product) => {
+        dispatch({ type: 'ADD_PRODUCT', payload: product });
     };
 
-    const removeProductToCart = (product) => {        
-        if (product.quantity > 1) dispatch({ type: 'REMOVE_PRODUCT', payload: product });        
+    const removeProductToCart = (product) => {
+        if (product.quantity > 1) dispatch({ type: 'REMOVE_PRODUCT', payload: product });
     };
 
-    const removeAllProducts = (product) => {        
-        dispatch({ type: 'REMOVE_PRODUCT', payload: product });        
-    };    
+    const removeAllProducts = (product) => {
+        dispatch({ type: 'REMOVE_PRODUCT', payload: product });
+    };
 
-    useEffect(() => {        
-        window.localStorage.setItem('cart', JSON.stringify(state.cartProducts));        
+    useEffect(() => {
+        window.localStorage.setItem('cart', JSON.stringify(state.cartProducts));
     }, [state])
 
     const products = state.cartProducts?.sort((a, b) => a.id - b.id);
