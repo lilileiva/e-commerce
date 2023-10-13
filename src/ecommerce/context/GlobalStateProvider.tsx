@@ -3,7 +3,7 @@ import GlobalStateContext from './globalStateContext';
 
 const initialState = {
 	cartProducts: window.localStorage.getItem('cart') ? JSON.parse(window.localStorage.getItem('cart')) : [],
-	currentPage: 0
+	currentPage: 1
 };
 
 const stateReducer = (state, action) => {

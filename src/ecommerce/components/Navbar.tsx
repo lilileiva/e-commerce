@@ -1,5 +1,5 @@
 import '../../index.css'
-import { useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import GlobalStateContext from "../context/globalStateContext";
 
@@ -10,8 +10,8 @@ import UserIcon from '../icons/UserIcon'
 function Navbar() {
 
     let token = window.localStorage.getItem("token");
-
     const location = useLocation()
+    const [search, setSearch] = useState(false);
 
     useEffect(() => {
         token = window.localStorage.getItem("token");
@@ -27,8 +27,10 @@ function Navbar() {
                 <Link to="/" className='font-semibold self-center text-turquoise text-3xl text-center'>
                     MegaMart
                 </Link>
-                <div className='lg:inline-flex md:inline-flex grid grid-cols-3 justify-between align-center lg:gap-10 gap-4'>
-                    <Searchbar />
+                <div className={`align-center lg:gap-10 md:gap-10 gap-4 w-full ${search ? "lg:inline-flex md:inline-flex lg:justify-end md:justify-end flex flex-wrap justify-around" : "lg:inline-flex md:inline-flex lg:justify-end md:justify-end grid grid-cols-3"}`}>
+                    <div className={`${search ? "lg:w-48 md:w-48 w-full" : "lg:w-32 md:w-32 w-14"}`}>
+                        <Searchbar search={search} setSearch={setSearch} />
+                    </div>
                     {token ? <>
                         <Link to="/user/details/" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
                             <UserIcon size='27' />

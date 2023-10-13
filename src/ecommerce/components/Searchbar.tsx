@@ -3,20 +3,19 @@ import { useNavigate, useLocation } from "react-router-dom";
 import SearchIcon from '../icons/SearchIcon';
 import GlobalStateContext from "../context/globalStateContext";
 
-function Searchbar() {
+function Searchbar({search, setSearch}) {
 
     const location = useLocation()
     const navigate = useNavigate()
     const [inputText, setInputText] = useState("");
-    const [search, setSearch] = useState(false);
 
     const { dispatch } = useContext(GlobalStateContext);
-    
+
     const handleInputChange = (e) => {
         setInputText(e.target.value);
     }
 
-    const handleInputSubmit = (e) => {        
+    const handleInputSubmit = (e) => {
         dispatch({ type: 'SET_PAGE', payload: 1 });
         e.preventDefault();
         if (location.search) {
@@ -35,16 +34,16 @@ function Searchbar() {
             navigate(`products/?&title=${inputText}`);
         }
     }
-
-    return (        
+    console.log(search)
+    return (
         <form className={
-            `bg-skyblue px-4 py-2 rounded-xl flex lg:gap-4 md:gap-4 ease-in-out duration-500 overflow-hidden ${search ? "lg:w-52 w-24" : "lg:w-32 w-14"} `
+            `bg-skyblue px-4 py-2 rounded-xl flex lg:gap-4 md:gap-4 ease-in-out duration-500 overflow-hidden ${search ? "lg:w-52 md:w-52 w-full" : "lg:w-32 md:w-32 w-14"} `
         }
             onSubmit={(e) => handleInputSubmit(e)}
             onClick={() => setSearch(true)}
         >
             {search ? (
-                <button type="submit" onSubmit={() => setSearch(false)} onClick={() => setSearch(false)}>
+                <button type="submit" onSubmit={() => setSearch(false)}>
                     <SearchIcon size='27' />
                 </button>
             ) : (
