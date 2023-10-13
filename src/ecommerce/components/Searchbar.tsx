@@ -1,20 +1,23 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import SearchIcon from '../icons/SearchIcon';
+import GlobalStateContext from "../context/globalStateContext";
 
-function Searchbar({ setPage }) {
+function Searchbar() {
 
     const location = useLocation()
     const navigate = useNavigate()
     const [inputText, setInputText] = useState("");
     const [search, setSearch] = useState(false);
 
+    const { dispatch } = useContext(GlobalStateContext);
+    
     const handleInputChange = (e) => {
         setInputText(e.target.value);
     }
 
-    const handleInputSubmit = (e) => {
-        setPage(1)
+    const handleInputSubmit = (e) => {        
+        dispatch({ type: 'SET_PAGE', payload: 1 });
         e.preventDefault();
         if (location.search) {
             let found = false

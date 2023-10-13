@@ -1,9 +1,12 @@
+import { useContext } from "react";
+import GlobalStateContext from "../context/globalStateContext";
 import LeftArrowIcon from "../icons/LeftArrowIcon";
 import RightArrowIcon from "../icons/RightArrowIcon";
 
-function Paging({ listLength, page, elementsPerPage, setPage, setPageTo }) {
+function Paging({ listLength, elementsPerPage }) {
 
-    const currentPage = page
+    const { state, dispatch } = useContext(GlobalStateContext);    
+    const currentPage = state.currentPage
     const pages = []
 
     const createPages = (pages) => {
@@ -13,13 +16,17 @@ function Paging({ listLength, page, elementsPerPage, setPage, setPageTo }) {
     }
     createPages(pages)
 
+    const setPageTo = (page) => {
+        dispatch({ type: 'SET_PAGE', payload: page });
+    }
+
     const getPrevious = () => {
-        if (page > 1) setPage(page - 1)
+        if (currentPage > 1) setPageTo(currentPage - 1 );
         window.scrollTo(0, 0);
     }
 
     const getNext = (pages) => {
-        if (page < pages.length) setPage(page + 1)
+        if (currentPage < pages.length) setPageTo(currentPage + 1 );
         window.scrollTo(0, 0);
     }
 
@@ -29,8 +36,8 @@ function Paging({ listLength, page, elementsPerPage, setPage, setPageTo }) {
     }
 
     let pagesSlice = pages.slice(0, 6)
-    if (page >= 3 && page <= (pages.length - 3)) pagesSlice = pages.slice(page - 3, page + 3)
-    if (page > (pages.length - 3)) pagesSlice = pages.slice(pages.length - 6, pages.length + 3)
+    if (currentPage >= 3 && currentPage <= (pages.length - 3)) pagesSlice = pages.slice(currentPage - 3, currentPage + 3)
+    if (currentPage > (pages.length - 3)) pagesSlice = pages.slice(pages.length - 6, pages.length + 3)
 
     return (
         <>

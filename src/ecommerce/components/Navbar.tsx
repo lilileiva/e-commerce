@@ -7,7 +7,7 @@ import Searchbar from './Searchbar';
 import CartIcon from '../icons/CartIcon'
 import UserIcon from '../icons/UserIcon'
 
-function Navbar({ setPage }) {
+function Navbar() {
 
     let token = window.localStorage.getItem("token");
 
@@ -28,7 +28,7 @@ function Navbar({ setPage }) {
                     MegaMart
                 </Link>
                 <div className='lg:inline-flex md:inline-flex grid grid-cols-3 justify-between align-center lg:gap-10 gap-4'>
-                    <Searchbar setPage={setPage} />
+                    <Searchbar />
                     {token ? <>
                         <Link to="/user/details/" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
                             <UserIcon size='27' />

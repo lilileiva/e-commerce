@@ -8,7 +8,7 @@ import CustomButton from "./CustomButton";
 import GlobalStateContext from "../context/globalStateContext";
 import Paging from "../components/Paging";
 
-function ProductsList({ data, status, page, setPage }) {
+function ProductsList({ data, status }) {
     const navigate = useNavigate()
     const userRole = window.localStorage.getItem("userRole")
 
@@ -27,13 +27,9 @@ function ProductsList({ data, status, page, setPage }) {
     }, [state])
 
     const elementsPerPage = 24
-    const totalPages = page * elementsPerPage;
+    const totalPages = state.currentPage * elementsPerPage;
     const firstPage = totalPages - elementsPerPage;
     const dataPaged = data && status === "success" ? data.slice(firstPage, totalPages) : null;
-
-    const setPageTo = (page) => {
-        setPage(page)
-    }    
 
     return (
         <div className="flex flex-col justify-center w-full items-center">
@@ -87,7 +83,7 @@ function ProductsList({ data, status, page, setPage }) {
             {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center">There are no products</p>}
             {status === 'loading' && <ProductsLoader length="6" />}
             {status === 'error' && <p className="text-center">Error loading products</p>}
-            <Paging listLength={data?.length} page={page} elementsPerPage={elementsPerPage} setPage={setPage} setPageTo={setPageTo} />
+            <Paging listLength={data?.length} elementsPerPage={elementsPerPage} />
         </div>
     );
 }

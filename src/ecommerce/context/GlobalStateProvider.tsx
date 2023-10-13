@@ -2,12 +2,18 @@ import { useReducer } from 'react';
 import GlobalStateContext from './globalStateContext';
 
 const initialState = {
-	cartProducts: window.localStorage.getItem('cart') ? JSON.parse(window.localStorage.getItem('cart')) : []
+	cartProducts: window.localStorage.getItem('cart') ? JSON.parse(window.localStorage.getItem('cart')) : [],
+	currentPage: 0
 };
 
 const stateReducer = (state, action) => {
 	
 	switch (action.type) {
+		case 'SET_PAGE':
+			return {
+				...state,
+				currentPage: action.payload
+			}
 		case 'ADD_PRODUCT':			
 			let productIndex = state.cartProducts.findIndex((p) => p.id === action.payload.id);
 			let products = state.cartProducts.filter((p) => p.id !== action.payload.id);

@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useQuery, useQueryClient } from 'react-query';
 import { CATEGORIES_QUERY_KEY, PRODUCTS_QUERY_KEY } from "../constants"
 import { fetchCategories } from "../services/categories";
 import { useLocation, useNavigate } from "react-router-dom";
+import GlobalStateContext from "../context/globalStateContext";
 
 import CloseIcon from "../icons/CloseIcon";
 import MenuFoldIcon from "../icons/MenuFoldIcon";
@@ -12,6 +13,8 @@ function FilterBar({ setOrder }) {
 
     const location = useLocation()
     const navigate = useNavigate()
+    const queryClient = useQueryClient();
+    const { dispatch } = useContext(GlobalStateContext);
     const [showFilters, setShowFilters] = useState(true)
     const [filter, setFilter] = useState("")
     const [orderValue, setOrderValue] = useState("")
@@ -19,7 +22,6 @@ function FilterBar({ setOrder }) {
     const [minPrice, setMinPrice] = useState("")
     const [maxPrice, setMaxPrice] = useState("")
     const [title, setTitle] = useState("")
-    const queryClient = useQueryClient();
 
     const { data, status } = useQuery(CATEGORIES_QUERY_KEY, fetchCategories)
 
@@ -75,6 +77,7 @@ function FilterBar({ setOrder }) {
         setFilter(category + minPrice + maxPrice)
         setOrder(orderValue)
         queryClient.invalidateQueries([PRODUCTS_QUERY_KEY]);
+        dispatch({ type: 'SET_PAGE', payload: 1 });
         navigate(`/products/?${filter}`)
     }
 

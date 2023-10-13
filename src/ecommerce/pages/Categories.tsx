@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CATEGORIES_QUERY_KEY, PRODUCTS_QUERY_KEY } from "../constants"
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { fetchCategories } from "../services/categories";
 import { fetchProducts } from "../services/products";
+import GlobalStateContext from "../context/globalStateContext";
 
 import CustomButton from "../components/CustomButton";
 import CategoriesList from "../components/CategoriesList";
@@ -12,11 +13,11 @@ import CategoriesList from "../components/CategoriesList";
 function Categories() {
 
     const navigate = useNavigate()
-
     const queryClient = useQueryClient();
+    const userRole = window.localStorage.getItem("userRole")
+    const { dispatch } = useContext(GlobalStateContext);
     const { data, status } = useQuery(CATEGORIES_QUERY_KEY, fetchCategories)
     const [filter, setFilter] = useState(null)
-    const userRole = window.localStorage.getItem("userRole")
 
     const getProductsByCategory = (categoryId) => {
         setFilter(`&categoryId=${categoryId}`)
@@ -25,6 +26,7 @@ function Categories() {
     const mutation = useMutation([PRODUCTS_QUERY_KEY, { filter, order: "" }], () => fetchProducts({ filter, order: "" }), {
         onSuccess: () => {
             queryClient.invalidateQueries([PRODUCTS_QUERY_KEY]);
+            dispatch({ type: 'SET_PAGE', payload: 1 });
             navigate(`/products/?${filter}`)
         }
     })

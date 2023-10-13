@@ -8,7 +8,7 @@ import FilterBar from "../components/FilterBar";
 import CustomButton from "../components/CustomButton";
 import ProductsList from "../components/ProductsList";
 
-function Products({ page, setPage }) {
+function Products() {
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -36,7 +36,7 @@ function Products({ page, setPage }) {
                         {userRole === "admin"
                             && <CustomButton width="w-fit" text="Create product" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick={() => navigate("/products/create")} />}
                     </div>
-                    <ProductsList data={data} status={status} page={page} setPage={setPage} />
+                    <ProductsList data={data} status={status} />
                 </div>
             </div>
         </div>

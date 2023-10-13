@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import GlobalStateContext from "../context/globalStateContext";
 import camera from "../../assets/camera-img.png";
 import TrashButton from "./TrashButton";
+import CustomButton from "./CustomButton";
 
 function CartProducts() {
 
@@ -79,7 +80,15 @@ function CartProducts() {
                     </li>
                 ))
             }
-            {products && products.length == 0 && <p className="w-full text-center">You haven't added any products yet</p>}
+            {products && products.length == 0 && <div className="flex flex-col justify-center gap-10">
+                <p className="w-full text-center">
+                    You haven't added any products yet
+                </p>
+                <CustomButton width="w-fit" text="Add products" bgColor="turquoise" textColor="white" borderColor="turquoise"
+                    onClick={() => navigate("/products")}
+                />
+            </div>
+            }
         </ul>
     );
 }

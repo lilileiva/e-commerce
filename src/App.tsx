@@ -21,17 +21,15 @@ import Checkout from './ecommerce/pages/Checkout'
 import NotFound from './ecommerce/pages/NotFound'
 
 
-function App() {
-
-  const [page, setPage] = useState(1);
+function App() {  
 
   return (
     <div className='px-4 grid grid-rows-[max-content_auto_100px] grid-cols-1 justify-center content-top w-full max-w-6xl h-full'>
       <GlobalStateProvider>
-        <Navbar setPage={setPage} />
+        <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='products/?' element={<Products page={page} setPage={setPage} />} />
+          <Route path='products/?' element={<Products />} />
           <Route path='products/:productId' element={<Product />} />
           <Route path='products/create/' element={<CreateProduct />} />
           <Route path='products/edit/:productId' element={<EditProduct />} />
