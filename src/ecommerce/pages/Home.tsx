@@ -12,6 +12,7 @@ import BannerCarousel from "../components/BannerCarousel";
 import watch_banner from "../../assets/Shop-Products-Social-Media-Banner.png"
 import sale_banner from "../../assets/mega-sale-banner.jpg"
 import balck_friday_banner from "../../assets/black-friday-banner.jpg"
+import RightArrowIcon from "../icons/RightArrowIcon";
 
 function Home() {
 
@@ -33,10 +34,13 @@ function Home() {
                         <p className="text-transparent">-</p>
                         <p className="text-turquoise">offer</p>
                     </p>
-                    <p className="text-md w-fit text-gray-500 cursor-pointer"
-                        onClick={() => navigate("/products")}>
-                        View more
-                    </p>
+                    <div className="flex items-center">
+                        <p className="text-md w-fit text-gray-500 cursor-pointer mr-2"
+                            onClick={() => navigate("/products")}>
+                            View more
+                        </p>
+                        < RightArrowIcon size="18" color="#1ABCFE" />
+                    </div>
                 </div>
                 <ProductsOffers data={products?.data?.slice(0, 4)} status={products?.status} />
             </div>
@@ -47,10 +51,13 @@ function Home() {
                         <p className="text-transparent">-</p>
                         <p className="text-turquoise">categories</p>
                     </p>
-                    <p className="text-md w-fit text-gray-500 cursor-pointer"
-                        onClick={() => navigate("/products")}>
-                        View more
-                    </p>
+                    <div className="flex items-center">
+                        <p className="text-md w-fit text-gray-500 cursor-pointer  mr-2"
+                            onClick={() => navigate("/products")}>
+                            View more
+                        </p>
+                        < RightArrowIcon size="18" color="#1ABCFE" />
+                    </div>
                 </div>
                 <BestCategories data={categories?.data?.slice(0, 4)} status={categories?.status} />
             </div>

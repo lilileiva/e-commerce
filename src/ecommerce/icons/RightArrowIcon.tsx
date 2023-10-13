@@ -1,8 +1,8 @@
-function RightArrowIcon({ size }) {
+function RightArrowIcon({ size, color="#242424" }) {
     return (
         <svg
             viewBox="0 0 24 24"
-            fill="#242424"
+            fill={color}
             height={size}
             width={size}
         >

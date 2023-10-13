@@ -15,6 +15,7 @@ function Product() {
     window.scrollTo(0, 0);
 
     const navigate = useNavigate()
+    const token = window.localStorage.getItem("token");
     const userRole = window.localStorage.getItem("userRole")
     const { productId } = useParams()
     const { data, status } = useQuery([PRODUCT_QUERY_KEY, productId], () => fetchProduct({ productId }))
@@ -24,6 +25,10 @@ function Product() {
     const addProductToCart = (product) => {
         dispatch({ type: 'ADD_PRODUCT', payload: product });
     };
+
+    const purchase = () => {
+        token ? navigate("/checkout") : navigate("/login")
+    }
 
     return (
         <div className="w-full flex justify-center">
@@ -45,7 +50,7 @@ function Product() {
                     <h2 className="text-gray-700 text-3xl">${data.price}</h2>
                     <p className="text-gray-700">{data.description}</p>
                     <p className="text-gray-500">Category: {data.category.name}</p>
-                    <CustomButton width="w-56" text="Buy" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick="" />
+                    <CustomButton width="w-56" text="Buy" bgColor="turquoise" textColor="white" borderColor="turquoise" onClick={() => purchase()} />
                     <CustomButton width="w-56" text="Add to cart" bgColor="white" textColor="turquoise" borderColor="turquoise"
                         onClick={(e) => {
                             e.stopPropagation();
