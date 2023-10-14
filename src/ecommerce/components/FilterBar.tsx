@@ -165,7 +165,7 @@ function FilterBar({ showFilters, setShowFilters, setOrder }) {
                         onClick={(e) => handleInputSubmit(e)}
                     />
                 </div>
-            </div> : <div className="w-min duration-150">
+            </div> : <div className="w-min h-min flex flex-col place-self-center duration-150">
                 <button
                     className="bg-skyblue rounded-md md:p-2 p-[1px]"
                     onClick={() => setShowFilters(true)}>

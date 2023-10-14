@@ -59,7 +59,7 @@
 - View of products and categories
 - Products cart
 - Filter and search products
-- Create, edit and delete products and cateogires (as admin user)
+- Create, edit and delete products and categories (as admin user)
 
 ## How To Use
 
@@ -81,11 +81,9 @@ $ npm run dev
 ## Default users
 - USER:
 e-mail: user@mail.com
-password: user1234
 
 - ADMIN USER:
 e-mail: admin@mail.com
-password: admin1234
 
 ## Acknowledgements
 
