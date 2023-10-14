@@ -36,7 +36,7 @@ function BestCategories({ data, status }) {
                     data && data.length > 0 && status === 'success' && data.map((category) => (
                         <li
                             onClick={() => setFilter(`&categoryId=${category.id}`)}
-                            className="relative z-0 block justify-center items-center lg:w-52 lg:h-52 w-44 h-fit border-white cursor-pointer"
+                            className="relative z-0 block justify-center items-center lg:w-52 lg:h-52 w-44 h-fit border-gray-300 cursor-pointer"
                             key={category.id}
                         >
                             <div className="lg:w-52 lg:h-52 w-46 h-46 overflow-hidden rounded-full border-[1px] hover:border-[1px] hover:border-turquoise">
@@ -47,7 +47,7 @@ function BestCategories({ data, status }) {
                                     onError={(e) => { e.target["src"] = camera }}
                                 />
                             </div>
-                            <p className="w-full bg-white text-gray-700 font-bold capitalize text-center truncate">
+                            <p className="w-full mt-2 bg-white text-gray-600 font-bold capitalize text-center truncate">
                                 {category.name}
                             </p>
                         </li>

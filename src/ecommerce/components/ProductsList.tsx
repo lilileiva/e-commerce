@@ -38,7 +38,7 @@ function ProductsList({ data, status }) {
                     data && data.length > 0 && status === 'success' && dataPaged.map((product) => (
                         <li
                             onClick={() => navigate(`/products/${product.id}`)}
-                            className="relative z-0 flex flex-col justify-center place-self-center items-center lg:w-56 md:w-52 w-44 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
+                            className="relative z-0 flex flex-col justify-center place-self-center items-center lg:w-56 md:w-52 w-44 h-fit rounded-xl border-gray-300 overflow-hidden shadow shadow-slate-300 cursor-pointer border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
                             key={product.id}
                         >
                             {isAdded == product.id && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>}
@@ -60,10 +60,10 @@ function ProductsList({ data, status }) {
                                 />
                             </div>
                             <div className="flex flex-col w-full h-20 justify-center items-center">
-                                <p className="w-5/6 bg-white text-gray-700 font-bold capitalize text-center truncate">
+                                <p className="w-5/6 bg-white text-gray-600 font-bold capitalize text-center truncate">
                                     {product.title}
                                 </p>
-                                <p className="w-5/6 bg-white text-gray-700 capitalize text-center truncate">
+                                <p className="w-5/6 bg-white text-gray-500 capitalize text-center truncate">
                                     {product.category.name}
                                 </p>
                                 <p className="w-5/6 bg-white font-medium text-gray-600 text-center text-lg truncate">
