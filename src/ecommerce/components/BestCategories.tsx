@@ -14,6 +14,7 @@ function BestCategories({ data, status }) {
     const navigate = useNavigate()
     const { dispatch } = useContext(GlobalStateContext);
     const [filter, setFilter] = useState(null)
+    const [length] = useState(5)
 
     const mutation = useMutation([PRODUCTS_QUERY_KEY, { filter, order: "" }], () => fetchProducts({ filter, order: "" }), {
         onSuccess: () => {
@@ -31,17 +32,24 @@ function BestCategories({ data, status }) {
 
     return (
         <div className="flex flex-col gap-10 justify-center w-full items-center">
-            <ul className="flex flex-wrap justify-center gap-6 mt-10 h-full w-full">
+            <ul className={data && data.length > 0 && status === 'success' &&
+                "grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 grid-rows-1 justify-around gap-6 mt-10 h-full w-full"
+            }>
                 {
                     data && data.length > 0 && status === 'success' && data.map((category) => (
                         <li
-                            onClick={() => setFilter(`&categoryId=${category.id}`)}
-                            className="relative z-0 block justify-center items-center lg:w-52 lg:h-52 w-44 h-fit border-gray-300 cursor-pointer"
+                            onClick={() => setFilter(`&categoryId=${category.id}`)}                             
+                            className={`
+                                ${data.indexOf(category) == 4 && "lg:block hidden"}
+                                ${data.indexOf(category) == 3 && "md:block hidden"}
+                                ${data.indexOf(category) == 2 && "sm:block hidden"}
+                                relative z-0 block justify-center items-center place-self-center w-44 h-fit border-gray-300 cursor-pointer
+                            `}                            
                             key={category.id}
                         >
-                            <div className="lg:w-52 lg:h-52 w-46 h-46 overflow-hidden rounded-full border-[1px] hover:border-[1px] hover:border-turquoise">
+                            <div className="overflow-hidden rounded-full border-[1px] hover:border-[1px] hover:border-turquoise">
                                 <img
-                                    className="object-cover aspect-square lg:w-52 lg:h-52 w-46 h-46 shadow shadow-slate-300 border-gray-200"
+                                    className="object-cover aspect-square shadow shadow-slate-300 border-gray-200"
                                     src={category.image}
                                     alt={category.title}
                                     onError={(e) => { e.target["src"] = camera }}
@@ -54,7 +62,7 @@ function BestCategories({ data, status }) {
                     ))
                 }
                 {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center absolute left-0 right-0">There are no categories</p>}
-                {status === 'loading' && <BestCategoriesLoader length="4" />}
+                {status === 'loading' && <BestCategoriesLoader length={length} />}
                 {status === 'error' && <p className="text-center absolute left-0 right-0">Error al cargar las categorías</p>}
             </ul>
         </div>

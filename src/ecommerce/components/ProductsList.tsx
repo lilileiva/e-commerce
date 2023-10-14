@@ -8,7 +8,7 @@ import CustomButton from "./CustomButton";
 import GlobalStateContext from "../context/globalStateContext";
 import Paging from "../components/Paging";
 
-function ProductsList({ data, status }) {
+function ProductsList({ data, status, showFilters }) {
     const navigate = useNavigate()
     const userRole = window.localStorage.getItem("userRole")
 
@@ -30,10 +30,13 @@ function ProductsList({ data, status }) {
     const totalPages = state.currentPage * elementsPerPage;
     const firstPage = totalPages - elementsPerPage;
     const dataPaged = data && status === "success" ? data.slice(firstPage, totalPages) : null;
-
+    
     return (
         <div className="flex flex-col justify-center w-full h-full items-center">
-            <ul className="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-3 grid-cols-2 justify-center gap-6 mt-10 h-full w-full">
+            <ul
+                className={data && data.length > 0 && status === 'success' &&
+                    `grid ${showFilters ? "lg:grid-cols-3" : "lg:grid-cols-4"} md:grid-cols-3 sm:grid-cols-3 grid-cols-2 justify-center gap-6 mt-10 h-full w-full`
+                }>
                 {
                     data && data.length > 0 && status === 'success' && dataPaged.map((product) => (
                         <li
@@ -81,7 +84,7 @@ function ProductsList({ data, status }) {
                 }
             </ul>
             {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center">There are no products</p>}
-            {status === 'loading' && <ProductsLoader length="6" />}
+            {status === 'loading' && <ProductsLoader length="6" showFilters={showFilters} />}
             {status === 'error' && <p className="text-center">Error loading products</p>}
             <Paging listLength={data?.length} elementsPerPage={elementsPerPage} />
         </div>

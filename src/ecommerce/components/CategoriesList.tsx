@@ -11,7 +11,9 @@ function CategoriesList({ data, status, getProductsByCategory }) {
 
     return (
         <>
-            <ul className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 justify-center gap-8 mt-10 pb-2 overflow-y-scroll overflow-x-hidden">
+            <ul className={data && data.length > 0 && status === 'success' &&
+                "grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 justify-center gap-8 mt-10 pb-2 overflow-y-scroll overflow-x-hidden"
+            }>
                 {
                     data && data.length > 0 && data.map((category) => (
                         <li className="flex flex-col justify-center items-center place-self-center w-44 h-fit rounded-xl border-gray-300 overflow-hidden shadow shadow-slate-300 cursor-pointer border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"

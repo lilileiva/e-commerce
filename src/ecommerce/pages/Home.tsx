@@ -47,7 +47,7 @@ function Home() {
                         < RightArrowIcon size="18" color="#1ABCFE" />
                     </div>
                 </div>
-                <ProductsOffers data={products?.data?.slice(0, 4)} status={products?.status} />
+                <ProductsOffers data={products?.data?.slice(0, 5)} status={products?.status} />
             </div>
             <div className="w-full h-fit mt-8">
                 <div className="w-full flex justify-between items-center">
@@ -64,7 +64,7 @@ function Home() {
                         < RightArrowIcon size="18" color="#1ABCFE" />
                     </div>
                 </div>
-                <BestCategories data={categories?.data?.slice(0, 4)} status={categories?.status} />
+                <BestCategories data={categories?.data?.slice(0, 5)} status={categories?.status} />
             </div>
         </div>
     );

@@ -82,7 +82,7 @@ function FilterBar({ showFilters, setShowFilters, setOrder }) {
 
     return (
         <>
-            {showFilters ? <div className="lg:sticky lg:top-8 lg:mb-10 h-80 lg:w-80 w-full flex flex-col justify-top align-left shadow shadow-slate-300 rounded-md p-4 h-fit duration-150">
+            {showFilters ? <div className="lg:sticky lg:top-8 lg:mb-10 mb-4 h-80 lg:w-80 w-full flex flex-col justify-top align-left shadow shadow-slate-300 rounded-md p-4 h-fit duration-150">
                 <div className="flex mb-4 justify-between items-center">
                     <h3 className="font-semibold text-gray-500">Filters</h3>
                     <button onClick={() => setShowFilters(false)}>
