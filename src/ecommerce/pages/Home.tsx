@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ProductsOffers from "../components/ProductsOffers";
 import { fetchProducts } from "../services/products";
@@ -23,6 +24,10 @@ function Home() {
 
     const products = useQuery([PRODUCTS_QUERY_KEY, { filter: location.search, order }], () => fetchProducts({ filter: location.search, order }))
     const categories = useQuery([CATEGORIES_QUERY_KEY], () => fetchCategories())
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location])
 
     return (
         <div>

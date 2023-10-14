@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import './index.css'
 
 import Navbar from './ecommerce/components/Navbar'
+import Footer from './ecommerce/components/Footer'
 import Products from './ecommerce/pages/Products'
 import Product from './ecommerce/pages/Product'
 import Categories from './ecommerce/pages/Categories'
@@ -23,7 +24,7 @@ import NotFound from './ecommerce/pages/NotFound'
 function App() {  
 
   return (
-    <div className='px-4 grid grid-rows-[max-content_auto_100px] grid-cols-1 justify-center content-top w-full max-w-6xl h-full'>
+    <div className='px-4 grid grid-rows-[max-content_auto_180px] grid-cols-1 justify-center content-top w-full max-w-6xl h-full'>
       <GlobalStateProvider>
         <Navbar />
         <Routes>
@@ -43,6 +44,7 @@ function App() {
           <Route path='checkout/successful/' element={<SuccessfulCheckout />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
+        <Footer />
       </GlobalStateProvider>
     </div>
   )

@@ -38,7 +38,7 @@ function CategoriesList({ data, status, getProductsByCategory }) {
                     ))
                 }
             </ul>
-            {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center">There are not products</p>}
+            {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center">There are not categories</p>}
             {status === 'loading' && <CategoriesLoader length="8" />}
             {status === 'error' && <p className="text-center">Error loading categories</p>}
         </>

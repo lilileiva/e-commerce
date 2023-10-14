@@ -14,6 +14,7 @@ function Products() {
     const location = useLocation()
     const [order, setOrder] = useState("")
     const userRole = window.localStorage.getItem("userRole")
+    
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [location])

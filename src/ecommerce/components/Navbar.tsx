@@ -44,7 +44,7 @@ function Navbar() {
                     </>}
                     <Link to="/cart-detail" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
                         <CartIcon size='27' />
-                        Carts
+                        Cart
                         <p className={
                             totalProducts > 0 ? 'px-2 py-[2px] h-fit rounded-full font-semibold text-sm text-white bg-turquoise duration-300' : 'px-2 text-white all-ease-out duration-300'
                         }>

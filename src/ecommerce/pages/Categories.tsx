@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { CATEGORIES_QUERY_KEY, PRODUCTS_QUERY_KEY } from "../constants"
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { fetchCategories } from "../services/categories";
@@ -11,13 +11,18 @@ import CategoriesList from "../components/CategoriesList";
 
 
 function Categories() {
-
+    
     const navigate = useNavigate()
+    const location = useLocation()
     const queryClient = useQueryClient();
     const userRole = window.localStorage.getItem("userRole")
     const { dispatch } = useContext(GlobalStateContext);
     const { data, status } = useQuery(CATEGORIES_QUERY_KEY, fetchCategories)
     const [filter, setFilter] = useState(null)
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location])
 
     const getProductsByCategory = (categoryId) => {
         setFilter(`&categoryId=${categoryId}`)

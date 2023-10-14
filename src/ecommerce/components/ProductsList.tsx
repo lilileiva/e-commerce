@@ -32,7 +32,7 @@ function ProductsList({ data, status }) {
     const dataPaged = data && status === "success" ? data.slice(firstPage, totalPages) : null;
 
     return (
-        <div className="flex flex-col justify-center w-full items-center">
+        <div className="flex flex-col justify-center w-full h-full items-center">
             <ul className="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-3 grid-cols-2 justify-center gap-6 mt-10 h-full w-full">
                 {
                     data && data.length > 0 && status === 'success' && dataPaged.map((product) => (
