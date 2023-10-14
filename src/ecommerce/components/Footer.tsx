@@ -1,7 +1,11 @@
 import '../../index.css'
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import GlobalStateContext from '../context/globalStateContext';
 
 function Footer() {
+
+    const { dispatch } = useContext(GlobalStateContext);
 
     return (
         <div className='h-38 flex flex-col justify-between align-bottom w-full mt-20 mb-2'>
@@ -10,7 +14,7 @@ function Footer() {
                 <Link to="/" className='text-gray-700 text-center flex items-center font-normal lg:text-base w-fit text-sm py-1 px-2 rounded-xl hover:bg-gray-300 duration-75'>
                     Offers
                 </Link>
-                <Link to="/products" className='text-gray-700 text-center flex items-center font-normal lg:text-base w-fit text-sm py-1 px-2 rounded-xl hover:bg-gray-300 duration-75'>
+                <Link to="/products" onClick={() => dispatch({ type: 'SET_PAGE', payload: 1 })} className='text-gray-700 text-center flex items-center font-normal lg:text-base w-fit text-sm py-1 px-2 rounded-xl hover:bg-gray-300 duration-75'>
                     Products
                 </Link>
                 <Link to="/categories" className='text-gray-700 text-center flex items-center font-normal lg:text-base w-fit text-sm py-1 px-2 rounded-xl hover:bg-gray-300 duration-75'>
