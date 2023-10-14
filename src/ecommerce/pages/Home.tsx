@@ -58,7 +58,7 @@ function Home() {
                     </p>
                     <div className="flex items-center">
                         <p className="text-md w-fit text-gray-500 cursor-pointer  mr-2"
-                            onClick={() => navigate("/products")}>
+                            onClick={() => navigate("/categories")}>
                             View more
                         </p>
                         < RightArrowIcon size="18" color="#1ABCFE" />

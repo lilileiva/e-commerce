@@ -78,7 +78,7 @@ export const validateCategoryDetails = (e, inputErrors, setInputErrors) => {
     }
 }
 
-export const validateCard = (e, inputErrors, setInputErrors) => {
+export const validateCard = (e, inputErrors, setInputErrors, expirationMonth, expirationYear, onSubmit=false) => {
     const currentDate = new Date()
     if (e.target.name === "cardNumber") {
         if (!e.target.value.match(/^[0-9]{16}$/)) {
@@ -95,12 +95,17 @@ export const validateCard = (e, inputErrors, setInputErrors) => {
             delete inputErrors["expirationYear"]
         }
     }
-    if (e.target.name === "expirationMonth") {
+    if (expirationMonth == "" && onSubmit) {
+        setInputErrors({ ...inputErrors, expirationMonth: "Select the expiration month" })            
+            return false
+    }
+    if (expirationMonth !== "" && expirationYear !== "") {
         const currentMonth = currentDate.getMonth() + 1
-        console.log(currentMonth)
-        if (e.target.value < currentMonth) {
-            setInputErrors({ ...inputErrors, expirationMonth: "Card is already expired" })
-        } else {
+        const currentYear = currentDate.getFullYear()        
+        if (expirationMonth < currentMonth && currentYear.toString().slice(2) == expirationYear) {
+            setInputErrors({ ...inputErrors, expirationMonth: "Card is already expired" })            
+            return false                        
+        } else {            
             delete inputErrors["expirationMonth"]
         }
     }
