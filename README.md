@@ -33,7 +33,8 @@
 
 ## Overview
 
-![image](https://github.com/lilileiva/e-commerce/assets/94813118/310f9104-6161-4fd3-a542-4063a09d777c)
+![image](https://github.com/lilileiva/e-commerce/assets/94813118/031c72f0-d06e-42a6-ba54-5395168af107)
+
 
 <!-- Introduce your projects by taking a screenshot or a gif. Try to tell visitors a story about your project by answering:
 
