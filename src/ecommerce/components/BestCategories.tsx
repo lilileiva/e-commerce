@@ -28,23 +28,23 @@ function BestCategories({ data, status }) {
 
     return (
         <div className="flex flex-col gap-10 justify-center w-full items-center">
-            <ul className="flex flex-wrap justify-center gap-6 mt-10 h-full w-full">
+            <ul className="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 justify-center lg:gap-6 md:gap-4 gap-2 mt-10 h-full w-full">
                 {
                     data && data.length > 0 && status === 'success' && data.map((category) => (
                         <li
                             onClick={() => setFilter(`&categoryId=${category.id}`)}
-                            className="relative z-0 block justify-center items-center lg:w-52 lg:h-52 w-44 h-fit border-white cursor-pointer"
+                            className="relative z-0 block justify-center place-self-center items-center w-full h-fit border-gray-200 cursor-pointer"
                             key={category.id}
                         >
-                            <div className="lg:w-52 lg:h-52 w-46 h-46 overflow-hidden rounded-full border-[1px] hover:border-[1px] hover:border-turquoise">
+                            <div className="w-full h-full overflow-hidden rounded-full border-[1px] hover:border-[1px] hover:border-turquoise">
                                 <img
-                                    className="object-cover aspect-square lg:w-52 lg:h-52 w-46 h-46 shadow shadow-slate-300 border-gray-200"
+                                    className="object-cover aspect-square w-full shadow shadow-slate-300 border-gray-200"
                                     src={category.image}
                                     alt={category.title}
                                     onError={(e) => { e.target["src"] = camera }}
                                 />
                             </div>
-                            <p className="w-full bg-white text-gray-700 font-bold capitalize text-center truncate">
+                            <p className="w-full bg-white text-gray-800 mt-2 font-bold capitalize text-center truncate">
                                 {category.name}
                             </p>
                         </li>

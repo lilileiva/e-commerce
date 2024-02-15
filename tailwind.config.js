@@ -7,7 +7,7 @@ export default {
   theme: {    
     extend: {
       backgroundColor: {
-        'skyblue': '#E3F7FF',
+        'skyblue': '#edf9ff',
         'turquoise': '#1ABCFE'
       },
       textColor: {
@@ -15,7 +15,7 @@ export default {
       },
       borderColor: {
         'strong-skyblue': '#9AD6F0',
-        'skyblue': '#E3F7FF',
+        'skyblue': '#edf9ff',
         'turquoise': '#1ABCFE'
       },
       screens: {

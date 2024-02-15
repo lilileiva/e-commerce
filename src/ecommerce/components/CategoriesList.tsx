@@ -11,10 +11,10 @@ function CategoriesList({ data, status, getProductsByCategory }) {
 
     return (
         <>
-            <ul className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 justify-center gap-8 mt-10 overflow-y-scroll overflow-x-hidden">
+            <ul className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 justify-center gap-8 mt-10 overflow-hidden">
                 {
                     data && data.length > 0 && data.map((category) => (
-                        <li className="flex flex-col justify-center items-center place-self-center w-44 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
+                        <li className="flex flex-col justify-center items-center place-self-center w-full h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
                             key={category.id}
                             onClick={() => getProductsByCategory(category.id)}>
                             <div className="w-full h-full relative">

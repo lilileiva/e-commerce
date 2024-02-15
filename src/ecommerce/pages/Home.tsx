@@ -28,8 +28,8 @@ function Home() {
         <div>
             <BannerCarousel images={images} />
             <div className="w-full h-fit mt-8">
-                <div className="w-full flex justify-between items-center">
-                    <p className="inline-flex lg:text-xl md:text-lg text-md w-fit text-gray-500 lg:font-medium border-b-2 border-turquoise rounded-b-sm py-1 h-fit">
+                <div className="w-full flex justify-between items-center border-b-[1px] border-gray-200">
+                    <p className="inline-flex lg:text-xl md:text-lg text-md w-fit text-gray-600 lg:font-medium border-b-2 border-turquoise py-1 h-fit">
                         Products in
                         <p className="text-transparent">-</p>
                         <p className="text-turquoise">offer</p>
@@ -42,11 +42,11 @@ function Home() {
                         < RightArrowIcon size="18" color="#1ABCFE" />
                     </div>
                 </div>
-                <ProductsOffers data={products?.data?.slice(0, 4)} status={products?.status} />
+                <ProductsOffers data={products?.data?.slice(0, 10)} status={products?.status} />
             </div>
             <div className="w-full h-fit mt-8">
-                <div className="w-full flex justify-between items-center">
-                    <p className="inline-flex lg:text-xl md:text-lg text-md w-fit text-gray-500 lg:font-medium border-b-2 border-turquoise rounded-b-sm py-1 h-fit">
+                <div className="w-full flex justify-between items-center border-b-[1px] border-gray-200">
+                    <p className="inline-flex lg:text-xl md:text-lg text-md w-fit text-gray-600 lg:font-medium border-b-2 border-turquoise py-1 h-fit">
                         Best
                         <p className="text-transparent">-</p>
                         <p className="text-turquoise">categories</p>
@@ -59,7 +59,7 @@ function Home() {
                         < RightArrowIcon size="18" color="#1ABCFE" />
                     </div>
                 </div>
-                <BestCategories data={categories?.data?.slice(0, 4)} status={categories?.status} />
+                <BestCategories data={categories?.data?.slice(0, 5)} status={categories?.status} />
             </div>
         </div>
     );

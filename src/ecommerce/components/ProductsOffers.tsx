@@ -21,35 +21,35 @@ function ProductsOffers({ data, status }) {
 
     return (
         <div className="flex flex-col gap-10 justify-center w-full items-center">
-            <ul className="flex flex-wrap justify-center gap-6 mt-10 h-full w-full">
+            <ul className="grid grid-rows-2 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 justify-center lg:gap-6 gap-4 mt-10 h-full w-full">
                 {
                     data && data.length > 0 && status === 'success' && data.map((product) => (
                         <li
                             onClick={() => navigate(`/products/${product.id}`)}
-                            className="relative z-0 flex flex-col justify-center items-center lg:w-52 w-44 h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
+                            className="relative z-0 flex flex-col justify-center items-center place-self-center w-full rounded-xl border-gray-200 overflow-hidden shadow shadow-slate-300 cursor-pointer border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
                             key={product.id}
                         >
                             {isAdded == product.id && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>}
-                            <div className="w-52 h-52">
+                            <div className="w-fit">
                                 <img
-                                    className="object-cover w-52 h-52"
+                                    className="object-cover w-fit"
                                     src={product.images[0]}
                                     alt={product.title}
                                     onError={(e) => { e.target["src"] = camera }}
                                 />
                             </div>
-                            <div className="flex flex-col w-full h-20 justify-center items-center">
-                                <p className="w-5/6 bg-white text-gray-700 font-bold capitalize text-center truncate">
+                            <div className="flex flex-col w-full bg-white h-20 justify-center items-center">
+                                <p className="w-5/6 bg-white text-gray-800 font-medium capitalize text-left truncate">
                                     {product.title}
                                 </p>
-                                <p className="w-5/6 bg-white text-gray-700 capitalize text-center truncate">
-                                    {product.category.name}
-                                </p>
-                                <p className="w-5/6 bg-white font-medium text-gray-600 text-center text-lg text-green-400 truncate">
+                                <p className="w-5/6 bg-white font-bold text-gray-600 text-left text-gray-800 truncate">
                                     ${product.price}
                                 </p>
+                                <p className="w-5/6 bg-white font-medium text-gray-600 text-left text-green-500 truncate border-t-[1px] border-gray-200">
+                                    Save - $50
+                                </p>
                             </div>
-                            <CustomButton width="w-fit" text="Add to cart" bgColor="turquoise" textColor="white" borderColor="turquoise"
+                            <CustomButton width="w-11/12" text="Add to cart" bgColor="turquoise" textColor="white" borderColor="turquoise"
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     addProductToCart(product)
