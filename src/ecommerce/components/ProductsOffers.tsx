@@ -18,7 +18,7 @@ function ProductsOffers({ data, status }) {
         setIsAdded(product.id)
         setTimeout(() => setIsAdded(""), 700)
     };
-
+    
     return (
         <div className="flex flex-col gap-10 justify-center w-full items-center">
             <ul className="grid grid-rows-2 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 justify-center lg:gap-6 gap-4 mt-10 h-full w-full">
@@ -59,7 +59,7 @@ function ProductsOffers({ data, status }) {
                     ))
                 }
                 {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center absolute left-0 right-0">There are no products</p>}
-                {status === 'loading' && < ProductsOffersLoader length="4" />}
+                {status === 'loading' && < ProductsOffersLoader length={length} />}
                 {status === 'error' && <p className="text-center absolute left-0 right-0">Error al cargar los productos</p>}
             </ul>
         </div>

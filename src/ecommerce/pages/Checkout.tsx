@@ -9,9 +9,9 @@ function Checkout() {
 
     const token = window.localStorage.getItem("token")
     const cart = window.localStorage.getItem("cart")
-    if (!token && cart == "[]") navigate("")
+    if (!token && cart == "[]") navigate("/")
 
-    const [showBack, setShowBack] = useState(false)
+    const [showBack, setShowBack] = useState(false)    
     const [inputErrors, setInputErrors] = useState({});
     const [purchaseDetails, setPurchaseDetails] = useState({
         cardNumber: "",
@@ -22,7 +22,7 @@ function Checkout() {
     })
 
     const handleInputChange = (e) => {
-        validateCard(e, inputErrors, setInputErrors)
+        validateCard(e, inputErrors, setInputErrors, purchaseDetails.expirationMonth, purchaseDetails.expirationYear)
         if (e.target.name === "cardHolder" && e.target.value != " " && e.target.value.match(/^[a-zA-Z ]+$/)) {
             setPurchaseDetails({
                 ...purchaseDetails,
@@ -39,8 +39,9 @@ function Checkout() {
     }
 
     const handleInputSubmit = (e) => {
-        e.preventDefault()
-        if (Object.keys(inputErrors).length === 0) navigate("/checkout/successful")
+        e.preventDefault()        
+        const validation = validateCard(e, inputErrors, setInputErrors, purchaseDetails.expirationMonth, purchaseDetails.expirationYear, true)        
+        if (validation != false && Object.keys(inputErrors).length === 0) navigate("/checkout/successful")
     }
 
     return (
@@ -93,7 +94,7 @@ function Checkout() {
                             name="expirationMonth"
                             value={purchaseDetails.expirationMonth}
                         >
-                            <option value="month" selected disabled>
+                            <option defaultValue="">
                                 MONTH
                             </option>
                             <option value="01">01</option>

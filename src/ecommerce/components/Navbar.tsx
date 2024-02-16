@@ -10,14 +10,14 @@ import UserIcon from '../icons/UserIcon'
 function Navbar() {
 
     let token = window.localStorage.getItem("token");
-    const location = useLocation()
+    const location = useLocation()    
     const [search, setSearch] = useState(false);
 
     useEffect(() => {
         token = window.localStorage.getItem("token");
     }, [location])
 
-    const { state } = useContext(GlobalStateContext);
+    const { dispatch, state } = useContext(GlobalStateContext);
 
     const totalProducts = state?.cartProducts.reduce((acc, product) => acc + product.quantity, 0);
 
@@ -44,7 +44,7 @@ function Navbar() {
                     </>}
                     <Link to="/cart-detail" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
                         <CartIcon size='27' />
-                        Carts
+                        Cart
                         <p className={
                             totalProducts > 0 ? 'px-2 py-[2px] h-fit rounded-full font-semibold text-sm text-white bg-turquoise duration-300' : 'px-2 text-white all-ease-out duration-300'
                         }>
@@ -58,7 +58,7 @@ function Navbar() {
                 <Link to="/" className='text-gray-700 text-center flex items-center font-normal lg:text-base w-fit text-sm py-1 px-2 bg-slate-100 rounded-xl hover:bg-gray-300 duration-75'>
                     Home
                 </Link>
-                <Link to="/products" className='text-gray-700 text-center flex items-center font-normal lg:text-base w-fit text-sm py-1 px-2 bg-slate-100 rounded-xl hover:bg-gray-300 duration-75'>
+                <Link to="/products" onClick={() => dispatch({ type: 'SET_PAGE', payload: 1 })} className='text-gray-700 text-center flex items-center font-normal lg:text-base w-fit text-sm py-1 px-2 bg-slate-100 rounded-xl hover:bg-gray-300 duration-75'>
                     All products
                 </Link>
                 <Link to="/categories" className='text-gray-700 text-center flex items-center font-normal lg:text-base w-fit text-sm py-1 px-2 bg-slate-100 rounded-xl hover:bg-gray-300 duration-75'>

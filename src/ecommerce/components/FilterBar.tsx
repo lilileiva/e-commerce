@@ -9,13 +9,12 @@ import CloseIcon from "../icons/CloseIcon";
 import MenuFoldIcon from "../icons/MenuFoldIcon";
 import CustomButton from "./CustomButton";
 
-function FilterBar({ setOrder }) {
+function FilterBar({ showFilters, setShowFilters, setOrder }) {
 
     const location = useLocation()
     const navigate = useNavigate()
     const queryClient = useQueryClient();
     const { dispatch } = useContext(GlobalStateContext);
-    const [showFilters, setShowFilters] = useState(true)
     const [filter, setFilter] = useState("")
     const [orderValue, setOrderValue] = useState("")
     const [category, setCategory] = useState("")
@@ -81,12 +80,11 @@ function FilterBar({ setOrder }) {
         navigate(`/products/?${filter}`)
     }
 
-
     return (
         <>
-            {showFilters ? <div className="h-80 lg:w-80 w-full flex flex-col justify-top align-left shadow shadow-slate-300 rounded-md p-4 h-fit duration-150">
+            {showFilters ? <div className="lg:sticky lg:top-8 lg:mb-10 mb-4 h-80 lg:w-80 w-full flex flex-col justify-top align-left shadow shadow-slate-300 rounded-md p-4 h-fit duration-150">
                 <div className="flex mb-4 justify-between items-center">
-                    <h3 className="font-semibold text-gray-400">Filters</h3>
+                    <h3 className="font-semibold text-gray-500">Filters</h3>
                     <button onClick={() => setShowFilters(false)}>
                         <CloseIcon size='25' />
                     </button>
@@ -117,7 +115,7 @@ function FilterBar({ setOrder }) {
                         </select>
                     </div>
                     <div className="flex flex-col mb-6 w-full">
-                        <label htmlFor="categories" className="lg:font-semibold lg:text-lg text-md text-gray-400">
+                        <label htmlFor="categories" className="lg:font-semibold lg:text-lg text-md text-gray-500">
                             Categories
                         </label>
                         <select
@@ -167,7 +165,7 @@ function FilterBar({ setOrder }) {
                         onClick={(e) => handleInputSubmit(e)}
                     />
                 </div>
-            </div> : <div className="w-min duration-150">
+            </div> : <div className="w-min h-min flex flex-col place-self-center duration-150">
                 <button
                     className="bg-skyblue rounded-md md:p-2 p-[1px]"
                     onClick={() => setShowFilters(true)}>

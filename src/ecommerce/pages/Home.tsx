@@ -1,28 +1,34 @@
+import { useEffect, useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import ProductsOffers from "../components/ProductsOffers";
-import { fetchProducts } from "../services/products";
-import { useState } from "react";
-import { CATEGORIES_QUERY_KEY, PRODUCTS_QUERY_KEY } from "../constants";
 import { useQuery } from "react-query";
+import { fetchProducts } from "../services/products";
 import { fetchCategories } from "../services/categories";
+import GlobalStateContext from "../context/globalStateContext";
+import { CATEGORIES_QUERY_KEY, PRODUCTS_QUERY_KEY } from "../constants";
 
 import BestCategories from "../components/BestCategories";
 import BannerCarousel from "../components/BannerCarousel";
+import ProductsOffers from "../components/ProductsOffers";
+import RightArrowIcon from "../icons/RightArrowIcon";
 
 import watch_banner from "../../assets/Shop-Products-Social-Media-Banner.png"
 import sale_banner from "../../assets/mega-sale-banner.jpg"
 import balck_friday_banner from "../../assets/black-friday-banner.jpg"
-import RightArrowIcon from "../icons/RightArrowIcon";
 
 function Home() {
 
     const navigate = useNavigate()
     const location = useLocation()
+    const { dispatch } = useContext(GlobalStateContext);
     const [order] = useState("")
     const images = [watch_banner, sale_banner, balck_friday_banner]
 
     const products = useQuery([PRODUCTS_QUERY_KEY, { filter: location.search, order }], () => fetchProducts({ filter: location.search, order }))
     const categories = useQuery([CATEGORIES_QUERY_KEY], () => fetchCategories())
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location])
 
     return (
         <div>
@@ -36,7 +42,10 @@ function Home() {
                     </p>
                     <div className="flex items-center">
                         <p className="text-md w-fit text-gray-500 cursor-pointer mr-2"
-                            onClick={() => navigate("/products")}>
+                            onClick={() => {
+                                dispatch({ type: 'SET_PAGE', payload: 1 })
+                                navigate("/products")
+                            }}>
                             View more
                         </p>
                         < RightArrowIcon size="18" color="#1ABCFE" />
@@ -53,7 +62,7 @@ function Home() {
                     </p>
                     <div className="flex items-center">
                         <p className="text-md w-fit text-gray-500 cursor-pointer  mr-2"
-                            onClick={() => navigate("/products")}>
+                            onClick={() => navigate("/categories")}>
                             View more
                         </p>
                         < RightArrowIcon size="18" color="#1ABCFE" />

@@ -34,7 +34,7 @@ function Searchbar({search, setSearch}) {
             navigate(`products/?&title=${inputText}`);
         }
     }
-    console.log(search)
+
     return (
         <form className={
             `bg-skyblue px-4 py-2 rounded-xl flex lg:gap-4 md:gap-4 ease-in-out duration-500 overflow-hidden ${search ? "lg:w-52 md:w-52 w-full" : "lg:w-32 md:w-32 w-14"} `

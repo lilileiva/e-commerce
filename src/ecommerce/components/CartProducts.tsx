@@ -33,7 +33,7 @@ function CartProducts() {
             {
                 products && products.length > 0 && products.map((product) => (
                     <li
-                        className="relative z-0 mt-4 grid grid-cols-[100px_auto_60px] w-full h-fit rounded-xl border-white overflow-auto shadow shadow-slate-300 cursor-pointer"
+                        className="relative z-0 mt-4 grid grid-cols-[100px_auto_60px] w-full h-fit rounded-xl border-gray-300 overflow-auto shadow shadow-slate-300 cursor-pointer"
                         key={product.name}
                     >
                         <div className="w-24 h-24">
