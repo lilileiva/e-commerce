@@ -2,7 +2,7 @@ function CloseIcon({size}) {
   return (
     <svg
       viewBox="0 0 512 512"
-      fill="#1ABCFE"
+      fill="turquoise"
       height={size}
       width={size}
     >

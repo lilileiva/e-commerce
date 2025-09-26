@@ -41,44 +41,42 @@ function ProductsList({ data, status, showFilters }) {
                     data && data.length > 0 && status === 'success' && dataPaged.map((product) => (
                         <li
                             onClick={() => navigate(`/products/${product.id}`)}
-                            className="relative z-0 flex flex-col justify-center place-self-center items-center w-full max-w-[250px] h-fit rounded-xl border-gray-200 overflow-hidden shadow shadow-slate-300 cursor-pointer border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
                             key={product.id}
-                        >
+                            className="relative z-0 cursor-pointer rounded-lg shadow-md hover:shadow-xl transition-shadow overflow-hidden group">
                             {isAdded == product.id && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>}
-                            <div className="w-fit">
-                                {userRole === "admin" && <button
-                                    className="z-10 text-white pl-[2.5px] bg-turquoise w-6 h-6 rounded-md absolute right-0"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        navigate(`/products/edit/${product.id}`)
-                                    }}
-                                >
-                                    <EditIcon size='20' />
-                                </button>}
-                                <img
-                                    className="object-cover w-fit"
-                                    src={product.images[0]}
-                                    alt={product.title}
-                                    onError={(e) => { e.target["src"] = camera }}
-                                />
-                            </div>
-                            <div className="flex flex-col w-full h-20 justify-center items-center">
-                                <p className="w-5/6 bg-white text-gray-800 font-bold capitalize text-left truncate">
-                                    {product.title}
-                                </p>
-                                <p className="w-5/6 bg-white text-gray-800 capitalize text-left truncate">
-                                    {product.category.name}
-                                </p>
-                                <p className="w-5/6 bg-white font-bold text-gray-800 text-left truncate">
-                                    ${product.price}
-                                </p>
-                            </div>
-                            <CustomButton width="w-11/12" text="Add to cart" bgColor="turquoise" textColor="white" borderColor="turquoise"
+                            {userRole === "admin" && <button
+                                className="z-10 text-white pl-[2.5px] bg-turquoise w-6 h-6 rounded-md absolute right-0"
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    addProductToCart(product)
+                                    navigate(`/products/edit/${product.id}`)
                                 }}
+                            >
+                                <EditIcon size='20' />
+                            </button>}
+                            <img
+                                className="object-cover w-full h-40"
+                                src={product.images[0]}
+                                alt={product.title}
+                                onError={(e) => { e.target["src"] = camera }}
                             />
+                            <div className="p-4">
+                                <h4 className="font-semibold truncate text-gray-800">
+                                    {product.title}
+
+                                </h4>
+                                <p className="text-lg font-light text-gray-500">
+                                    {product.category.name}
+                                </p>
+                                <p className="text-lg font-bold text-gray-700 mb-2">
+                                    ${product.price}
+                                </p>
+                                <CustomButton width="w-full" text="Add to cart" bgColor="turquoise" textColor="white" borderColor="turquoise"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        addProductToCart(product)
+                                    }}
+                                />
+                            </div>
                         </li>
                     ))
                 }

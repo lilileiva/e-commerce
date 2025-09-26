@@ -18,43 +18,37 @@ function ProductsOffers({ data, status }) {
         setIsAdded(product.id)
         setTimeout(() => setIsAdded(""), 700)
     };
-    
+
     return (
-        <div className="flex flex-col gap-10 justify-center w-full items-center">
-            <ul className="grid grid-rows-2 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 justify-center lg:gap-6 gap-4 mt-10 h-full w-full">
+        <section className="my-12">
+            <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
                 {
                     data && data.length > 0 && status === 'success' && data.map((product) => (
                         <li
                             onClick={() => navigate(`/products/${product.id}`)}
-                            className="relative z-0 flex flex-col justify-center items-center place-self-center w-full rounded-xl border-gray-200 overflow-hidden shadow shadow-slate-300 cursor-pointer border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
                             key={product.id}
-                        >
+                            className="relative z-0 cursor-pointer rounded-lg shadow-md hover:shadow-xl transition-shadow overflow-hidden group">
                             {isAdded == product.id && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>}
-                            <div className="w-fit">
-                                <img
-                                    className="object-cover w-fit"
-                                    src={product.images[0]}
-                                    alt={product.title}
-                                    onError={(e) => { e.target["src"] = camera }}
-                                />
-                            </div>
-                            <div className="flex flex-col w-full bg-white h-20 justify-center items-center">
-                                <p className="w-5/6 bg-white text-gray-800 font-medium capitalize text-left truncate">
-                                    {product.title}
-                                </p>
-                                <p className="w-5/6 bg-white font-bold text-gray-600 text-left text-gray-800 truncate">
-                                    ${product.price}
-                                </p>
-                                <p className="w-5/6 bg-white font-medium text-gray-600 text-left text-green-500 truncate border-t-[1px] border-gray-200">
-                                    Save - $50
-                                </p>
-                            </div>
-                            <CustomButton width="w-11/12" text="Add to cart" bgColor="turquoise" textColor="white" borderColor="turquoise"
+                            <img
+                                className="object-cover w-full h-40"
+                                src={product.images[0]}
+                                alt={product.title}
+                                onError={(e) => { e.target["src"] = camera }}
+                            />
+                            <div className="p-4">
+                                <h4 className="font-semibold truncate text-gray-800">{product.title}</h4>
+                                <div className="flex items-baseline space-x-2 my-2">
+                                    <p className="text-lg font-bold text-gray-600">${product.price}</p>
+                                    <p className="text-sm text-gray-600 line-through">${product.price - (product.price * 15 / 100)}</p>
+                                </div>
+                                <p className="text-xs text-green-600 mb-4">Save ${(product.price * 15 / 100)}</p>
+                                <CustomButton width="w-full" text="Add to cart" bgColor="turquoise" textColor="white" borderColor="turquoise"
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     addProductToCart(product)
                                 }}
                             />
+                            </div>
                         </li>
                     ))
                 }
@@ -62,7 +56,7 @@ function ProductsOffers({ data, status }) {
                 {status === 'loading' && < ProductsOffersLoader length={length} />}
                 {status === 'error' && <p className="text-center absolute left-0 right-0">Error al cargar los productos</p>}
             </ul>
-        </div>
+        </section>
     );
 }
 

@@ -1,56 +1,77 @@
 import '../../index.css'
-import { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import GlobalStateContext from '../context/globalStateContext';
 
 function Footer() {
 
-    const { dispatch } = useContext(GlobalStateContext);
-
     return (
-        <div className='h-38 flex flex-col justify-between align-bottom w-full mt-20 mb-2'>
-            <hr className='border-gray-200 mt-4' />
-            <div className='flex flex-wrap justify-between px-4'>
-                <Link to="/" className='text-gray-700 text-center flex items-center font-normal lg:text-base w-fit text-sm py-1 px-2 rounded-xl hover:bg-gray-300 duration-75'>
-                    Offers
-                </Link>
-                <Link to="/products" onClick={() => dispatch({ type: 'SET_PAGE', payload: 1 })} className='text-gray-700 text-center flex items-center font-normal lg:text-base w-fit text-sm py-1 px-2 rounded-xl hover:bg-gray-300 duration-75'>
-                    Products
-                </Link>
-                <Link to="/categories" className='text-gray-700 text-center flex items-center font-normal lg:text-base w-fit text-sm py-1 px-2 rounded-xl hover:bg-gray-300 duration-75'>
-                    Categories
-                </Link>
-                <Link to="/cart-detail" className='text-gray-700 text-center flex items-center font-normal lg:text-base w-fit text-sm py-1 px-2 rounded-xl hover:bg-gray-300 duration-75'>
-                    Cart
-                </Link>
+        <footer className="bg-card-light border-t border-gray-200">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+                    <div className="col-span-2 md:col-span-1">
+                        <h1 className="text-2xl font-bold text-turquoise mb-2">MegaMart</h1>
+                        <p className="text-sm text-gray-700">Your one-stop shop for everything you need.</p>
+                    </div>
+                    <div>
+                        <h4 className="font-semibold mb-3 text-gray-700">Offers</h4>
+                        <ul className="space-y-2 text-sm text-subtext-light">
+                            <li><a className="text-gray-700" href="#">Best Deals</a></li>
+                            <li><a className="text-gray-700" href="#">New Arrivals</a></li>
+                            <li><a className="text-gray-700" href="#">Clearance</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 className="font-semibold mb-3 text-gray-700">Products</h4>
+                        <ul className="space-y-2 text-sm text-subtext-light dark:text-subtext-dark">
+                            <li><a className="text-gray-700" href="#">Electronics</a></li>
+                            <li><a className="text-gray-700" href="#">Apparel</a></li>
+                            <li><a className="text-gray-700" href="#">Home Goods</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 className="font-semibold mb-3 text-gray-700">Categories</h4>
+                        <ul className="space-y-2 text-sm text-subtext-light dark:text-subtext-dark">
+                            <li><a className="text-gray-700" href="#">Men</a></li>
+                            <li><a className="text-gray-700" href="#">Women</a></li>
+                            <li><a className="text-gray-700" href="#">Kids</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 className="font-semibold mb-3 text-gray-700">Support</h4>
+                        <ul className="space-y-2 text-sm text-subtext-light dark:text-subtext-dark">
+                            <li>
+                                <a
+                                    href="https://www.linkedin.com/in/lilianaleiva/"
+                                    target='blank'
+                                    className="text-gray-700"
+                                >
+                                    LinkedIn
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://github.com/lilileiva"
+                                    target='blank'
+                                    className="text-gray-700"
+                                >
+                                    Github
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://lilianaleiva.vercel.app"
+                                    target='blank'
+                                    className="text-gray-700"
+                                >
+                                    Portfolio
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm text-gray-700">
+                    <p>© 2024 MegaMart. All Rights Reserved.</p>
+                </div>
             </div>
-            <div className='w-full px-2 flex flex-row justify-between items-center h-12 w-full rounded-xl bg-gray-100'>
-                <a
-                    href="https://www.linkedin.com/in/lilianaleiva/"
-                    target='blank'
-                    className='text-gray-700 text-center flex items-center font-normal lg:text-base w-fit text-sm px-2 py-1 h-fit rounded-xl hover:bg-gray-300 duration-75'
-                >
-                    LinkedIn
-                </a>
-                <a
-                    href="https://github.com/lilileiva"
-                    target='blank'
-                    className='text-gray-700 text-center flex items-center font-normal lg:text-base w-fit text-sm px-2 py-1 h-fit rounded-xl hover:bg-gray-300 duration-75'
-                >
-                    Github
-                </a>
-                <a
-                    href="https://lilianaleiva.vercel.app"
-                    target='blank'
-                    className='text-gray-700 text-center flex items-center font-normal lg:text-base w-fit text-sm px-2 py-1 h-fit rounded-xl hover:bg-gray-300 duration-75'
-                >
-                    Portfolio
-                </a>
-            </div>
-            <Link to="/" className='font-semibold self-center text-turquoise text-xl text-center'>
-                MegaMart
-            </Link>
-        </div>
+        </footer>
     );
 }
 

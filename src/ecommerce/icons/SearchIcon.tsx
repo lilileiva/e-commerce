@@ -2,7 +2,7 @@ function SearchIcon({size}) {
   return (
     <svg
       fill="none"
-      stroke="#1ABCFE"
+      stroke="#66bfe2ff"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}

@@ -2,7 +2,7 @@ function MenuFoldIcon({size}) {
   return (
     <svg
       viewBox="0 0 1024 1024"
-      fill="#1ABCFE"
+      fill="turquoise"
       height={size}
       width={size}
     >

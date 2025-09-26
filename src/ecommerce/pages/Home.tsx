@@ -48,7 +48,7 @@ function Home() {
                             }}>
                             View more
                         </p>
-                        < RightArrowIcon size="18" color="#1ABCFE" />
+                        < RightArrowIcon size="18" color="turquoise" />
                     </div>
                 </div>
                 <ProductsOffers data={products?.data?.slice(0, 10)} status={products?.status} />
@@ -65,7 +65,7 @@ function Home() {
                             onClick={() => navigate("/categories")}>
                             View more
                         </p>
-                        < RightArrowIcon size="18" color="#1ABCFE" />
+                        < RightArrowIcon size="18" color="turquoise" />
                     </div>
                 </div>
                 <BestCategories data={categories?.data?.slice(0, 5)} status={categories?.status} />

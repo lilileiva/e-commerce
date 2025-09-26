@@ -23,7 +23,7 @@ function Products() {
     const { data, status } = useQuery([PRODUCTS_QUERY_KEY, { filter: location.search, order }], () => fetchProducts({ filter: location.search, order }))
 
     return (
-        <div className="flex flex-col justify-top content-center w-full h-fit">
+        <div className="flex flex-col justify-top content-center w-full h-fit mb-12">
             <div className={`grid h-full w-full lg:gap-x-10 gap-x-4 ${showFilters ? "lg:grid-cols-[320px_auto] grid-row-1" : "grid-row-1 gap-0"}`}>
                 <div className="inline-flex w-full">
                     <FilterBar showFilters={showFilters} setShowFilters={setShowFilters} setOrder={setOrder} />

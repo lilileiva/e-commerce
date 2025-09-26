@@ -46,7 +46,7 @@ function Paging({ listLength, elementsPerPage }) {
                     <div className="mt-10">
                         <div className='w-fit flex flex-row gap-4'>
                             <button className="p-2 bg-gray-100 hover:bg-gray-300 rounded-md duration-200" onClick={() => getPrevious()}>
-                                <LeftArrowIcon size='20' color="#1ABCFE" />
+                                <LeftArrowIcon size='20' color="turquoise" />
                             </button>
                             {pagesSlice.map(page => (
                                 <a className={
@@ -56,7 +56,7 @@ function Paging({ listLength, elementsPerPage }) {
                                     onClick={() => setPageNumber(page)}>{page}</a>
                             ))}
                             <button className="p-2 bg-gray-100 hover:bg-gray-300 rounded-md duration-200" onClick={() => getNext(pages)}>
-                                <RightArrowIcon size='20' color="#1ABCFE" />
+                                <RightArrowIcon size='20' color="turquoise" />
                             </button>
                         </div>
                     </div >

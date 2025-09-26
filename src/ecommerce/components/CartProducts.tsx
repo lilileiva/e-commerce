@@ -71,7 +71,7 @@ function CartProducts() {
                             </p>
                         </div>
                         <div className="w-fit flex items-center justify-center">
-                            <TrashButton width="fit" bgColor="white" color="#1ABCFE" borderColor="turquoise"
+                            <TrashButton width="fit" bgColor="white" color="turquoise" borderColor="turquoise"
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     removeAllProducts(product)

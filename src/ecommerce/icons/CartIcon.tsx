@@ -2,7 +2,7 @@ function CartIcon({size}) {
   return (
     <svg
       viewBox="0 0 24 24"
-      fill="#1ABCFE"
+      fill="#66bfe2ff"
       height={size}
       width={size}
     >

@@ -31,26 +31,24 @@ function BestCategories({ data, status }) {
     }, [filter])
 
     return (
-        <div className="flex flex-col gap-10 justify-center w-full items-center">
-            <ul className="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 justify-center lg:gap-6 md:gap-4 gap-2 mt-10 h-full w-full">
+        <section className="my-12">
+            <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 text-center">
                 {
                     data && data.length > 0 && status === 'success' && data.map((category) => (
                         <li
                             onClick={() => setFilter(`&categoryId=${category.id}`)}
-                            className="relative z-0 block justify-center place-self-center items-center w-full h-fit border-gray-200 cursor-pointer"
+                            className="group"
                             key={category.id}
                         >
-                            <div className="w-full h-full overflow-hidden rounded-full border-[1px] hover:border-[1px] hover:border-turquoise">
+                            <div className="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-lg transform group-hover:scale-105 transition-transform">
                                 <img
-                                    className="object-cover aspect-square w-full shadow shadow-slate-300 border-gray-200"
+                                    className="object-cover h-full w-full"
                                     src={category.image}
                                     alt={category.title}
                                     onError={(e) => { e.target["src"] = camera }}
                                 />
                             </div>
-                            <p className="w-full bg-white text-gray-800 mt-2 font-bold capitalize text-center truncate">
-                                {category.name}
-                            </p>
+                            <p className="mt-4 font-semibold text-gray-700">{category.name}</p>
                         </li>
                     ))
                 }
@@ -58,7 +56,7 @@ function BestCategories({ data, status }) {
                 {status === 'loading' && <BestCategoriesLoader length={length} />}
                 {status === 'error' && <p className="text-center absolute left-0 right-0">Error al cargar las categorías</p>}
             </ul>
-        </div>
+        </section>
     );
 }
 

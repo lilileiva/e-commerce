@@ -2,7 +2,7 @@ function UserIcon({size}) {
     return (
       <svg
         viewBox="0 0 1024 1024"
-        fill="#1ABCFE"
+        fill="#66bfe2ff"
         height={size}
         width={size}
       >
