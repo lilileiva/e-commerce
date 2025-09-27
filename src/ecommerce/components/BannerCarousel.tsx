@@ -37,22 +37,22 @@ function BannerCarousel({ images }) {
             </div>
             {images.length > 1 && <div className="w-full flex justify-between absolute">
                 <button
-                    className="z-10 h-16 w-16 ml-2 mr-20 bg-skyblue cursor-pointer rounded-full shadow hover:bg-gray-300 duration-200 flex justify-center items-center"
+                    className="z-10 h-16 w-16 ml-2 mr-20 bg-gray-300 opacity-50 cursor-pointer rounded-full shadow hover:bg-gray-200 duration-200 flex justify-center items-center"
                     onClick={(e) => {
                         e.stopPropagation()
                         prevImage()
                     }}
                 >
-                    <LeftArrowIcon size='20' color="#24BFFE" />
+                    <LeftArrowIcon size='20' color="#242424" />
                 </button>
                 <button
-                    className="z-10 h-16 w-16 mr-2 bg-skyblue cursor-pointer rounded-full shadow hover:bg-gray-300 duration-200 flex justify-center items-center"
+                    className="z-10 h-16 w-16 mr-2 bg-gray-300 opacity-50 cursor-pointer rounded-full shadow hover:bg-gray-200 duration-200 flex justify-center items-center"
                     onClick={(e) => {
                         e.stopPropagation()
                         nextImage()
                     }}
                 >
-                    <RightArrowIcon size='20' color="#24BFFE" />
+                    <RightArrowIcon size='20' color="#242424" />
                 </button>
             </div>}
             <ul className="flex w-full h-full gap-2 justify-center items-end mb-4 opacity-50 rounded-md absolute right-0 left-0">

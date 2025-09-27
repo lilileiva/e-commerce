@@ -10,7 +10,7 @@ import UserIcon from '../icons/UserIcon'
 function Navbar() {
 
     let token = window.localStorage.getItem("token");
-    const location = useLocation()    
+    const location = useLocation()
     const [search, setSearch] = useState(false);
 
     useEffect(() => {
@@ -42,11 +42,11 @@ function Navbar() {
                             Sign in / Sign up
                         </Link>
                     </>}
-                    <Link to="/cart-detail" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
+                    <Link to="/cart-detail" className='inline-flex justify-center items-center gap-2 text-center text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
                         <CartIcon size='27' />
                         Cart
                         <p className={
-                            totalProducts > 0 ? 'px-2 py-[2px] h-fit rounded-full font-semibold text-sm text-white bg-turquoise duration-300' : 'px-2 text-white all-ease-out duration-300'
+                            totalProducts > 0 ? 'px-2 py-[2px] h-fit rounded-full font-semibold text-sm text-white bg-turquoise duration-' : 'px-2 text-white all-ease-out duration-300'
                         }>
                             {totalProducts}
                         </p>

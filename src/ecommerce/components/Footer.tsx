@@ -3,7 +3,7 @@ import '../../index.css'
 function Footer() {
 
     return (
-        <footer className="bg-card-light border-t border-gray-200">
+        <footer className="bg-card-light border-t border-gray-200 mt-12">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
                     <div className="col-span-2 md:col-span-1">

@@ -11,7 +11,7 @@ function ProductsOffers({ data, status }) {
     const navigate = useNavigate()
     const { dispatch } = useContext(GlobalStateContext);
 
-    const [isAdded, setIsAdded] = useState("")
+    const [isAdded, setIsAdded] = useState("");
 
     const addProductToCart = (product) => {
         dispatch({ type: 'ADD_PRODUCT', payload: product });
@@ -38,22 +38,22 @@ function ProductsOffers({ data, status }) {
                             <div className="p-4">
                                 <h4 className="font-semibold truncate text-gray-800">{product.title}</h4>
                                 <div className="flex items-baseline space-x-2 my-2">
-                                    <p className="text-lg font-bold text-gray-600">${product.price}</p>
+                                    <p className="text-lg font-bold text-gray-800">${product.price}</p>
                                     <p className="text-sm text-gray-600 line-through">${product.price - (product.price * 15 / 100)}</p>
                                 </div>
                                 <p className="text-xs text-green-600 mb-4">Save ${(product.price * 15 / 100)}</p>
                                 <CustomButton width="w-full" text="Add to cart" bgColor="turquoise" textColor="white" borderColor="turquoise"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    addProductToCart(product)
-                                }}
-                            />
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        addProductToCart(product)
+                                    }}
+                                />
                             </div>
                         </li>
                     ))
                 }
                 {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center absolute left-0 right-0">There are no products</p>}
-                {status === 'loading' && < ProductsOffersLoader length={length} />}
+                {status === 'loading' && < ProductsOffersLoader />}
                 {status === 'error' && <p className="text-center absolute left-0 right-0">Error al cargar los productos</p>}
             </ul>
         </section>

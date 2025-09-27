@@ -19,7 +19,8 @@ export const loginUser = async ({ email, password }: loginUserProps) => {
             })
         })
         if (!response.ok) {
-            throw new Error("Error HTTP: " + response.status);
+            console.error("Error HTTP: " + response.status);
+            return response;
         }
         return response
     } catch (error) {

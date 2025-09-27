@@ -4,7 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}"
   ],
-  theme: {    
+  theme: {
     extend: {
       backgroundColor: {
         'skyblue': '#edf9ff',
@@ -20,11 +20,11 @@ export default {
       },
       screens: {
         '2sm': '5px',
-      },   
+      },
       keyframes: {
         cardFlip: {
-          '0%': {transform: 'rotateY(-180deg)'},
-          '100%': {transform: 'rotateY(0deg)'}          
+          '0%': { transform: 'rotateY(-180deg)' },
+          '100%': { transform: 'rotateY(0deg)' }
         }
       },
       animation: {

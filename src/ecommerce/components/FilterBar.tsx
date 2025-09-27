@@ -96,10 +96,10 @@ function FilterBar({ showFilters, setShowFilters, setOrder }) {
                         </label>
                         <select
                             name="order"
-                            className="w-full h-6 rounded-sm cursor-pointer border-[1px] border-gray-200 text-gray-500 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"
+                            className="w-full h-6 rounded-sm cursor-pointer border-[1px] border-gray-200 text-gray-400 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"
                             onChange={(e) => handleInputChange(e)}
                         >
-                            <option value="" selected disabled>-----</option>
+                            <option value="" selected disabled>No order</option>
                             <option value="title_asc">
                                 Alphabetically: A to Z
                             </option>
@@ -123,8 +123,8 @@ function FilterBar({ showFilters, setShowFilters, setOrder }) {
                             className="w-full h-6 rounded-sm cursor-pointer border-[1px] border-gray-200 text-gray-400 hover:border-strong-skyblue focus:border-strong-skyblue focus:outline-none"
                             onChange={(e) => handleInputChange(e)}
                         >
-                            <option defaultValue="" disabled>
-                                All categorías
+                            <option defaultValue="" selected disabled>
+                                All categories
                             </option>
                             {
                                 data && status == "success" && data.map((category) => (

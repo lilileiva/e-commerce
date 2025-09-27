@@ -7,7 +7,7 @@ export const validateRegister = (e, inputErrors, setInputErrors) => {
         }
     }
     if (e.target.name === "email") {
-        let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;        
+        let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if (!e.target.value.match(emailRegex)) {
             return setInputErrors({ ...inputErrors, email: "Email is not valid" })
         } else {
@@ -15,8 +15,8 @@ export const validateRegister = (e, inputErrors, setInputErrors) => {
         }
     }
     if (e.target.name === "password") {
-        if (e.target.value.length < 4) {
-            setInputErrors({ ...inputErrors, password: "Password must have at least 4 characters" })
+        if (e.target.value.length < 6) {
+            setInputErrors({ ...inputErrors, password: "Password must have at least 6 characters" })
         } else {
             delete inputErrors["password"]
         }
@@ -78,7 +78,7 @@ export const validateCategoryDetails = (e, inputErrors, setInputErrors) => {
     }
 }
 
-export const validateCard = (e, inputErrors, setInputErrors, expirationMonth, expirationYear, onSubmit=false) => {
+export const validateCard = (e, inputErrors, setInputErrors, expirationMonth, expirationYear, onSubmit = false) => {
     const currentDate = new Date()
     if (e.target.name === "cardNumber") {
         if (!e.target.value.match(/^[0-9]{16}$/)) {
@@ -96,16 +96,16 @@ export const validateCard = (e, inputErrors, setInputErrors, expirationMonth, ex
         }
     }
     if (expirationMonth == "" && onSubmit) {
-        setInputErrors({ ...inputErrors, expirationMonth: "Select the expiration month" })            
-            return false
+        setInputErrors({ ...inputErrors, expirationMonth: "Select the expiration month" })
+        return false
     }
     if (expirationMonth !== "" && expirationYear !== "") {
         const currentMonth = currentDate.getMonth() + 1
-        const currentYear = currentDate.getFullYear()        
+        const currentYear = currentDate.getFullYear()
         if (expirationMonth < currentMonth && currentYear.toString().slice(2) == expirationYear) {
-            setInputErrors({ ...inputErrors, expirationMonth: "Card is already expired" })            
-            return false                        
-        } else {            
+            setInputErrors({ ...inputErrors, expirationMonth: "Card is already expired" })
+            return false
+        } else {
             delete inputErrors["expirationMonth"]
         }
     }

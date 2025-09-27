@@ -5,7 +5,7 @@ import RightArrowIcon from "../icons/RightArrowIcon";
 
 function Paging({ listLength, elementsPerPage }) {
 
-    const { state, dispatch } = useContext(GlobalStateContext);    
+    const { state, dispatch } = useContext(GlobalStateContext);
     const currentPage = state.currentPage
     const pages = []
 
@@ -21,12 +21,12 @@ function Paging({ listLength, elementsPerPage }) {
     }
 
     const getPrevious = () => {
-        if (currentPage > 1) setPageTo(currentPage - 1 );
+        if (currentPage > 1) setPageTo(currentPage - 1);
         window.scrollTo(0, 0);
     }
 
     const getNext = (pages) => {
-        if (currentPage < pages.length) setPageTo(currentPage + 1 );
+        if (currentPage < pages.length) setPageTo(currentPage + 1);
         window.scrollTo(0, 0);
     }
 
@@ -46,17 +46,17 @@ function Paging({ listLength, elementsPerPage }) {
                     <div className="mt-10">
                         <div className='w-fit flex flex-row gap-4'>
                             <button className="p-2 bg-gray-100 hover:bg-gray-300 rounded-md duration-200" onClick={() => getPrevious()}>
-                                <LeftArrowIcon size='20' color="turquoise" />
+                                <LeftArrowIcon size='20' color="gray" />
                             </button>
                             {pagesSlice.map(page => (
                                 <a className={
-                                    `hover:bg-gray-300 w-8 rounded-md flex justify-center items-center cursor-pointer duration-200 ${currentPage === page ? "bg-gray-300" : "bg-gray-100"}`
+                                    `hover:bg-gray-300 w-8 text-gray-500 rounded-md flex justify-center items-center cursor-pointer duration-200 ${currentPage === page ? "bg-gray-300" : "bg-gray-100"}`
                                 }
                                     key={page}
                                     onClick={() => setPageNumber(page)}>{page}</a>
                             ))}
                             <button className="p-2 bg-gray-100 hover:bg-gray-300 rounded-md duration-200" onClick={() => getNext(pages)}>
-                                <RightArrowIcon size='20' color="turquoise" />
+                                <RightArrowIcon size='20' color="gray" />
                             </button>
                         </div>
                     </div >

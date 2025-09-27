@@ -18,7 +18,7 @@ function Register() {
     const [isRegistered, setIsRegistered] = useState(false)
     const token = window.localStorage.getItem("token");
 
-    const handleInputChange = (e) => {        
+    const handleInputChange = (e) => {
         if (e.target.name === "name") {
             validateRegister(e, inputErrors, setInputErrors)
             setName(e.target.value);
@@ -35,13 +35,17 @@ function Register() {
 
     const register = async () => {
         try {
-            const response = await createUser({ name, email, password })
+            const response = await createUser({ name, email, password });
+            console.log(response)
             if (response != undefined && response.status === 201) {
                 setMessage("Account created successfully. Sign in.")
                 setIsRegistered(false)
+            } else if (response != undefined && response.status === 400) {
+                setError("Error trying to sign up. Verify your data.")
+                setIsRegistered(false)
             } else {
                 setIsRegistered(false)
-                setError("Could not sign up. Verify data is valid.")
+                setError("Error trying to sign up")
             }
         } catch (error) {
             setIsRegistered(false)
@@ -51,18 +55,9 @@ function Register() {
 
     const handleInputSubmit = async (e) => {
         e.preventDefault();
-        // let checkEmail = await checkAvailableEmail({ email })        
-        // if (checkEmail["isAvailable"] == false) {
-        //     setInputErrors({ ...inputErrors, email: "Email already in use" })
-        // } else {
-        //     if (Object.keys(inputErrors).length === 0) {
-        //         setIsRegistered(true)
-        //         register();
-        //     }
-        // }
         if (Object.keys(inputErrors).length === 0) {
             setIsRegistered(true)
-            register();
+            await register();
         }
     }
 
@@ -127,7 +122,7 @@ function Register() {
                             className="text-turquoise w-72 mt-2 border-[1px] border-turquoise p-2 rounded-md bg-white cursor-pointer hover:bg-turquoise hover:text-white transition duration-150 ease-out hover:ease-in">
                             Sign in
                         </button>
-                        {message && <p className="mt-4 text-green-500 font-semibold text-center w-72">{message}</p>}
+                        {message && <p className="mt-4 text-green-500 text-center w-72">{message}</p>}
                         {error && <p className="mt-4 text-gray-500 text-center w-72">{error}</p>}
                     </>
                 }

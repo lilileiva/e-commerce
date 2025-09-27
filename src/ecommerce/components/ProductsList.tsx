@@ -30,13 +30,12 @@ function ProductsList({ data, status, showFilters }) {
     const totalPages = state.currentPage * elementsPerPage;
     const firstPage = totalPages - elementsPerPage;
     const dataPaged = data && status === "success" ? data.slice(firstPage, totalPages) : null;
-    
+
     return (
-        <div className="flex flex-col justify-center w-full h-full items-center">
+        <div className="flex flex-col items-center w-full">
             <ul
-                className={data && data.length > 0 && status === 'success' &&
-                    `grid ${showFilters ? "lg:grid-cols-3" : "lg:grid-cols-4"} md:grid-cols-3 sm:grid-cols-3 grid-cols-2 justify-center lg:gap-6 md:gap-4 gap-2 mt-10 h-full w-full`
-                }>
+                className={`grid ${showFilters ? "lg:grid-cols-3" : "lg:grid-cols-4"} md:grid-cols-3 sm:grid-cols-3 grid-cols-2 lg:gap-6 md:gap-4 gap-2 mt-10 w-full`}
+            >
                 {
                     data && data.length > 0 && status === 'success' && dataPaged.map((product) => (
                         <li
@@ -64,10 +63,10 @@ function ProductsList({ data, status, showFilters }) {
                                     {product.title}
 
                                 </h4>
-                                <p className="text-lg font-light text-gray-500">
+                                <p className="text-md text-gray-500">
                                     {product.category.name}
                                 </p>
-                                <p className="text-lg font-bold text-gray-700 mb-2">
+                                <p className="text-lg font-bold text-gray-800 my-2">
                                     ${product.price}
                                 </p>
                                 <CustomButton width="w-full" text="Add to cart" bgColor="turquoise" textColor="white" borderColor="turquoise"
@@ -80,10 +79,11 @@ function ProductsList({ data, status, showFilters }) {
                         </li>
                     ))
                 }
+                {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center">There are no products</p>}
+                {status === 'loading' && <ProductsLoader />}
+                {status === 'error' && <p className="text-center">Error loading products</p>}
+
             </ul>
-            {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center">There are no products</p>}
-            {status === 'loading' && <ProductsLoader length="6" showFilters={showFilters} />}
-            {status === 'error' && <p className="text-center">Error loading products</p>}
             <Paging listLength={data?.length} elementsPerPage={elementsPerPage} />
         </div>
     );

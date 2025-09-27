@@ -33,7 +33,7 @@ function Product() {
     }
 
     return (
-        <div className="w-full flex justify-center">
+        <div className="w-full flex justify-center mb-24">
             {data && status === 'success' && <div className="w-10/12 flex justify-center lg:gap-8 gap-2 grid lg:grid-cols-2 grid-cols-1">
                 <Carousel data={data} />
                 <div className="flex flex-col gap-4 mt-6">

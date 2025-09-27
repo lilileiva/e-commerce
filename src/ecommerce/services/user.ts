@@ -2,12 +2,12 @@ import { baseUrl } from "../constants"
 
 export const getUsers = async () => {
     try {
-        const response = await fetch(`${baseUrl}/users/`)            
+        const response = await fetch(`${baseUrl}/users/`)
         if (!response.ok) {
             throw new Error("Error HTTP: " + response.status);
         }
         const users = await response.json()
-        return users        
+        return users
     } catch (error) {
         console.error('Error fetching API data:', error);
     }
@@ -19,11 +19,11 @@ interface getUserProps {
 
 export const getUser = async ({ email }: getUserProps) => {
     try {
-        const response = await fetch(`${baseUrl}/users/`)            
+        const response = await fetch(`${baseUrl}/users/`)
         if (!response.ok) {
             throw new Error("Error HTTP: " + response.status);
         }
-        const users = await response.json()        
+        const users = await response.json()
         return users.find((user) => user.email === email)
     } catch (error) {
         console.error('Error fetching API data:', error);
@@ -52,7 +52,8 @@ export const createUser = async ({ name, email, password }: createUserProps) => 
             })
         })
         if (!response.ok) {
-            throw new Error("Error HTTP: " + response.status);
+            console.log("Error HTTP: " + response.status);
+            return response;
         }
         return response
     } catch (error) {
@@ -61,7 +62,7 @@ export const createUser = async ({ name, email, password }: createUserProps) => 
 };
 
 // NOT WORKING
-export const checkAvailableEmail = async ({ email }) => {    
+export const checkAvailableEmail = async ({ email }) => {
     try {
         const response = await fetch(`${baseUrl}/users/is-available`, {
             method: "post",
@@ -70,12 +71,12 @@ export const checkAvailableEmail = async ({ email }) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: email                
+                email: email
             })
         })
-        if (!response.ok) {            
+        if (!response.ok) {
             throw new Error("Error HTTP: " + response.status);
-        }        
+        }
         const responseJson = await response.json()
         return responseJson
     } catch (error) {

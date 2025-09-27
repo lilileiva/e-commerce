@@ -21,10 +21,10 @@ import Checkout from './ecommerce/pages/Checkout'
 import NotFound from './ecommerce/pages/NotFound'
 
 
-function App() {  
+function App() {
 
   return (
-    <div className='px-4 grid grid-rows-[max-content_auto_230px] grid-cols-1 justify-center content-top w-full max-w-6xl h-full'>
+    <div className='px-4 grid grid-rows-[max-content_auto_fit-content] grid-cols-1 justify-center content-top w-full max-w-6xl h-full'>
       <GlobalStateProvider>
         <Navbar />
         <Routes>

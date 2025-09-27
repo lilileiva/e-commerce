@@ -30,6 +30,7 @@ function Login() {
     const login = async () => {
         try {
             let response = await loginUser({ email, password })
+            console.log(response)
             if (response != undefined && response.status === 201) {
                 response = await response.json()
                 const token = await response["access_token"];
@@ -39,9 +40,12 @@ function Login() {
                     window.localStorage.setItem("userRole", data["role"])
                 }
                 navigate("/");
+            } else if (response != undefined && response.status === 401) {
+                setIsLogged(false)
+                setError("Invalid credentials.")
             } else {
                 setIsLogged(false)
-                setError("Could not sign in. Verify your credentials are valid.")
+                setError("An error has occurred trying sign in.")
             }
         } catch (error) {
             setIsLogged(false)
@@ -75,7 +79,7 @@ function Login() {
                                     required
                                     className="border-[1px] border-gray-200 pl-2 rounded-md hover:border-strong-skyblue focus:border-[1px] focus:border-strong-skyblue focus:outline-none"
                                     name="email"
-                                    type="text"
+                                    type="email"
                                     onChange={(e) => handleInputChange(e)}
                                 />
                             </div>

@@ -11,36 +11,36 @@ function CategoriesList({ data, status, getProductsByCategory }) {
 
     return (
         <>
-            <ul className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 justify-center gap-8 mt-10 overflow-hidden">
+            <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 text-center mt-10">
                 {
-                    data && data.length > 0 && data.map((category) => (
-                        <li className="flex flex-col justify-center items-center place-self-center w-full h-fit rounded-xl border-white overflow-hidden shadow shadow-slate-300 cursor-pointer border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
+                    data && data.length > 0 && status === 'success' && data.map((category) => (
+                        <li
+                            onClick={() => getProductsByCategory(category.id)}
+                            className="group relative"
                             key={category.id}
-                            onClick={() => getProductsByCategory(category.id)}>
-                            <div className="w-full h-full relative">
-                                {userRole === "admin" && <button
-                                    onClick={() => navigate(`/categories/edit/${category.id}`)}
-                                    className="text-white pl-[2.5px] bg-turquoise w-6 h-6 rounded-md absolute right-0"
-                                >
-                                    <EditIcon size='20' />
-                                </button>}
+                        >
+                            {userRole !== "admin" && <button
+                                onClick={() => navigate(`/categories/edit/${category.id}`)}
+                                className="z-10 text-white pl-[2.5px] bg-turquoise w-6 h-6 rounded-md absolute right-0"
+                            >
+                                <EditIcon size='20' />
+                            </button>}
+                            <div className="cursor-pointer w-32 h-32 mx-auto rounded-full overflow-hidden shadow-lg transform group-hover:scale-105 transition-transform">
                                 <img
-                                    className="object-cover w-full h-44"
+                                    className="object-cover h-full w-full"
                                     src={category.image}
-                                    alt={category.name}
+                                    alt={category.title}
                                     onError={(e) => { e.target["src"] = camera }}
                                 />
                             </div>
-                            <p className="w-full z-10 bg-white pl-2 text-gray-700 capitalize truncate">
-                                {category.name}
-                            </p>
+                            <p className="mt-4 font-semibold text-gray-700">{category.name}</p>
                         </li>
                     ))
                 }
+                {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center absolute left-0 right-0">There are no categories</p>}
+                {status === 'loading' && <CategoriesLoader />}
+                {status === 'error' && <p className="text-center absolute left-0 right-0">Error al cargar las categorías</p>}
             </ul>
-            {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center">There are not categories</p>}
-            {status === 'loading' && <CategoriesLoader length="8" />}
-            {status === 'error' && <p className="text-center">Error loading categories</p>}
         </>
     );
 }

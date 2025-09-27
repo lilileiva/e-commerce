@@ -23,7 +23,7 @@ function Products() {
     const { data, status } = useQuery([PRODUCTS_QUERY_KEY, { filter: location.search, order }], () => fetchProducts({ filter: location.search, order }))
 
     return (
-        <div className="flex flex-col justify-top content-center w-full h-fit mb-12">
+        <div className="flex flex-col justify-top content-center w-full h-fit mb-24">
             <div className={`grid h-full w-full lg:gap-x-10 gap-x-4 ${showFilters ? "lg:grid-cols-[320px_auto] grid-row-1" : "grid-row-1 gap-0"}`}>
                 <div className="inline-flex w-full">
                     <FilterBar showFilters={showFilters} setShowFilters={setShowFilters} setOrder={setOrder} />
@@ -48,7 +48,7 @@ function Products() {
                             </p>
                             {userRole === "admin"
                                 ? <CustomButton width="w-fit" text="Create product" bgColor="white" textColor="turquoise" borderColor="turquoise" onClick={() => navigate("/products/create")} />
-                            : <div></div>}
+                                : <div></div>}
                         </div>}
                     </div>
                     <ProductsList data={data} status={status} showFilters={showFilters} />

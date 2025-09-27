@@ -31,7 +31,7 @@ function CartDetail() {
                 </div>
                 <CartProducts />
                 {totalPrice != 0 && <>
-                    <div className="w-full flex justify-between items-center bg-gray-100 rounded-lg content-center mt-6 p-2">
+                    <div className="w-full flex justify-between items-center bg-gray-100 rounded-lg content-center mt-6 py-2 px-4">
                         <h2 className="text-lg text-gray-600 font-bold">Total price: ${totalPrice}</h2>
                         <CustomButton width="w-fit" text="Buy" bgColor="turquoise" textColor="white" borderColor="turquoise"
                             onClick={(e) => purchase(e)}

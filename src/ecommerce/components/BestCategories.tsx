@@ -6,7 +6,7 @@ import { PRODUCTS_QUERY_KEY } from "../constants";
 import camera from "../../assets/camera-img.png";
 import { fetchProducts } from "../services/products";
 
-import BestCategoriesLoader from "./BestCategoriesLoader";
+import CategoriesLoader from "./CategoriesLoader";
 
 function BestCategories({ data, status }) {
 
@@ -53,7 +53,7 @@ function BestCategories({ data, status }) {
                     ))
                 }
                 {(data && data.length == 0 || !data) && status === 'success' && <p className="text-center absolute left-0 right-0">There are no categories</p>}
-                {status === 'loading' && <BestCategoriesLoader length={length} />}
+                {status === 'loading' && <CategoriesLoader />}
                 {status === 'error' && <p className="text-center absolute left-0 right-0">Error al cargar las categorías</p>}
             </ul>
         </section>

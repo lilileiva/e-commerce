@@ -47,7 +47,7 @@ interface editCategoryProps {
 }
 
 export const editCategory = async ({ name, image, categoryId }: editCategoryProps) => {
-    try {        
+    try {
         const response = await fetch(`${baseUrl}/categories/${categoryId}`, {
             method: "put",
             headers: {
@@ -61,7 +61,7 @@ export const editCategory = async ({ name, image, categoryId }: editCategoryProp
         })
         if (!response.ok) {
             throw new Error("Error HTTP: " + response.status);
-        }        
+        }
         return response
     } catch (error) {
         console.error('Error fetching API data:', error);
@@ -69,7 +69,7 @@ export const editCategory = async ({ name, image, categoryId }: editCategoryProp
 };
 
 export const deleteCategory = async ({ categoryId }) => {
-    try {        
+    try {
         const response = await fetch(`${baseUrl}/categories/${categoryId}`, {
             method: "delete",
             headers: {
@@ -79,7 +79,7 @@ export const deleteCategory = async ({ categoryId }) => {
         })
         if (!response.ok) {
             throw new Error("Error HTTP: " + response.status);
-        }        
+        }
         return response
     } catch (error) {
         console.error('Error fetching API data:', error);
@@ -87,7 +87,7 @@ export const deleteCategory = async ({ categoryId }) => {
 };
 
 export const fetchCategory = async ({ categoryId }) => {
-    try {        
+    try {
         const response = await fetch(`${baseUrl}/categories/${categoryId}`)
         if (!response.ok) {
             throw new Error("Error HTTP: " + response.status);

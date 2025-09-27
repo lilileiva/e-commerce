@@ -1,24 +1,33 @@
-function CategoriesLoader({ length }) {
+import { useEffect } from "react";
+
+function CategoriesLoader() {
+
+    let length = 10;
 
     const items = []
     for (let i = 0; i < length; i++) {
         items.push(i)
     }
 
+    useEffect(() => {
+        if (window.innerWidth < 1024) length = 8;
+        if (window.innerWidth < 770) length = 6;
+        if (window.innerWidth < 640) length = 4;
+    }, [location])
+
     return (
-        <ul className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 justify-center gap-8 mt-10 overflow-y-scroll overflow-x-hidden">
+        <>
             {
                 items.map((item) => (
-                    <li className="animate-pulseFast flex flex-col justify-center items-center place-self-center w-44 h-44 rounded-xl border-gray-300 overflow-hidden shadow shadow-slate-300 cursor-pointer border-gray-200 border-[1px] hover:border-[1px] hover:border-turquoise"
-                        key={item}>
-                        <div className="w-full h-full bg-gray-300 relative">
-                        </div>
-                        <p className="w-full z-10 bg-gray-200 pl-2 text-gray-700 capitalize truncate">
-                        </p>
+                    <li
+                        className="group"
+                        key={item}
+                    >
+                        <div className="animate-pulseFast w-32 h-32 mx-auto rounded-full shadow-lg transform transition-transform bg-gray-100 mb-4"></div>
                     </li>
                 ))
             }
-        </ul>
+        </ >
     );
 }
 

@@ -29,14 +29,14 @@ function CartProducts() {
     const products = state.cartProducts?.sort((a, b) => a.id - b.id);
 
     return (
-        <ul className="justify-top gap-10 mt-10 h-full w-full">
+        <ul className="justify-top gap-10 mt-10 h-[40vh] w-full">
             {
                 products && products.length > 0 && products.map((product) => (
                     <li
-                        className="relative z-0 mt-4 grid grid-cols-[100px_auto_60px] w-full h-fit rounded-xl border-gray-300 overflow-auto shadow shadow-slate-300 cursor-pointer"
+                        className="relative z-0 mt-4 grid grid-cols-[100px_auto_60px] w-full h-fit rounded-xl border-gray-300 overflow-auto shadow shadow-slate-300"
                         key={product.name}
                     >
-                        <div className="w-24 h-24">
+                        <div className="w-24 h-24 cursor-pointer">
                             <img
                                 onClick={() => navigate(`/products/${product.id}`)}
                                 className="object-cover w-24 h-24"
