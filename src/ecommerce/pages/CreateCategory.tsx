@@ -4,7 +4,7 @@ import { createCategory } from "../services/categories";
 import { CATEGORY_QUERY_KEY } from "../constants";
 import { useMutation } from "react-query";
 import { validateCategoryDetails } from "../utils/validations";
-import camera from "../../assets/camera-img.png";
+import camera from "../../assets/camera-svg.png";
 
 import Loader from "../components/Loader";
 
@@ -21,7 +21,7 @@ function CreateCategory() {
     const userRole = window.localStorage.getItem("userRole");
     if (userRole !== "admin") navigate("/")
 
-    const handleInputChange = (e) => {        
+    const handleInputChange = (e) => {
         validateCategoryDetails(e, inputErrors, setInputErrors)
         setCategoryDetails({
             ...categoryDetails,

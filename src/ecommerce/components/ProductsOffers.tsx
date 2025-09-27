@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import camera from "../../assets/camera-img.png";
+import camera from "../../assets/camera-svg.png";
 
 import ProductsOffersLoader from "./ProductsOffersLoader";
 import CustomButton from "./CustomButton";

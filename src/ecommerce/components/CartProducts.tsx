@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import GlobalStateContext from "../context/globalStateContext";
-import camera from "../../assets/camera-img.png";
+import camera from "../../assets/camera-svg.png";
 import TrashButton from "./TrashButton";
 import CustomButton from "./CustomButton";
 

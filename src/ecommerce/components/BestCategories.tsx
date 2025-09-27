@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import GlobalStateContext from "../context/globalStateContext";
 import { PRODUCTS_QUERY_KEY } from "../constants";
-import camera from "../../assets/camera-img.png";
+import camera from "../../assets/camera-svg.png";
 import { fetchProducts } from "../services/products";
 
 import CategoriesLoader from "./CategoriesLoader";
@@ -14,7 +14,6 @@ function BestCategories({ data, status }) {
     const navigate = useNavigate()
     const { dispatch } = useContext(GlobalStateContext);
     const [filter, setFilter] = useState(null)
-    const [length] = useState(5)
 
     const mutation = useMutation([PRODUCTS_QUERY_KEY, { filter, order: "" }], () => fetchProducts({ filter, order: "" }), {
         onSuccess: () => {

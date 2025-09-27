@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import camera from "../../assets/camera-img.png";
+import camera from "../../assets/camera-svg.png";
 
 import EditIcon from "../icons/EditIcon";
 import CategoriesLoader from "./CategoriesLoader";
@@ -19,7 +19,7 @@ function CategoriesList({ data, status, getProductsByCategory }) {
                             className="group relative"
                             key={category.id}
                         >
-                            {userRole !== "admin" && <button
+                            {userRole === "admin" && <button
                                 onClick={() => navigate(`/categories/edit/${category.id}`)}
                                 className="z-10 text-white pl-[2.5px] bg-turquoise w-6 h-6 rounded-md absolute right-0"
                             >

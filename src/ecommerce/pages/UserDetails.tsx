@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from "react-query";
 import { USERS_QUERY_KEY } from "../constants";
 import { getUser } from "../services/user";
-import camera from "../../assets/camera-img.png";
+import camera from "../../assets/camera-svg.png";
 import { useNavigate } from "react-router";
 import CustomButton from "../components/CustomButton";
 import Loader from "../components/Loader";

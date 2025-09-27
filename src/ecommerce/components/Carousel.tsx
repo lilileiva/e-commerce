@@ -1,5 +1,5 @@
 import { useState } from "react"
-import camera from "../../assets/camera-img.png";
+import camera from "../../assets/camera-svg.png";
 import LeftArrowIcon from "../icons/LeftArrowIcon";
 import RightArrowIcon from "../icons/RightArrowIcon";
 

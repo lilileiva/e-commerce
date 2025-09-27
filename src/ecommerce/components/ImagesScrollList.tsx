@@ -1,6 +1,6 @@
-import camera from "../../assets/camera-img.png";
+import camera from "../../assets/camera-svg.png";
 
-function ImagesScrollList({images, deleteImage}) {
+function ImagesScrollList({ images, deleteImage }) {
     return (
         <ul className="flex overflow-x-scroll mt-4 gap-2">
             {images.length > 0 && images.map((image, index) => (

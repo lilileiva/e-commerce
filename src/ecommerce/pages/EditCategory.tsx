@@ -5,7 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { CATEGORIES_QUERY_KEY, CATEGORY_QUERY_KEY } from "../constants";
 import { fetchCategory, editCategory, deleteCategory } from "../services/categories";
 import { validateCategoryDetails } from "../utils/validations";
-import camera from "../../assets/camera-img.png";
+import camera from "../../assets/camera-svg.png";
 
 import Loader from "../components/Loader";
 import Modal from "../components/Modal";
