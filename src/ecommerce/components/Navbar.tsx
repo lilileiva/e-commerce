@@ -27,10 +27,8 @@ function Navbar() {
                 <Link to="/" className='font-semibold self-center text-turquoise text-3xl text-center'>
                     MegaMart
                 </Link>
-                <div className={`align-center lg:gap-10 md:gap-10 gap-4 w-full ${search ? "lg:inline-flex md:inline-flex lg:justify-end md:justify-end flex flex-wrap justify-around" : "lg:inline-flex md:inline-flex lg:justify-end md:justify-end grid grid-cols-3"}`}>
-                    <div className={`${search ? "lg:w-48 md:w-48 w-full" : "lg:w-32 md:w-32 w-14"}`}>
-                        <Searchbar search={search} setSearch={setSearch} />
-                    </div>
+                <div className={`align-center lg:gap-10 md:gap-10 gap-4 w-auto ${search ? "lg:inline-flex md:inline-flex lg:justify-end md:justify-end flex flex-wrap justify-around" : "lg:inline-flex md:inline-flex lg:justify-end md:justify-end grid grid-cols-3"}`}>
+                    <Searchbar search={search} setSearch={setSearch} />
                     {token ? <>
                         <Link to="/user/details/" className='inline-flex justify-center items-center gap-1 text-gray-500 self-center font-medium lg:text-lg md:text-base text-sm'>
                             <UserIcon size='27' />

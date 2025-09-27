@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import SearchIcon from '../icons/SearchIcon';
 import GlobalStateContext from "../context/globalStateContext";
 
-function Searchbar({search, setSearch}) {
+function Searchbar({ search, setSearch }) {
 
     const location = useLocation()
     const navigate = useNavigate()
@@ -37,13 +37,14 @@ function Searchbar({search, setSearch}) {
 
     return (
         <form className={
-            `bg-skyblue px-4 py-2 rounded-xl flex lg:gap-4 md:gap-4 ease-in-out duration-500 overflow-hidden ${search ? "lg:w-52 md:w-52 w-full" : "lg:w-32 md:w-32 w-14"} `
+            `flex ease-in-out duration-500 overflow-hidden justify-center w-fit py-2 lg:gap-4 md:gap-4 ${search && "bg-gray-50 px-4 rounded-xl"}`
         }
             onSubmit={(e) => handleInputSubmit(e)}
             onClick={() => setSearch(true)}
+            onBlur={() => setSearch(false)}
         >
             {search ? (
-                <button type="submit" onSubmit={() => setSearch(false)}>
+                <button type="submit" onSubmit={() => setSearch(false)} >
                     <SearchIcon size='27' />
                 </button>
             ) : (
@@ -54,7 +55,7 @@ function Searchbar({search, setSearch}) {
             <input
                 type="text"
                 placeholder="Search product..."
-                className="bg-skyblue text-gray-500 outline-none overflow-hidden focus:outline-none focus:w-full"
+                className={search ? "bg-gray-50 text-gray-500 outline-none overflow-hidden pl-2 focus:outline-none focus:w-full" : "hidden"}
                 onChange={(e) => handleInputChange(e)}
             />
         </form>
